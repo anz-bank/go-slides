@@ -1,7 +1,6 @@
 # Set gcloubuild trigger for master branch only
 steps:
-- id: appengine_deployment 
-  name: 'gcr.io/cloud-builders/gcloud' 
-  args: ['app', 'deploy'] 
+- id: appengine_deployment
+  name: 'gcr.io/cloud-builders/gcloud'
+  args: ['app', 'deploy']
   timeout: '600s'
-  
