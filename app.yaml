@@ -13,4 +13,4 @@ handlers:
 # is useful for embedding static assets like code snippets and preventing
 # them from producing build errors for your project.
 
-nobuild_files: content/
+nobuild_files: content/|pingserver/
