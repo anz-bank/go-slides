@@ -1,5 +1,5 @@
 Go training
-Lectures and labs for go development at ANZ
+Go development @ANZ - lectures and labs
 
 Julia Ogris
 Engineer, ANZ
@@ -9,10 +9,229 @@ https://github.com/anz-bank/go-training
 
 * Introduction
 
-* Test
 
-# * Go history
 
-# * Why Go at ANZ
+* Agenda (11 - 15 February)
 
-# * Ping server Java Spring Boot vs Go
+- Introduction to Go
+- Go language fundamentals
+- Go standard library
+- Go tool chain
+- Third party Go libraries used at ANZ
+- Project work
+
+Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
+
+
+* Day 1 - Schedule
+
+*Morning:* Introduction to Go
+
+- Overview and history
+- Demo
+
+*Afternoon:* Hello world and first PR
+
+- Interlude: towards continuous deployment (CD)
+- Go language fundamentals
+- First lab
+
+* History and Overview
+
+* History of Go
+
+.image img/xkcd_compiling.png
+.caption [[https://xkcd.com/303/]]
+
+2007: Robert Griesemer, Rob Pike, and Ken Thompson start working on go at Google
+2008: Russ Cox (go mod) and Ian Taylor (gcc frontend) join
+2009: Go goes Open Source
+2012: Go version 1.0
+
+
+* What is Go?
+
+- A simple language that is easy to learn and read
+- Statically typed, but with a dynamic feel
+- Compiled to native machine code, but has a fast development cycle
+- Language-level concurrency features
+- Expansive "batteries included" standard library
+- Great tools
+- Open source
+
+(Source: [[https://talks.golang.org/2012/zen.slide#2][Go and the Zen of Python]])
+
+* What does Go look like?
+
+Hello world in Go
+
+	package main
+
+	import (
+		"fmt"
+	)
+
+	func main() {
+		fmt.Println("Hello, ಬೆಂಗಳೂರು")
+	}
+
+Execute with
+
+	go run hello.go
+
+* What is NOT Go?
+
+- No type hierarchies or inheritance
+- No exceptions
+- No method overloading
+- No generics
+- No iterators
+- No decorators
+- No named or optional arguments
+- No generators
+- No operator overloading
+- No macros
+
+* Motivation and Demo
+
+* Why Go at ANZ
+
+- simple: easy to learn and read
+- idiomatic
+- tools - gofmt, goimports, go mod, go test, golangci-lint, coverage
+- standard library
+- productive and fun
+- concurrency
+
+* Demo
+- 2 seconds latency Pingserver
+- Java Spring Boot implementation
+- Go implementation
+- Benchmark
+
+* Java Spring Boot Initializr
+
+	── build.gradle
+	├── gradle
+	│   └── wrapper
+	│       ├── gradle-wrapper.jar
+	│       └── gradle-wrapper.properties
+	├── gradlew
+	├── gradlew.bat
+	├── settings.gradle
+	└── src
+	    ├── main
+	    │   ├── java
+	    │   │   └── com
+	    │   │       └── anz
+	    │   │           └── demo
+	    │   │               └── pingserver
+	    │   │                   ├── PingserverApplication.java
+	    │   │                   └── controller
+	    │   │                       └── PingController.java        <--------- THAT'S THE ONE
+	    │   └── resources
+	    │       └── application.properties
+	    └── test
+	          .....
+		                                └── PingserverApplicationTests.java
+
+
+* PingController.java
+Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/java][GitHub]]
+
+	package com.anz.dcx.serverdemo.controller;
+
+	import org.springframework.http.MediaType;
+	import org.springframework.web.bind.annotation.GetMapping;
+	import org.springframework.web.bind.annotation.ResponseBody;
+	import org.springframework.web.bind.annotation.RestController;
+
+	@RestController
+	public class PingController {
+
+	    @GetMapping(path = "/ping", produces = MediaType.TEXT_PLAIN_VALUE)
+	    @ResponseBody
+	    String ping() throws Exception {
+	        Thread.sleep(2000L);
+	        return "pong";
+	    }
+	}
+
+Execute with
+
+	./gradlew clean bootRun
+
+* Go Implementation
+Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/go][GitHub]]
+
+	├── go.mod
+	├── go.sum
+	└── main.go
+
+Execute with
+
+	go run main.go
+
+* Main.go
+
+	package main
+
+	import (
+		"fmt"
+		"log"
+		"net/http"
+		"time"
+	)
+
+	func main() {
+		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+			time.Sleep(2000 * time.Millisecond)
+			fmt.Fprint(w, "pong")
+		})
+		fmt.Println("Starting webserver on port 9090")
+		log.Fatal(http.ListenAndServe(":9090", nil))
+	}
+
+* Benchmark
+
+- 7,000 concurrent requests
+- Apache's `ab` command on MacBook Pro
+
+    ab -n 7000 -c 7000 -s 200 localhost:8080/ping  # Java
+    ab -n 7000 -c 7000 -s 200 localhost:9090/ping  # go
+
+- Results
+
+	Java mean: 36.3 sec
+	Go mean:    2.8 sec
+
+- Further details on [[https://github.com/anz-bank/go-slides/tree/master/pingserver#benchmark][GitHub]]
+
+
+* Interlude: Towards CD
+
+
+* Go language fundamentals
+
+
+* Go standard library
+
+
+* Go tool chain
+
+
+* 3rd party Go libs @ANZ
+
+
+* Project work
+
+
+
+
+* References
+
+- [[https://golang.org/doc/faq]]
+- [[https://en.wikipedia.org/wiki/Go_(programming_language)][Wikipedia]]
+- [[https://talks.golang.org/2015/gophercon-goevolution.slide][The Evolution of Go]]
+- [[https://talks.golang.org/2012/zen.slide]]
+- [[https://www.youtube.com/watch?v=ytEkHepK08c][Talk: A Tour of Go]]
