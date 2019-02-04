@@ -10,7 +10,6 @@ https://github.com/anz-bank/go-training
 * Introduction
 
 
-
 * Agenda (11 - 15 February)
 
 - Introduction to Go
@@ -36,7 +35,9 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 - Go language fundamentals
 - First lab
 
+
 * History and Overview
+
 
 * History of Go
 
@@ -61,6 +62,7 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 
 (Source: [[https://talks.golang.org/2012/zen.slide#2][Go and the Zen of Python]])
 
+
 * What does Go look like?
 
 Hello world in Go
@@ -79,8 +81,9 @@ Execute with
 
 	go run hello.go
 
+
 * What is Go NOT?
-Go favours simplicity and directness leading to some purposeful omissions:
+Go favours simplicity and directness resulting in some purposeful omissions:
 
 - No type hierarchies or inheritance
 - No exceptions
@@ -92,22 +95,27 @@ Go favours simplicity and directness leading to some purposeful omissions:
 - No macros
 - No arguments about code style :)
 
+
 * Motivation and Demo
+
 
 * Why Go at ANZ
 
 - simple: easy to learn and read
 - a single obvious right way to do most things
-- tools - gofmt, goimports, go mod, go test, golangci-lint, coverage
+- tools - `gofmt`, `goimports`, `go` `mod`, `go` `test`, `golangci-lint`, coverage
 - standard library
 - productive and fun
 - lightweight concurrency
 
+
 * Demo
+
 - 2 seconds latency Pingserver
 - Java Spring Boot implementation
 - Go implementation
 - Benchmark
+
 
 * Java Spring Boot Initializr
 
@@ -137,6 +145,7 @@ Go favours simplicity and directness leading to some purposeful omissions:
 
 
 * PingController.java
+
 Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/java][GitHub]]
 
 	package com.anz.dcx.serverdemo.controller;
@@ -161,6 +170,7 @@ Execute with
 
 	./gradlew clean bootRun
 
+
 * Go Implementation
 Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/go][GitHub]]
 
@@ -171,6 +181,7 @@ Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/go][Git
 Execute with
 
 	go run main.go
+
 
 * Main.go
 
@@ -193,6 +204,7 @@ Execute with
 		log.Fatal(http.ListenAndServe(addr, nil))
 	}
 
+
 * Benchmark
 
 - 7,000 concurrent requests
@@ -212,21 +224,265 @@ Execute with
 * Interlude: Towards Continuous Deployment
 
 
+* What is Continuous Deployment (CD)?
+
+Continuous Deployment != Continuous Delivery
+
+.image img/cd.jpg
+.caption [[https://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment][Yassal Sundman, Continuous Delivery vs Continuous Deployment]]
+
+
+* Continuous Deployment Quotes
+
+"Continuous Deployment is a strategy for software releases wherein any code commit that passes the automated testing phase is automatically released into the production environment."
+[[https://searchitoperations.techtarget.com/definition/continuous-deployment][TechTarget definition]]
+
+
+"Continuous deployment requires a highly developed culture of monitoring, being on call, and having the capacity to recover quickly."
+[[https://semaphoreci.com/blog/2017/07/27/what-is-the-difference-between-continuous-integration-continuous-deployment-and-continuous-delivery.html][Marko Anastasov, Semaphore Engineering Blog]]
+
+
+* Recommendations for CD @ANZ (1/2)
+
+- Use *trunk* *based* *development* (abandon GitFlow)
+- Create *small* *PRs* (Pull Requests) that can be Squash Merged
+- ... which lead to revertible commits that have passed automated tests
+- Protect `master` branch on GitHub
+- Write great commit messages
+- Think about the reviewer and review your own PRs first
+
+
+* Recommendations for CD @ANZ (2/2)
+
+- *Lint* strictly `golangci-lint` `run`
+- Ensure *100%* *coverage*
+- Test (unit & system), lint & cover as part of *CI* (Continuous Integration)
+- *Version* all deployments (use [[https://semver.org/][semver]]; tag source, images etc.)
+- *Document* for newbies in the README.md (must!) and use godoc
+- ... Non-prod vs Prod ?
+- Enjoy your CD as last step after successful CI run on master
+
+
+* Protect `master` branch on GitHub
+
+	Settings -> Options:
+	[ ] Allow merge commits
+	[x] Allow squash merging
+	[ ] Allow rebase merging
+
+	Settings -> Branches -> [Add rule|Edit] `master`:
+	[x] Require pull request reviews before merging
+	[x] Dismiss stale pull request approvals when new commits are pushed
+	[x] Require status checks to pass before merging
+	[x] Require branches to be up to date before merging
+	[x] Include administrators
+
+
+* Commit messages
+
+.image img/xkcd_git_commit.png
+.caption [[https://xkcd.com/1296/]]
+
+
+* Commit messages - spot the difference
+
+[[https://chris.beams.io/posts/git-commit/]]
+
+	$ git log --oneline -5 --author cbeams --before "Fri Mar 26 2009"
+
+	e5f4b49 Re-adding ConfigurationPostProcessorTests after its brief removal in r814. @Ignore-ing the testCglibClassesAreLoadedJustInTimeForEnhancement() method as it turns out this was one of the culprits in the recent build breakage. The classloader hacking causes subtle downstream effects, breaking unrelated tests. The test method is still useful, but should only be run on a manual basis to ensure CGLIB is not prematurely classloaded, and should not be run as part of the automated build.
+	2db0f12 fixed two build-breaking issues: + reverted ClassMetadataReadingVisitor to revision 794 + eliminated ConfigurationPostProcessorTests until further investigation determines why it causes downstream tests to fail (such as the seemingly unrelated ClassPathXmlApplicationContextTests)
+	147709f Tweaks to package-info.java files
+	22b25e0 Consolidated Util and MutableAnnotationUtils classes into existing AsmUtils
+	7f96f57 polishing
+
+versus
+
+	$ git log --oneline -5 --author pwebb --before "Sat Aug 30 2014"
+
+	5ba3db6 Fix failing CompositePropertySourceTests
+	84564a0 Rework @PropertySource early parsing logic
+	e142fd1 Add tests for ImportSelector meta-data
+	887815f Update docbook dependency and generate epub
+	ac8326d Polish mockito usage
+
+
+* Recipe for great commit messages
+
+[[https://chris.beams.io/posts/git-commit/]]
+
+- Separate subject from body with a blank line
+- Limit the subject line to 60 characters
+- *Capitalize* the subject line
+- Do not end the subject line with a period
+- Use the *imperative* *mood* in the subject line
+- Wrap the body at 80 characters
+- Use the body to explain what and why vs. how
+- Use `git` `rebase` `-i` `COMMIT_HASH` to rework your commits if necessary
+
+Don't be afraid!
+Try it out on a new, throwaway branch.
+
+
+* Pull Request (PR) recommendations (1/2)
+
+- Choose a meaningful *PR* *title*, it will become your Squash Merge message
+- Fill in *PR* *description* and reference an Issue for instance with #6
+- Review the *Files* *changed* tab - many reviewers start here
+- Review the *Commits* tab - some reviewers start here
+- Review the *Checks* tab - all checks must pass
+
+
+* Pull Request (PR) recommendations (2/2)
+
+- "Think of the reviewer: your code needs to be reviewable and that should be a prime concern when writing your code, commits and PRs." (@camh-anz)
+- Tag your PR Title with `[WIP]` if adjustments are needed
+- Rework fixup commits with `git` `rebase` `-i`  `COMMIT_HASH` and force push
+- Add reviewers and remove `[WIP]` tag when all of the above are met
+- Delete branch once merged, especially when using a single remote (no forks)
+
+
 * Go language fundamentals
+
+
+* Tutorials, references and tools
+
+- [[https://tour.golang.org/][Tour of Go]]
+- [[https://gobyexample.com/][Go by example]]
+- [[https://play.golang.org/][Go playground]]
+- [[https://golangbot.com/learn-golang-series/][Golangbot]]
+- [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
+
+
+* Values and Control Flow
+
+- Values
+- Variables
+- Constants
+- For
+- If/Else
+- Switch
+
+
+* Lab 1
+
+TODO
+
+
+* Iterable data types and Range
+- Arrays
+- Slices
+- Maps
+- Range
+
+
+* Lab 2
+
+TODO
+
+
+* Functions
+
+- Functions
+- Multiple Return Values
+- Variadic Functions
+- Closures
+
+
+* Lab 3
+
+TODO
+
+
+* Data structures and interfaces
+
+- Pointers
+- Structs
+- Methods
+- Interfaces
+
+
+* Lab 4
+
+TODO
+
+
+* Errors
+
+- Errors
+- Defer
+- Panic
+
+
+* Lab 5
+
+TODO
+
+
+* Concurrency
+
+- Goroutines
+- Channels
+- Select
+
+
+* Lab 6
+
+TODO
 
 
 * Go standard library
 
+[[https://golang.org/pkg/]]
+- fmt
+- strings
+- time
+- encoding/json
+- net/http
+- regexp
+- sort
+- database/sql
+- os
+- path
+- bytes
+- ...
+
 
 * Go tool chain
 
+	go help
+	go version
+	go build ./...
+	go test ./...
+	go install ./...
+	go mod init
+	go mod vendor
+	go mod tidy
+	go clean -modcache
+	go test -coverprofile=coverage.out ./... && go tool cover -html=coverage.out
+
+Lint with
+
+	golangci-lint run
+
+and configure the linter in `.golangci.yml`
+
+Use `gofmt` or `goimport` as part of your editor/IDE
 
 * 3rd party Go libs @ANZ
+
+- testify
+- chi
+- kingpin.v2
+- TODO
 
 
 * Project work
 
-
+- Sample-rest
+- decimal
+- slackbot for ghe
+- JSON custom tags
 
 
 * References
