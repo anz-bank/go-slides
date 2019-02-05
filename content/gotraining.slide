@@ -319,6 +319,7 @@ versus
 - Wrap the body at 80 characters
 - Use the body to explain what and why vs. how
 - Use `git` `rebase` `-i` `COMMIT_HASH` to rework your commits if necessary
+- Use `git` `add` `-p` for two separate concerns addressed in the one file
 
 Don't be afraid!
 Try it out on a new, throwaway branch.
@@ -407,11 +408,11 @@ TODO
 TODO
 
 
-* Errors
+* Errors and resource management
 
 - Errors
-- Defer
 - Panic
+- Defer
 
 
 * Lab 5
