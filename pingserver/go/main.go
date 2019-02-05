@@ -12,6 +12,7 @@ func main() {
 		time.Sleep(2000 * time.Millisecond)
 		fmt.Fprint(w, "pong")
 	})
-	fmt.Println("Starting webserver on port 9090")
-	log.Fatal(http.ListenAndServe(":9090", nil))
+	addr := ":9090"
+	fmt.Println("Starting webserver on port", addr)
+	log.Fatal(http.ListenAndServe(addr, nil))
 }

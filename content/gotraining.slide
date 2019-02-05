@@ -43,7 +43,7 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 .image img/xkcd_compiling.png
 .caption [[https://xkcd.com/303/]]
 
-2007: Robert Griesemer, Rob Pike, and Ken Thompson start working on go at Google
+2007: Robert Griesemer, Rob Pike, and Ken Thompson start working on Go at Google
 2008: Russ Cox (go mod) and Ian Taylor (gcc frontend) join
 2009: Go goes Open Source
 2012: Go version 1.0
@@ -55,7 +55,7 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 - Statically typed, but with a dynamic feel
 - Compiled to native machine code, but has a fast development cycle
 - Language-level concurrency features
-- Expansive "batteries included" standard library
+- Comprehensive and clear standard library
 - Great tools
 - Open source
 
@@ -79,29 +79,29 @@ Execute with
 
 	go run hello.go
 
-* What is NOT Go?
+* What is Go NOT?
+Go favours simplicity and directness leading to some purposeful omissions:
 
 - No type hierarchies or inheritance
 - No exceptions
 - No method overloading
 - No generics
-- No iterators
 - No decorators
 - No named or optional arguments
-- No generators
 - No operator overloading
 - No macros
+- No arguments about code style :)
 
 * Motivation and Demo
 
 * Why Go at ANZ
 
 - simple: easy to learn and read
-- idiomatic
+- a single obvious right way to do most things
 - tools - gofmt, goimports, go mod, go test, golangci-lint, coverage
 - standard library
 - productive and fun
-- concurrency
+- lightweight concurrency
 
 * Demo
 - 2 seconds latency Pingserver
@@ -188,8 +188,9 @@ Execute with
 			time.Sleep(2000 * time.Millisecond)
 			fmt.Fprint(w, "pong")
 		})
-		fmt.Println("Starting webserver on port 9090")
-		log.Fatal(http.ListenAndServe(":9090", nil))
+		addr := ":9090"
+		fmt.Println("Starting webserver on port", addr)
+		log.Fatal(http.ListenAndServe(addr, nil))
 	}
 
 * Benchmark
@@ -208,7 +209,7 @@ Execute with
 - Further details on [[https://github.com/anz-bank/go-slides/tree/master/pingserver#benchmark][GitHub]]
 
 
-* Interlude: Towards CD
+* Interlude: Towards Continuous Deployment
 
 
 * Go language fundamentals
