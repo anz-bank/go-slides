@@ -389,6 +389,7 @@ pre.numbers span:before {
 code {
   font-size: 95%;
   font-family: "Droid Sans Mono", "Courier New", monospace;
+  font-weight: bold;
 
   color: black;
 }
