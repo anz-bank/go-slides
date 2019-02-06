@@ -41,7 +41,7 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 
 * History of Go
 
-.image img/xkcd_compiling.png
+.image _img/xkcd_compiling.png
 .caption [[https://xkcd.com/303/]]
 
 2007: Robert Griesemer, Rob Pike, and Ken Thompson start working on Go at Google
@@ -83,6 +83,7 @@ Execute with
 
 
 * What is Go NOT?
+
 Go favours simplicity and directness resulting in some purposeful omissions:
 
 - No type hierarchies or inheritance
@@ -228,7 +229,7 @@ Execute with
 
 Continuous Deployment != Continuous Delivery
 
-.image img/cd.jpg
+.image _img/cd.jpg
 .caption [[https://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment][Yassal Sundman, Continuous Delivery vs Continuous Deployment]]
 
 
@@ -286,7 +287,7 @@ ways to increase and maintain quality.
 
 * Commit messages
 
-.image img/xkcd_git_commit.png
+.image _img/xkcd_git_commit.png
 .caption [[https://xkcd.com/1296/]]
 
 
@@ -366,19 +367,80 @@ Try it out on a new, throwaway branch.
 - [[https://golang.org/ref/spec][The Go Programming Language Specification]]
 
 
-* Values and Control Flow
+* Getting started
 
-- Values
-- Variables
-- Constants
-- For
-- If/Else
-- Switch
+- [[https://goplay.space/#ZgnRgImb2mv][Packages]], imports and exported names
+- [[https://goplay.space/#0sIugrcfh_z][Functions]]
+
+_Notes:_
+Keep your exported Names to as few as possible
+Document them
 
 
-* Lab 1
+* Basic types
 
-TODO
+	bool
+
+	string
+
+	int  int8  int16  int32  int64
+	uint uint8 uint16 uint32 uint64 uintptr
+
+	byte // alias for uint8
+
+	rune // alias for int32
+	     // represents a Unicode code point
+
+	float32 float64
+
+	complex64 complex128
+
+
+* Zero values
+
+	0      for numeric types
+	false  for the boolean type
+	""     for strings
+
+
+* Values and control flow
+
+- [[https://goplay.space/#TOqGA-5RjUi][Values]]
+- [[https://goplay.space/#gs20cFjl-gs][Variables]]
+- [[https://goplay.space/#uCIuF7FqJGX][Constants]]
+- [[https://goplay.space/#Rbz8FhL3PxU][Type conversion]]
+- [[https://goplay.space/#ugMD-VYlwjI][For]]
+- [[https://goplay.space/#AbYAd6LB2c3][If/Else]]
+- [[https://goplay.space/#GpoaMY8dboJ][Switch]]
+
+
+* Lab setup
+
+- Clone https://github.com/anz-bank/go-training
+- Follow instructions on [[https://github.com/anz-bank/go-training/blob/master/README.md][README.md]]
+
+As part of all labs
+
+- Test your code
+- Create a PR following the [[https://github.com/anz-bank/go-training#pre-pr-checklist][PR checklist]]
+
+
+* Lab 1 - Fibonacci
+
+- Create an executable go program in directory `1_fib`
+- Write a function that prints the first n Fibonacci numbers
+
+	func fib(n int)
+
+- Call `fib(7)` in `main` to print
+
+	1
+	1
+	2
+	3
+	5
+	8
+	13
 
 
 * Iterable data types and Range
@@ -446,6 +508,60 @@ TODO
 TODO
 
 
+* Tools and Conventions
+
+
+* Project layout
+
+For non-trivial size projects follow the layout suggested by [[https://github.com/golang-standards/project-layout][golang-standards]]
+Abridged and ANZ adjusted version:
+
+	├── README.md
+	├── go.mod
+	├── go.sum
+	├── cloudbuild.yaml
+	├── .gitignore
+	├── .golangci.yml
+	├── pkg
+	│   ├── bar
+	│   │   ├── bar.go
+	│   │   ├── baz.go
+	│   │   └── bar_test.go
+	│   └── foo
+	│       ├── foo.go
+	│       └── foo_test.go
+	├── cmd
+	│   └── fooserver
+	│       └── main.go
+	├── docs
+	└── vendor
+
+
+* Go tool chain
+
+	go help
+	go version
+	go build ./...
+	go test ./...
+	go install ./...
+	go mod init
+	go mod vendor
+	go mod tidy
+	go clean -modcache
+	go test -coverprofile=coverage.out ./... && go tool cover -html=coverage.out
+
+
+* Other tools
+
+Lint with
+
+	golangci-lint run
+
+and configure the linter in `.golangci.yml`
+
+Use `gofmt` or `goimport` as part of your editor/IDE setup
+
+
 * Go standard library
 
 [[https://golang.org/pkg/]]
@@ -462,27 +578,6 @@ TODO
 - bytes
 - ...
 
-
-* Go tool chain
-
-	go help
-	go version
-	go build ./...
-	go test ./...
-	go install ./...
-	go mod init
-	go mod vendor
-	go mod tidy
-	go clean -modcache
-	go test -coverprofile=coverage.out ./... && go tool cover -html=coverage.out
-
-Lint with
-
-	golangci-lint run
-
-and configure the linter in `.golangci.yml`
-
-Use `gofmt` or `goimport` as part of your editor/IDE
 
 * 3rd party Go libs @ANZ
 
