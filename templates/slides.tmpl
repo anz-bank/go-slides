@@ -36,6 +36,8 @@
         };
       }
     </script>
+    <script src="/static/highlight.pack.js"></script>
+    <link type="text/css" href="/static/highlight.css" rel="stylesheet">
   </head>
 
   <body style='display: none'>
@@ -97,6 +99,15 @@
           var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(ga, s);
         }
       })();
+    </script>
+    <script>
+      hljs.configure({
+        languages: ['bash', 'markdown', 'go', 'java']
+      })
+
+      document.querySelectorAll('.code pre').forEach( el => {
+        hljs.highlightBlock(el)
+      })
     </script>
   </body>
 </html>
