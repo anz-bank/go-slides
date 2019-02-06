@@ -269,7 +269,7 @@ ways to increase and maintain quality.
 - Enjoy your CD as last step after successful CI run on master
 
 
-* Protect `master` branch on GitHub
+* Protect master branch on GitHub
 
 	Settings -> Options:
 	[ ] Allow merge commits
@@ -326,7 +326,7 @@ versus
 - Use the body to explain what and why vs. how
 
 
-* Two `git` commands for precision work
+* Two git commands for precision work
 
 - Use `git` `rebase` `-i` `COMMIT_HASH` to rework your commits if necessary
 - Use `git` `add` `-p` for two separate concerns addressed in the one file
@@ -363,6 +363,7 @@ Try it out on a new, throwaway branch.
 - [[https://play.golang.org/][Go playground]]
 - [[https://golangbot.com/learn-golang-series/][Golangbot]]
 - [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
+- [[https://golang.org/ref/spec][The Go Programming Language Specification]]
 
 
 * Values and Control Flow
@@ -385,8 +386,8 @@ TODO
 - Arrays
 - Slices
 - Maps
-- Range
 - Channels
+- Range
 
 
 * Lab 2
