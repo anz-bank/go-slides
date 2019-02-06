@@ -540,3 +540,8 @@ figcaption {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
 }
+
+/* override highlightjs default padding */
+.code pre.hljs {
+  padding: 0;
+}
