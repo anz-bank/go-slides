@@ -41,7 +41,7 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 
 * History of Go
 
-.image img/xkcd_compiling.png
+.image _img/xkcd_compiling.png
 .caption [[https://xkcd.com/303/]]
 
 2007: Robert Griesemer, Rob Pike, and Ken Thompson start working on Go at Google
@@ -228,7 +228,7 @@ Execute with
 
 Continuous Deployment != Continuous Delivery
 
-.image img/cd.jpg
+.image _img/cd.jpg
 .caption [[https://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment][Yassal Sundman, Continuous Delivery vs Continuous Deployment]]
 
 
@@ -286,7 +286,7 @@ ways to increase and maintain quality.
 
 * Commit messages
 
-.image img/xkcd_git_commit.png
+.image _img/xkcd_git_commit.png
 .caption [[https://xkcd.com/1296/]]
 
 
