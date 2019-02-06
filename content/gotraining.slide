@@ -431,6 +431,7 @@ As part of all labs
 - Write a function that prints the first n Fibonacci numbers
 
 	func fib(n int)
+
 - Call `fib(7)` in `main` to print
 
 	1
