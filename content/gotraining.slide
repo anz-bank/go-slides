@@ -416,7 +416,7 @@ Document them
 
 * Lab setup
 
-- Clone https://github.com/anz-bank/go-training
+- Clone [[https://github.com/anz-bank/go-training][https://github.com/anz-bank/go-training]]
 - Follow instructions on [[https://github.com/anz-bank/go-training/blob/master/README.md][README.md]]
 
 As part of all labs
@@ -442,19 +442,47 @@ As part of all labs
 	8
 	13
 
+- Bonus points: For negative n print [[https://en.wikipedia.org/wiki/Fibonacci_number#Negafibonacci][Negafibonacci numbers]].
 
 * Iterable data types and Range
 
-- Arrays
-- Slices
-- Maps
-- Channels
-- Range
+- [[https://goplay.space/#rO6WSkFyvsy][Arrays]]
+- [[https://goplay.space/#iCpLzcOFWO5][Slices]]
+- [[https://goplay.space/#nSbbXFFXnjY][Maps]]
+- [[https://goplay.space/#S3KObilbh7H][Range]]
 
 
-* Lab 2
+* Lab 2 - Bubble sort
 
-TODO
+- Create an executable go program in directory `2_bubble`
+- Write a function that returns a sorted copy of `int` slice `s` using _Bubble_ _sort_
+
+	func bubble(s []int) []int
+
+- Call `fmt.Println(bubble([]int{3, 2, 1, 5}))` in `main` to print
+
+	[1 2 3 5]
+
+- Bonus points: implement _Insertion_ _sort_ and an _O(n_ _log(n))_ sorting algorithm
+
+
+* Lab 3 - Letter frequency
+
+- Create an executable go program in directory `3_letters`
+- Write a function that returns a mapping of each letter to its frequency
+
+	func letters(s string) map[rune]int
+
+- Write a function that prints the contents of a map as `{key}:{val}\n` for each key/value pair sorted by keys. Use package `sort`.
+
+	func print(m map[rune]int)
+
+- Call `print(letters("aba"))` in `main` to print
+
+	a:2
+	b:1
+
+- Bonus points: comprehensive tests
 
 
 * Functions
@@ -465,7 +493,7 @@ TODO
 - Closures
 
 
-* Lab 3
+* Lab 4
 
 TODO
 
@@ -478,7 +506,7 @@ TODO
 - Interfaces
 
 
-* Lab 4
+* Lab 5
 
 TODO
 
@@ -491,7 +519,7 @@ TODO
 - Defer
 
 
-* Lab 5
+* Lab 6
 
 TODO
 
@@ -503,7 +531,7 @@ TODO
 - Select
 
 
-* Lab 6
+* Lab 7
 
 TODO
 

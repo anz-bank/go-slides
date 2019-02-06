@@ -10,8 +10,8 @@ It is continuously deployed to Appengine at [`https://gotraining.appspot.com/`](
 
 Run the present tool locally with
 
-	go build .
-	./go-slides
+    go build .
+    ./go-slides -base . -content content
 
 ## Manual Appengine deployment
 
@@ -19,8 +19,8 @@ Request access rights to the GCP `gotraining` project from a [contributor](https
 
 Execute
 
-	gcloud app deploy
+    gcloud app deploy
 
 Test the coudbuild with
 
-	gcloud builds submit --config cloudbuild.yaml
+    gcloud builds submit --config cloudbuild.yaml

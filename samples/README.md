@@ -8,7 +8,7 @@ For completeness they are also listed in this directory.
 ### Getting started
 
 -   [Packages](packages.go), imports and exported names
--   [Functions](fucntions.go)
+-   [Functions](functions.go)
 
 ### Values and control flow
 
@@ -19,3 +19,10 @@ For completeness they are also listed in this directory.
 -   [For](for.go)
 -   [If/Else](if_else.go)
 -   [Switch](switch.go)
+
+### Iterable data types and Range
+
+-   [Arrays](arrays.go)
+-   [Slices](slices.go)
+-   [Maps](maps.go)
+-   [Range](range.go)
