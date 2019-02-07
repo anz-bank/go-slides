@@ -512,6 +512,7 @@ As part of all labs
 - [[https://goplay.space/#OkA4buOlTe1][Methods]]
 - [[https://goplay.space/#An9Um8oSShm][Interfaces]]
 
+"The bigger the interface, the weaker the abstraction." - [[https://go-proverbs.github.io/][Rob Pike]]
 
 * Lab 5 - Stringer
 
@@ -549,6 +550,13 @@ TODO
 
 
 * Concurrency
+
+"Don't communicate by sharing memory, share memory by communicating.""
+"Concurrency is not parallelism."
+"Concurrency is about structure, parallelism is about execution.""
+ - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
+
+Concurrency isn't easy - we are only scratching the surface.
 
 - [[][Goroutines]]
 - [[][Channels]]
