@@ -513,9 +513,19 @@ As part of all labs
 - [[https://goplay.space/#An9Um8oSShm][Interfaces]]
 
 
-* Lab 5 - CRUD puppy with interface
+* Lab 5 - Stringer
 
-- Create an executable go program in directory `5_puppy`
+- Create an executable go program in directory `5_stringer`
+- Make the `IPAddr` type implement `fmt.Stringer` to print the address as a dotted quad
+- Find hints at [[https://tour.golang.org/methods/18][Tour of Go Exercise: Stringers]]
+- Call `fmt.Println(IPAddr{127,` `0,` `0,` `1})` in `main` to print:
+
+	127.0.0.1
+
+
+* Lab 6 - CRUD puppy with interface
+
+- Create an executable go program in directory `6_puppy`
 - Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
 - Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
@@ -523,6 +533,7 @@ As part of all labs
 - Bonus points: Write tests against the `Storer` interface in a [[https://godoc.org/github.com/stretchr/testify/suite][suite]] and run the suite with both implementations
 
 .image _img/crud_puppy.jpg
+
 
 * Errors
 
@@ -532,7 +543,7 @@ As part of all labs
 - [[][Defer]]
 
 
-* Lab 6
+* Lab 7
 
 TODO
 
@@ -544,7 +555,7 @@ TODO
 - [[][Select]]
 
 
-* Lab 7
+* Lab 8
 
 TODO
 
