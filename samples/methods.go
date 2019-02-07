@@ -1,9 +1,7 @@
 // Methods
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 type rect struct {
 	a, b int

@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-// This `person` struct type has `name` and `good` fields.
+// This `person` struct type has `name` and `malicious` fields.
 type person struct {
 	name      string
 	malicious bool

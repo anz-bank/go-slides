@@ -508,7 +508,7 @@ As part of all labs
 * Data structures and interfaces
 
 - [[https://goplay.space/#MYeoiSdP4tp][Pointers]]
-- [[https://goplay.space/#lHNpzvoFabD][Structs]]
+- [[https://goplay.space/#eoBLEu8lRvl][Structs]]
 - [[https://goplay.space/#mg9ScasagOC][Methods]]
 - [[https://goplay.space/#An9Um8oSShm][Interfaces]]
 
@@ -517,7 +517,7 @@ As part of all labs
 
 - Create an executable go program in directory `5_puppy`
 - Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
-- Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD] methods for `Puppy`
+- Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
 - Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
 - Bonus points: Write tests against the `Storer` interface in a [[https://godoc.org/github.com/stretchr/testify/suite][suite]] and run the suite with both implementations
