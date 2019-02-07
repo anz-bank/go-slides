@@ -507,23 +507,29 @@ As part of all labs
 
 * Data structures and interfaces
 
-- Pointers
-- Structs
-- Methods
-- Interfaces
+- [[https://goplay.space/#MYeoiSdP4tp][Pointers]]
+- [[https://goplay.space/#lHNpzvoFabD][Structs]]
+- [[https://goplay.space/#mg9ScasagOC][Methods]]
+- [[https://goplay.space/#An9Um8oSShm][Interfaces]]
 
 
-* Lab 5
+* Lab 5 - CRUD puppy with interface
 
-TODO
+- Create an executable go program in directory `5_puppy`
+- Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
+- Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD] methods for `Puppy`
+- Write a `MapStore` implementation of `Storer` backed by a `map`
+- Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
+- Bonus points: Write tests against the `Storer` interface in a [[https://godoc.org/github.com/stretchr/testify/suite][suite]] and run the suite with both implementations
 
+.image _img/crud_puppy.jpg
 
 * Errors
 
-- Errors
-- Panic
-- Recover
-- Defer
+- [[][Errors]]
+- [[][Panic]]
+- [[][Recover]]
+- [[][Defer]]
 
 
 * Lab 6
@@ -533,9 +539,9 @@ TODO
 
 * Concurrency
 
-- Goroutines
-- Channels
-- Select
+- [[][Goroutines]]
+- [[][Channels]]
+- [[][Select]]
 
 
 * Lab 7
@@ -621,8 +627,14 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - testify
 - chi
 - kingpin.v2
-- TODO
-
+- logrus
+- pq
+- redigo
+- mgo
+- goracle
+- jsonschema
+- go-jose
+- ...
 
 * Project work
 

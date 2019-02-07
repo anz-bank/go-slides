@@ -32,3 +32,23 @@ For completeness they are also listed in this directory.
 -   [Functions](functions2.go)
 -   [Variadic Functions](variadic_functions.go)
 -   [Closures](closures.go)
+
+### Data structures and interfaces
+
+-   [Pointers](pointers.go)
+-   [Structs](structs.go)
+-   [Methods](methods.go)
+-   [Interfaces](interfaces.go)
+
+### Errors
+
+-   [Errors](errors.go)
+-   [Panic](panic.go)
+-   [Recover](recover.go)
+-   [Defer](defer.go)
+
+### Concurrency
+
+-   [Goroutines](goroutines.go)
+-   [Channels](channels.go)
+-   [Select](select.go)
