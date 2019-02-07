@@ -105,8 +105,25 @@
         languages: ['bash', 'markdown', 'go', 'java']
       })
 
+      var reLanguageTag = /^\s*language:(\w+)\n?([\s\S]*)/m
+
       document.querySelectorAll('.code pre').forEach( el => {
-        hljs.highlightBlock(el)
+        var textContent = el.innerText
+        var languageTag = reLanguageTag.exec(textContent)
+
+        if (languageTag) {
+          var newTextContent = languageTag[2]
+          languageTag = languageTag[1]
+
+          el.classList.add(languageTag)
+          el.innerText = newTextContent.trim()
+
+          if (languageTag !== 'none') {
+            hljs.highlightBlock(el)
+          }
+        } else {
+          hljs.highlightBlock(el)
+        }
       })
     </script>
   </body>
