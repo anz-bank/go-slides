@@ -551,6 +551,7 @@ TODO
 For non-trivial size projects follow the layout suggested by [[https://github.com/golang-standards/project-layout][golang-standards]]
 Abridged and ANZ adjusted version:
 
+	language:none
 	├── README.md
 	├── go.mod
 	├── go.sum
@@ -574,6 +575,7 @@ Abridged and ANZ adjusted version:
 
 * Go tool chain
 
+	language:bash
 	go help
 	go version
 	go build ./...
