@@ -109,19 +109,19 @@
 
       document.querySelectorAll('.code pre').forEach( el => {
         var textContent = el.innerText
-        var languageTag = reLanguageTag.exec(textContent)
+        var match = reLanguageTag.exec(textContent)
+        var languageTag
+     
+        if (!match) {
+          hljs.highlightBlock(el)
 
-        if (languageTag) {
-          var newTextContent = languageTag[2]
-          languageTag = languageTag[1]
+          return
+        }
 
-          el.classList.add(languageTag)
-          el.innerText = newTextContent.trim()
-
-          if (languageTag !== 'none') {
-            hljs.highlightBlock(el)
-          }
-        } else {
+        languageTag = match[1]
+        el.innerText = match[2].trim()
+        el.classList.add(languageTag)
+        if (languageTag !== 'none') {
           hljs.highlightBlock(el)
         }
       })
