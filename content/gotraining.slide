@@ -536,7 +536,31 @@ As part of all labs
 .image _img/crud_puppy.jpg
 
 
-* Errors
+* Errors (1/2)
+
+"Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
+
+The `error` type is a built-in interface:
+
+	type error interface {
+	    Error() string
+	}
+
+By convention, functions often return `error` as the second/last return value.
+The calling code should handle errors by testing whether the error equals nil:
+
+	func getCat(strID string) (*Cat, error) {
+		id, err := strconv.Atoi(strID)
+		if err != nil {
+		    return nil, CatError(err)
+		}
+		return catStore.cats[id], nil
+	}
+
+
+* Errors (2/2)
+
+By convention, errors are the last return value and have type error, a built-in interface.
 
 - [[][Errors]]
 - [[][Panic]]
