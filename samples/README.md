@@ -26,3 +26,9 @@ For completeness they are also listed in this directory.
 -   [Slices](slices.go)
 -   [Maps](maps.go)
 -   [Range](range.go)
+
+### Functions
+
+-   [Functions](functions2.go)
+-   [Variadic Functions](variadic_functions.go)
+-   [Closures](closures.go)
