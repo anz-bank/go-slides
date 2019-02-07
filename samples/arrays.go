@@ -18,6 +18,6 @@ func main() {
 	fmt.Println("initial b:", b)
 
 	// Two dimensional array
-	c := [2][2]int{{1, 2}, {10, 20}}
+	c := [2][3]int{{1, 2, 3}, {10, 20, 30}}
 	fmt.Println("initial c: ", c)
 }
