@@ -10,7 +10,7 @@ func sum(a, b int) int {
 }
 
 // Multiple return values
-func gimmiTwo() (string, int) {
+func gimmeTwo() (string, int) {
 	return "0b10", 2
 }
 
@@ -28,5 +28,5 @@ func location(city string) (lat, lng float64) {
 func main() {
 	fmt.Println("sum(2,5)", sum(2, 5))
 	fmt.Println(location("Bangalore"))
-	fmt.Println(gimmiTwo())
+	fmt.Println(gimmeTwo())
 }

@@ -1,9 +1,7 @@
 // Variadic
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 // Use arbitrary number of parameters like `fmt.Printf()`
 func sum(vals ...int) {

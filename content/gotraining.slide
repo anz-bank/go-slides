@@ -488,19 +488,19 @@ As part of all labs
 
 * Functions
 
-- [[https://goplay.space/#M_EBwjCDT77][Functions]]: parameters and return values
-- [[https://goplay.space/#Kc-7LOUq_Ls][Variadic Functions]]
+- [[https://goplay.space/#gHOzTi05LkI][Functions]]: parameters and return values
+- [[https://goplay.space/#-G75RWA1DW1][Variadic Functions]]
 - [[https://goplay.space/#olrpJoSte3n][Closures]]
 
 
 * Lab 4 - numeronym
 
-- Create an executable go program in directory `3_letters`
-- Write a function that returns a slice of numeronyms for its input strings
+- Create an executable go program in directory `4_numeronym`
+- Write a function that returns a slice of numeronyms for its input strings:
 
 	func numeronyms(vals ...string) []string
 
-- Call `fmt.Prinln(numeronyms("accessibility",` `"Kubernetes",` `"abc"))` in `main` to print
+- Call `fmt.Println(numeronyms("accessibility",` `"Kubernetes",` `"abc"))` in `main` to print:
 
 	[a11y K8s abc]
 
