@@ -633,19 +633,21 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - ...
 
 
-* 3rd party Go libs @ANZ
+* Useful third party packages
 
-- testify
-- chi
-- kingpin.v2
-- logrus
-- pq
-- redigo
-- mgo
-- goracle
-- jsonschema
-- go-jose
-- ...
+[[https://godoc.org/github.com/stretchr/testify][testify]] - testing toolkit
+[[https://godoc.org/github.com/go-chi/chi][chi]] - lightweight router for Go HTTP services
+[[https://godoc.org/gopkg.in/alecthomas/kingpin.v2][kingpin.v2]] - command line and flag parser
+[[https://godoc.org/github.com/sirupsen/logrus][logrus]] - structured logger
+
+[[https://godoc.org/github.com/lib/pq][pq]] - Postgres driver for the database/sql
+[[https://godoc.org/github.com/gomodule/redigo/redis][redigo]] - lightweight client for Redis
+[[https://godoc.org/github.com/globalsign/mgo][mgo]] - MongoDB driver for Go
+[[https://godoc.org/gopkg.in/goracle.v2][goracle]] - Oracle driver for the database/sql
+
+[[https://github.com/santhosh-tekuri/jsonschema][jsonschema]] - JSON schema compilation and validation
+[[https://godoc.org/gopkg.in/square/go-jose.v2][go-jose]] - JWT utils
+ ...
 
 * Project work
 
