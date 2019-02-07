@@ -26,9 +26,9 @@ func main() {
 	// Append
 	s := []string{"C", "D", "E"}
 	s = append(s, "f")
-	s = append(s, "g", "h")
+	s = append(s, "g", "h", "i")
 	s = append([]string{"a", " b"}, s...)
-	fmt.Println("append:", s, "\n")
+	fmt.Printf("s: %v, len: %d, cap: %d\n\n", s, len(s), cap(s))
 
 	// Copy and reference
 	cs1 := make([]string, len(s))

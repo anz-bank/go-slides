@@ -23,6 +23,10 @@ func main() {
 	m2 := map[string]string{"welcome": "ಸ್ವಾಗತ", "friend": "ಸ್ನೇಹಿತ"}
 	fmt.Println("m2 :", m2)
 
+	// An empty map literal is a substitute for make
+	m3 := map[string]string{}
+	fmt.Println("m3 :", m3, make(map[string]string))
+
 	v, ok := m2["World peace"]
 	fmt.Printf(`Value: "%s" Present?: %v`+"\n", v, ok)
 }

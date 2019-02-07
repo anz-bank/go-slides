@@ -446,38 +446,39 @@ As part of all labs
 
 * Iterable data types and Range
 
-- [[https://goplay.space/#rO6WSkFyvsy][Arrays]]
-- [[https://goplay.space/#iCpLzcOFWO5][Slices]]
-- [[https://goplay.space/#nSbbXFFXnjY][Maps]]
+- [[https://goplay.space/#XrEt6YEl7QC][Arrays]]
+- [[https://goplay.space/#_KaPpZeRNPA][Slices]]
+- [[https://goplay.space/#lMZT_vCRchI][Maps]]
 - [[https://goplay.space/#S3KObilbh7H][Range]]
 
 
 * Lab 2 - Bubble sort
 
 - Create an executable go program in directory `2_bubble`
-- Write a function that returns a sorted copy of `int` slice `s` using _Bubble_ _sort_
+- Write a function that returns a sorted copy of `int` slice `s` using [[https://en.wikipedia.org/wiki/Bubble_sort][Bubble sort]]:
 
 	func bubble(s []int) []int
 
-- Call `fmt.Println(bubble([]int{3, 2, 1, 5}))` in `main` to print
+- Call `fmt.Println(bubble([]int{3,` `2,` `1,` `5}))` in `main` to print:
 
 	[1 2 3 5]
 
-- Bonus points: implement _Insertion_ _sort_ and an _O(n_ _log(n))_ sorting algorithm
+- Bonus points: implement [[https://en.wikipedia.org/wiki/Insertion_sort)][Insertion sort]]
+- Extra bonus points: implement an _O(n_ _log(n))_ sorting algorithm
 
 
 * Lab 3 - Letter frequency
 
 - Create an executable go program in directory `3_letters`
-- Write a function that returns a mapping of each letter to its frequency
+- Write a function that returns a mapping of each letter to its frequency:
 
 	func letters(s string) map[rune]int
 
-- Write a function that prints the contents of a map as `{key}:{val}\n` for each key/value pair sorted by keys. Use package `sort`.
+- Write a function that prints the contents of a map as `{key}:{val}\n` for each key/value pair sorted by keys. Use package [[https://golang.org/pkg/sort/][sort]]:
 
 	func print(m map[rune]int)
 
-- Call `print(letters("aba"))` in `main` to print
+- Call `print(letters("aba"))` in `main` to print:
 
 	a:2
 	b:1
