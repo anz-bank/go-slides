@@ -463,7 +463,7 @@ As part of all labs
 
 	[1 2 3 5]
 
-- Bonus points: implement [[https://en.wikipedia.org/wiki/Insertion_sort)][Insertion sort]]
+- Bonus points: implement [[https://en.wikipedia.org/wiki/Insertion_sort][Insertion sort]]
 - Extra bonus points: implement an _O(n_ _log(n))_ sorting algorithm
 
 
