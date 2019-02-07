@@ -488,15 +488,21 @@ As part of all labs
 
 * Functions
 
-- Functions
-- Multiple Return Values
-- Variadic Functions
-- Closures
+- [[https://goplay.space/#gHOzTi05LkI][Functions]]: parameters and return values
+- [[https://goplay.space/#-G75RWA1DW1][Variadic Functions]]
+- [[https://goplay.space/#olrpJoSte3n][Closures]]
 
 
-* Lab 4
+* Lab 4 - numeronym
 
-TODO
+- Create an executable go program in directory `4_numeronym`
+- Write a function that returns a slice of numeronyms for its input strings:
+
+	func numeronyms(vals ...string) []string
+
+- Call `fmt.Println(numeronyms("accessibility",` `"Kubernetes",` `"abc"))` in `main` to print:
+
+	[a11y K8s abc]
 
 
 * Data structures and interfaces
