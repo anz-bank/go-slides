@@ -407,7 +407,7 @@ Document them
 
 - [[https://goplay.space/#TOqGA-5RjUi][Values]]
 - [[https://goplay.space/#gs20cFjl-gs][Variables]]
-- [[https://goplay.space/#uCIuF7FqJGX][Constants]]
+- [[https://goplay.space/#2X57Ha4ldNV][Constants]]
 - [[https://goplay.space/#Rbz8FhL3PxU][Type conversion]]
 - [[https://goplay.space/#ugMD-VYlwjI][For]]
 - [[https://goplay.space/#AbYAd6LB2c3][If/Else]]
@@ -512,6 +512,7 @@ As part of all labs
 - [[https://goplay.space/#OkA4buOlTe1][Methods]]
 - [[https://goplay.space/#An9Um8oSShm][Interfaces]]
 
+"The bigger the interface, the weaker the abstraction." - [[https://go-proverbs.github.io/][Rob Pike]]
 
 * Lab 5 - Stringer
 
@@ -535,12 +536,48 @@ As part of all labs
 .image _img/crud_puppy.jpg
 
 
-* Errors
+* Errors (1/3)
 
-- [[][Errors]]
-- [[][Panic]]
-- [[][Recover]]
-- [[][Defer]]
+"Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
+
+The `error` type is a built-in interface:
+
+	type error interface {
+	    Error() string
+	}
+
+By convention, functions often return `error` as the second/last return value.
+The calling code should handle errors by testing whether the error equals nil:
+
+	func getCat(strID string) (*Cat, error) {
+		id, err := strconv.Atoi(strID)
+		if err != nil {
+		    return nil, CatError(err)
+		}
+		return catStore.cats[id], nil
+	}
+
+
+* Errors (2/3)
+
+"Don't panic." - [[https://go-proverbs.github.io/][Rob Pike]]
+
+Panic should be used when something went unexpectedly wrong.
+For instance, initialise a regular expression with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if the pattern is a string constant.
+`MustCompile` will `panic` during `go` `build` if the pattern is invalid.
+
+	var re = regexp.MustCompile(`^[a-c]+$`)
+	var re2 = regexp.MustCompile(`^[a-c+$`) // panic
+
+
+Use `panic` rarely and judiciously in your own code!
+
+
+* Errors (3/3)
+
+- [[https://goplay.space/#h1kA3qKaO6B][Errors]]
+- [[https://goplay.space/#9vu6iJHXMHC][Panic]]
+- [[][Defer and Recover]]
 
 
 * Lab 7
@@ -549,6 +586,13 @@ TODO
 
 
 * Concurrency
+
+"Don't communicate by sharing memory, share memory by communicating."
+"Concurrency is not parallelism."
+"Concurrency is about structure, parallelism is about execution."
+ - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
+
+Concurrency isn't easy - we are only scratching the surface.
 
 - [[][Goroutines]]
 - [[][Channels]]
