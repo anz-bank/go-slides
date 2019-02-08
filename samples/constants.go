@@ -3,7 +3,7 @@ package main
 
 import "fmt"
 
-const Phi = 2.61803398875
+const Phi = 1.61803398875
 
 // The `iota` identifier is used in const declarations to
 // simplify definitions of incrementing numbers.
