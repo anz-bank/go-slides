@@ -563,17 +563,20 @@ The calling code should handle errors by testing whether the error equals nil:
 "Don't panic." - [[https://go-proverbs.github.io/][Rob Pike]]
 
 Panic should be used when something went unexpectedly wrong.
-For instance, declare a regular expression as unexported, global `var` and
-initialise it with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if its pattern is known.
- `MustCompile` will `panic` at build time if the pattern is invalid.
+For instance, initialise a regular expression with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if the pattern is a string constant.
+`MustCompile` will `panic` during `go` `build` if the pattern is invalid.
+
+	var re = regexp.MustCompile(`^[a-c]+$`)
+	var re2 = regexp.MustCompile(`^[a-c+$`) // panic
+
 
 Use `panic` rarely and judiciously in your own code!
 
 
 * Errors (3/3)
 
-- [[https://goplay.space/#6pnfXTfDz4E][Errors]]
-- [[https://goplay.space/#UtkihNm1KvD][Panic]]
+- [[https://goplay.space/#h1kA3qKaO6B][Errors]]
+- [[https://goplay.space/#9vu6iJHXMHC][Panic]]
 - [[][Defer and Recover]]
 
 
@@ -584,9 +587,9 @@ TODO
 
 * Concurrency
 
-"Don't communicate by sharing memory, share memory by communicating.""
+"Don't communicate by sharing memory, share memory by communicating."
 "Concurrency is not parallelism."
-"Concurrency is about structure, parallelism is about execution.""
+"Concurrency is about structure, parallelism is about execution."
  - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
 
 Concurrency isn't easy - we are only scratching the surface.

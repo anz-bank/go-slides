@@ -8,7 +8,7 @@ import (
 
 const (
 	Invalid  = "INVALID"
-	NotFound = "NOT-FOUND" // ...
+	NotFound = "NOT-FOUND"
 )
 
 type CodeError struct {
