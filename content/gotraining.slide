@@ -577,7 +577,7 @@ Use `panic` rarely and judiciously in your own code!
 
 - [[https://goplay.space/#h1kA3qKaO6B][Errors]]
 - [[https://goplay.space/#9vu6iJHXMHC][Panic]]
-- [[https://goplay.space/#pMbrba6y9cY][Defer]]
+- [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
 
 
 * Lab 7 - Errors
@@ -586,7 +586,7 @@ Use `panic` rarely and judiciously in your own code!
 - Copy the CRUD puppy from upstream master
 - Add a custom error type `Error` with fields `Message` and `Code`
 - Extend the `Storer` interface for all methods to also return `error`
-- Create errors for
+- Create errors for:
 
 	language:none
 	- Value < 0
