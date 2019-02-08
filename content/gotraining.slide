@@ -577,12 +577,23 @@ Use `panic` rarely and judiciously in your own code!
 
 - [[https://goplay.space/#h1kA3qKaO6B][Errors]]
 - [[https://goplay.space/#9vu6iJHXMHC][Panic]]
-- [[][Defer and Recover]]
+- [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
 
 
-* Lab 7
+* Lab 7 - Errors
 
-TODO
+- Create an executable go program in directory `7_errors`
+- Copy the CRUD puppy from upstream master
+- Add a custom error type `Error` with fields `Message` and `Code`
+- Extend the `Storer` interface for all methods to also return `error`
+- Create errors for:
+
+	language:none
+	- Value < 0
+	- ID not found in Read, Update and Delete
+
+- Add locking for proper use of sync.Map
+- Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
 
 
 * Concurrency
