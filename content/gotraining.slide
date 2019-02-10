@@ -609,16 +609,17 @@ Goroutines (`go`)
 Channels (`chan`, `<-`)
 Select (`select`)
 
+
 * Concurrency (2/2)
 
 Concurrency isn't easy - we are only scratching the surface.
 
 - [[https://goplay.space/#YtuJgIuIswH][Goroutines]] ([[https://play.golang.org/p/YtuJgIuIswH][Playground]]`*`)
-- [[https://goplay.space/#4WyLMun1SwG][Channels]] ([[https://play.golang.org/p/4WyLMun1SwG][Playground]]`*`)
-- [[https://goplay.space/#lBnz0S9pLGB][Buffered Channels]]
-- [[https://goplay.space/#4TGM29YbvX4][Dead locks]] ([[https://play.golang.org/p/4TGM29YbvX4][Playground]]`*`)
-- [[https://goplay.space/#5hnd1cTbE4I][Range and close]] ([[https://play.golang.org/p/5hnd1cTbE4I][Playground]]`*`)
+- [[https://goplay.space/#5M0f3-YY44W][Channels]] ([[https://play.golang.org/p/5M0f3-YY44W][Playground]]`*`)
+- [[https://goplay.space/#FEWHmUA0QtN][Buffered Channels]]
+- [[https://goplay.space/#ANO8rpfNynY][Range and close]] ([[https://play.golang.org/p/ANO8rpfNynY][Playground]]`*`)
 - [[https://goplay.space/#R1qgjOsPSGk][Select]] ([[https://play.golang.org/p/R1qgjOsPSGk][Playground]]`*`)
+- [[https://goplay.space/#4TGM29YbvX4][Deadlocks]] ([[https://play.golang.org/p/4TGM29YbvX4][Playground]]`*`)
 
 `*` The [[https://play.golang.org/][official Go Playground]] prints in real-time with delays but lacks syntax colouring.
 

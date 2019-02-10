@@ -9,7 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-		time.Sleep(2 * time.Second)
+		time.Sleep(2000 * time.Millisecond)
 		fmt.Fprint(w, "pong")
 	})
 	addr := ":9090"

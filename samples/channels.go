@@ -20,6 +20,7 @@ func main() {
 	// Create a channel with make
 	ch := make(chan string)
 	go ping(ch)
+	fmt.Println("main: waiting for ping response")
 	str := <-ch
-	fmt.Println("main:", str)
+	fmt.Println("main: received", str)
 }
