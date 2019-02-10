@@ -262,7 +262,7 @@ ways to increase and maintain quality.
 - Ensure *100%* *coverage*
 
 
-* Recommendations for CD @ANZ (3/2)
+* Recommendations for CD @ANZ (3/3)
 
 - Test (unit & system), lint & cover as part of *CI* (Continuous Integration)
 - *Version* all deployments (use [[https://semver.org/][semver]]; tag source, images etc.)
