@@ -1,5 +1,5 @@
 Go training
-Go development @ANZ - lectures and labs
+Go development - lectures and labs
 
 Julia Ogris
 Engineer, ANZ
@@ -16,7 +16,7 @@ https://github.com/anz-bank/go-training
 - Go language fundamentals
 - Go standard library
 - Go tool chain
-- Third party Go libraries used at ANZ
+- Third party Go libraries commonly used
 - Project work
 
 Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
@@ -100,7 +100,7 @@ Go favours simplicity and directness resulting in some purposeful omissions:
 * Motivation and Demo
 
 
-* Why Go at ANZ
+* Why Go
 
 - simple: easy to learn and read
 - a single obvious right way to do most things
@@ -197,7 +197,7 @@ Execute with
 
 	func main() {
 		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-			time.Sleep(2000 * time.Millisecond)
+			time.Sleep(2 * time.Second)
 			fmt.Fprint(w, "pong")
 		})
 		addr := ":9090"
@@ -243,7 +243,7 @@ Continuous Deployment != Continuous Delivery
 [[https://semaphoreci.com/blog/2017/07/27/what-is-the-difference-between-continuous-integration-continuous-deployment-and-continuous-delivery.html][Marko Anastasov, Semaphore Engineering Blog]]
 
 
-* Recommendations for CD @ANZ (1/3)
+* Recommendations for CD (1/3)
 
 - Use *trunk* *based* *development* (not GitFlow)
 - Create *small* *PRs* (Pull Requests) that can be Squash Merged
@@ -251,7 +251,7 @@ Continuous Deployment != Continuous Delivery
 - Protect `master` branch on GitHub
 
 
-* Recommendations for CD @ANZ (2/3)
+* Recommendations for CD (2/3)
 
 Quality leads to the confidence to automatically deploy, so we need
 ways to increase and maintain quality.
@@ -262,7 +262,7 @@ ways to increase and maintain quality.
 - Ensure *100%* *coverage*
 
 
-* Recommendations for CD @ANZ (3/2)
+* Recommendations for CD (3/3)
 
 - Test (unit & system), lint & cover as part of *CI* (Continuous Integration)
 - *Version* all deployments (use [[https://semver.org/][semver]]; tag source, images etc.)
@@ -427,7 +427,7 @@ As part of all labs
 
 * Lab 1 - Fibonacci
 
-- Create an executable go program in directory `1_fib`
+- Create an executable go program in directory `01_fib`
 - Write a function that prints the first n Fibonacci numbers
 
 	func fib(n int)
@@ -454,7 +454,7 @@ As part of all labs
 
 * Lab 2 - Bubble sort
 
-- Create an executable go program in directory `2_bubble`
+- Create an executable go program in directory `02_bubble`
 - Write a function that returns a sorted copy of `int` slice `s` using [[https://en.wikipedia.org/wiki/Bubble_sort][Bubble sort]]:
 
 	func bubble(s []int) []int
@@ -469,7 +469,7 @@ As part of all labs
 
 * Lab 3 - Letter frequency
 
-- Create an executable go program in directory `3_letters`
+- Create an executable go program in directory `03_letters`
 - Write a function that returns a mapping of each letter to its frequency:
 
 	func letters(s string) map[rune]int
@@ -495,7 +495,7 @@ As part of all labs
 
 * Lab 4 - numeronym
 
-- Create an executable go program in directory `4_numeronym`
+- Create an executable go program in directory `04_numeronym`
 - Write a function that returns a slice of numeronyms for its input strings:
 
 	func numeronyms(vals ...string) []string
@@ -516,7 +516,7 @@ As part of all labs
 
 * Lab 5 - Stringer
 
-- Create an executable go program in directory `5_stringer`
+- Create an executable go program in directory `05_stringer`
 - Make the `IPAddr` type implement `fmt.Stringer` to print the address as a dotted quad
 - Find hints at [[https://tour.golang.org/methods/18][Tour of Go Exercise: Stringers]]
 - Call `fmt.Println(IPAddr{127,` `0,` `0,` `1})` in `main` to print:
@@ -526,7 +526,7 @@ As part of all labs
 
 * Lab 6 - CRUD puppy with interface
 
-- Create an executable go program in directory `6_puppy`
+- Create an executable go program in directory `06_puppy`
 - Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
 - Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
@@ -534,6 +534,7 @@ As part of all labs
 - Bonus points: Write tests against the `Storer` interface in a [[https://godoc.org/github.com/stretchr/testify/suite][suite]] and run the suite with both implementations
 
 .image _img/crud_puppy.jpg
+.caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
 
 * Errors (1/3)
@@ -582,7 +583,7 @@ Use `panic` rarely and judiciously in your own code!
 
 * Lab 7 - Errors
 
-- Create an executable go program in directory `7_errors`
+- Create an executable go program in directory `07_errors`
 - Copy the CRUD puppy from upstream master
 - Add a custom error type `Error` with fields `Message` and `Code`
 - Extend the `Storer` interface for all methods to also return `error`
@@ -596,23 +597,31 @@ Use `panic` rarely and judiciously in your own code!
 - Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
 
 
-* Concurrency
+* Concurrency (1/2)
 
 "Don't communicate by sharing memory, share memory by communicating."
 "Concurrency is not parallelism."
 "Concurrency is about structure, parallelism is about execution."
  - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
 
+*Overview:* *built-in* *language* *features*
+Goroutines (`go`)
+Channels (`chan`, `<-`)
+Select (`select`)
+
+
+* Concurrency (2/2)
+
 Concurrency isn't easy - we are only scratching the surface.
 
-- [[][Goroutines]]
-- [[][Channels]]
-- [[][Select]]
+- [[https://goplay.space/#YtuJgIuIswH][Goroutines]] ([[https://play.golang.org/p/YtuJgIuIswH][Playground]]`*`)
+- [[https://goplay.space/#5M0f3-YY44W][Channels]] ([[https://play.golang.org/p/5M0f3-YY44W][Playground]]`*`)
+- [[https://goplay.space/#FEWHmUA0QtN][Buffered Channels]]
+- [[https://goplay.space/#ANO8rpfNynY][Range and close]] ([[https://play.golang.org/p/ANO8rpfNynY][Playground]]`*`)
+- [[https://goplay.space/#R1qgjOsPSGk][Select]] ([[https://play.golang.org/p/R1qgjOsPSGk][Playground]]`*`)
+- [[https://goplay.space/#4TGM29YbvX4][Deadlocks]] ([[https://play.golang.org/p/4TGM29YbvX4][Playground]]`*`)
 
-
-* Lab 8
-
-TODO
+`*` The [[https://play.golang.org/][official Go Playground]] prints in real-time with delays but lacks syntax colouring.
 
 
 * Tools and Conventions
@@ -621,7 +630,7 @@ TODO
 * Project layout
 
 For non-trivial size projects follow the layout suggested by [[https://github.com/golang-standards/project-layout][golang-standards]]
-Abridged and ANZ adjusted version:
+Abridged version:
 
 	language:none
 	├── README.md
