@@ -427,7 +427,7 @@ As part of all labs
 
 * Lab 1 - Fibonacci
 
-- Create an executable go program in directory `1_fib`
+- Create an executable go program in directory `01_fib`
 - Write a function that prints the first n Fibonacci numbers
 
 	func fib(n int)
@@ -454,7 +454,7 @@ As part of all labs
 
 * Lab 2 - Bubble sort
 
-- Create an executable go program in directory `2_bubble`
+- Create an executable go program in directory `02_bubble`
 - Write a function that returns a sorted copy of `int` slice `s` using [[https://en.wikipedia.org/wiki/Bubble_sort][Bubble sort]]:
 
 	func bubble(s []int) []int
@@ -469,7 +469,7 @@ As part of all labs
 
 * Lab 3 - Letter frequency
 
-- Create an executable go program in directory `3_letters`
+- Create an executable go program in directory `03_letters`
 - Write a function that returns a mapping of each letter to its frequency:
 
 	func letters(s string) map[rune]int
@@ -495,7 +495,7 @@ As part of all labs
 
 * Lab 4 - numeronym
 
-- Create an executable go program in directory `4_numeronym`
+- Create an executable go program in directory `04_numeronym`
 - Write a function that returns a slice of numeronyms for its input strings:
 
 	func numeronyms(vals ...string) []string
@@ -516,7 +516,7 @@ As part of all labs
 
 * Lab 5 - Stringer
 
-- Create an executable go program in directory `5_stringer`
+- Create an executable go program in directory `05_stringer`
 - Make the `IPAddr` type implement `fmt.Stringer` to print the address as a dotted quad
 - Find hints at [[https://tour.golang.org/methods/18][Tour of Go Exercise: Stringers]]
 - Call `fmt.Println(IPAddr{127,` `0,` `0,` `1})` in `main` to print:
@@ -526,7 +526,7 @@ As part of all labs
 
 * Lab 6 - CRUD puppy with interface
 
-- Create an executable go program in directory `6_puppy`
+- Create an executable go program in directory `06_puppy`
 - Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
 - Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
@@ -583,7 +583,7 @@ Use `panic` rarely and judiciously in your own code!
 
 * Lab 7 - Errors
 
-- Create an executable go program in directory `7_errors`
+- Create an executable go program in directory `07_errors`
 - Copy the CRUD puppy from upstream master
 - Add a custom error type `Error` with fields `Message` and `Code`
 - Extend the `Storer` interface for all methods to also return `error`
