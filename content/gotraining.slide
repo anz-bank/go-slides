@@ -713,7 +713,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - fmt
 - strings
 - time
-- encoding/json
+- [[https://goplay.space/#ywqEGKzI7T6][encoding/json]]
 - net/http
 - regexp
 - sort
@@ -722,6 +722,14 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - path
 - bytes
 - ...
+
+
+* Lab 9 - JSON pupppy
+
+- Create directory `09_json` containing a copy of upstream master `08_project`
+- Add JSON tags to puppy data type
+- Test marshalling and unmarshalling using [[https://godoc.org/github.com/stretchr/testify/require#JSONEq][require.JSONEq]]
+- Add command line flag `-d` `FILE` with long form `--data` `FILE` using [[https://godoc.org/gopkg.in/alecthomas/kingpin.v2][kingpin.v2]]. FILE should contain an array of puppies in JSON format. Parse this file and store its contents.
 
 
 * Useful third party packages
@@ -740,11 +748,108 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 [[https://godoc.org/gopkg.in/square/go-jose.v2][go-jose]] - JWT utils
  ...
 
-* Project work
+
+* A RESTful API starter (1/3)
+
+[[https://goplay.space/#oPHSAHa_Zo1][Full basic sample]]
+[[https://goplay.space/#ddCcD-1JdDJ][Full sample]] with error handling
+
+	type TeapotHandler interface {
+		handlePost(w http.ResponseWriter, r *http.Request)
+		handleGet(w http.ResponseWriter, r *http.Request)
+	}
+
+	func SetupRoutes(h TeapotHandler, r chi.Router) {
+		r.Post("/api/teapot", h.handlePost)
+		r.Get("/api/teapot/{id}", h.handleGet)
+	}
+
+	func main() {
+		r := chi.NewRouter()
+		th := NewMapTeapotHandler()
+		SetupRoutes(th, r)
+		http.ListenAndServe(":7735", r)
+	}
+
+
+* A RESTful API starter (2/3)
+
+	type Teapot struct {
+		ID          int
+		Colour      string
+		Temperature int
+	}
+
+	// MapTeapotHandler implements TeapotHandler
+	type MapTeapotHandler struct {
+		store map[int]Teapot
+		maxID int
+	}
+
+	func NewMapTeapotHandler() *MapTeapotHandler {
+		return &MapTeapotHandler{store: make(map[int]Teapot), maxID: 0}
+	}
+
+
+* A RESTful API starter (3/3)
+
+	// MapTeapotHandler implements  TeapotHandler
+	func (mt *MapTeapotHandler) handleGet(w http.ResponseWriter, r *http.Request) {
+		id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+		teapot, _ := mt.store[id]
+		render.JSON(w, r, teapot)
+	}
+
+	func (mt *MapTeapotHandler) handlePost(w http.ResponseWriter, r *http.Request) {
+		var teapot Teapot
+		render.DecodeJSON(r.Body, &teapot)
+		mt.maxID += 1
+		teapot.ID = mt.maxID
+		mt.store[mt.maxID] = teapot
+		render.JSON(w, r, teapot)
+	}
+
+
+* Lab 10 - Puppy REST
+
+- Create directory `10_rest` containing a copy of upstream master `09_json`
+- Add file `pkg/puppy/rest.go` implementing:
+
+	GET    /api/puppy/{id}
+	POST   /api/puppy/          Payload: Puppy JSON without ID
+	PUT    /api/puppy/{id}      Payload: Puppy JSON without ID
+	DELETE /api/puppy/{id}
+
+- Use [[https://golang.org/pkg/net/http/httptest/][net/http/httptest]] for testing
+- Add flag `-p` `PORT` with long flag `--port` `PORT` to command line flags
+- Add flag `-s` `STORE` with long flag `--store` `STORE` with accepted values
+
+	map, sync, db
+
+- Document the API in README.md
+
+
+* Lab 11 - Puppy Notifications
+
+- Create directory `11_notify` containing a copy of upstream master `10_rest`
+- Create `cmd/lostpuppy-service/main.go` running single endpoint:
+
+	POST   /api/lostpuppy/          Payload: { id: PUPPY_ID }
+
+- This stubbed endpoint returns with 2 second delay
+
+	HTTP status 201 for even IDs
+	HTTP status 500 for odd IDs
+
+- Update Puppyt `Delete` method to notify lostpuppy-service in a goroutine
+  and log response code asynchronously.
+
+
+* Further project work
 
 - Sample-rest
 - decimal
-- slackbot for ghe
+- Slackbot for Github Enterprise
 - JSON custom tags
 
 
