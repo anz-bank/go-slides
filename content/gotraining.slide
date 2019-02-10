@@ -197,7 +197,7 @@ Execute with
 
 	func main() {
 		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-			time.Sleep(2 * time.Second)
+			time.Sleep(2000 * time.Millisecond)
 			fmt.Fprint(w, "pong")
 		})
 		addr := ":9090"
@@ -584,7 +584,7 @@ Use `panic` rarely and judiciously in your own code!
 * Lab 7 - Errors
 
 - Create an executable go program in directory `07_errors`
-- Copy the CRUD puppy from upstream master
+- Copy the CRUD puppy from upstream master `06_puppy`
 - Add a custom error type `Error` with fields `Message` and `Code`
 - Extend the `Storer` interface for all methods to also return `error`
 - Create errors for:
@@ -652,6 +652,33 @@ Abridged version:
 	│       └── main.go
 	├── docs
 	└── vendor
+
+
+* Lab 8 - Project Layout
+
+- Copy the CRUD puppy from upstream master `07_errors`
+- Create directory `08_project` containing
+
+	language:none
+	├── README.md
+	├── go.mod
+	├── go.sum
+	├── pkg
+	│   └── puppy
+	│       ├── types.go
+	│       ├── types_test.go
+	│       ├── errors.go
+	│       ├── errors_test.go
+	│       └── store
+	│           ├── storer.go
+	│           └── .... store files and tests, e.g. mapstore.go
+	├── cmd
+	│   └── puppyerver
+	│       └── main.go
+	└── vendor
+
+- Add project introduction and how to build, run & test it to `README.md`
+
 
 
 * Go tool chain
