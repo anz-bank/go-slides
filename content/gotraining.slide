@@ -1,5 +1,5 @@
 Go training
-Go development @ANZ - lectures and labs
+Go development - lectures and labs
 
 Julia Ogris
 Engineer, ANZ
@@ -16,7 +16,7 @@ https://github.com/anz-bank/go-training
 - Go language fundamentals
 - Go standard library
 - Go tool chain
-- Third party Go libraries used at ANZ
+- Third party Go libraries commonly used
 - Project work
 
 Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
@@ -100,7 +100,7 @@ Go favours simplicity and directness resulting in some purposeful omissions:
 * Motivation and Demo
 
 
-* Why Go at ANZ
+* Why Go
 
 - simple: easy to learn and read
 - a single obvious right way to do most things
@@ -243,7 +243,7 @@ Continuous Deployment != Continuous Delivery
 [[https://semaphoreci.com/blog/2017/07/27/what-is-the-difference-between-continuous-integration-continuous-deployment-and-continuous-delivery.html][Marko Anastasov, Semaphore Engineering Blog]]
 
 
-* Recommendations for CD @ANZ (1/3)
+* Recommendations for CD (1/3)
 
 - Use *trunk* *based* *development* (not GitFlow)
 - Create *small* *PRs* (Pull Requests) that can be Squash Merged
@@ -251,7 +251,7 @@ Continuous Deployment != Continuous Delivery
 - Protect `master` branch on GitHub
 
 
-* Recommendations for CD @ANZ (2/3)
+* Recommendations for CD (2/3)
 
 Quality leads to the confidence to automatically deploy, so we need
 ways to increase and maintain quality.
@@ -262,7 +262,7 @@ ways to increase and maintain quality.
 - Ensure *100%* *coverage*
 
 
-* Recommendations for CD @ANZ (3/3)
+* Recommendations for CD (3/3)
 
 - Test (unit & system), lint & cover as part of *CI* (Continuous Integration)
 - *Version* all deployments (use [[https://semver.org/][semver]]; tag source, images etc.)
@@ -628,7 +628,7 @@ Concurrency isn't easy - we are only scratching the surface.
 * Project layout
 
 For non-trivial size projects follow the layout suggested by [[https://github.com/golang-standards/project-layout][golang-standards]]
-Abridged and ANZ adjusted version:
+Abridged version:
 
 	language:none
 	├── README.md
