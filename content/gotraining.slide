@@ -197,7 +197,7 @@ Execute with
 
 	func main() {
 		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-			time.Sleep(2000 * time.Millisecond)
+			time.Sleep(2 * time.Second)
 			fmt.Fprint(w, "pong")
 		})
 		addr := ":9090"
@@ -596,23 +596,30 @@ Use `panic` rarely and judiciously in your own code!
 - Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
 
 
-* Concurrency
+* Concurrency (1/2)
 
 "Don't communicate by sharing memory, share memory by communicating."
 "Concurrency is not parallelism."
 "Concurrency is about structure, parallelism is about execution."
  - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
 
+*Overview:* *built-in* *language* *features*
+Goroutines (`go`)
+Channels (`chan`, `<-`)
+Select (`select`)
+
+* Concurrency (2/2)
+
 Concurrency isn't easy - we are only scratching the surface.
 
-- [[][Goroutines]]
-- [[][Channels]]
-- [[][Select]]
+- [[https://goplay.space/#YtuJgIuIswH][Goroutines]] ([[https://play.golang.org/p/YtuJgIuIswH][Playground]]`*`)
+- [[https://goplay.space/#4WyLMun1SwG][Channels]] ([[https://play.golang.org/p/4WyLMun1SwG][Playground]]`*`)
+- [[https://goplay.space/#lBnz0S9pLGB][Buffered Channels]]
+- [[https://goplay.space/#4TGM29YbvX4][Dead locks]] ([[https://play.golang.org/p/4TGM29YbvX4][Playground]]`*`)
+- [[https://goplay.space/#5hnd1cTbE4I][Range and close]] ([[https://play.golang.org/p/5hnd1cTbE4I][Playground]]`*`)
+- [[https://goplay.space/#R1qgjOsPSGk][Select]] ([[https://play.golang.org/p/R1qgjOsPSGk][Playground]]`*`)
 
-
-* Lab 8
-
-TODO
+`*` The [[https://play.golang.org/][official Go Playground]] prints in real-time with delays but lacks syntax colouring.
 
 
 * Tools and Conventions
