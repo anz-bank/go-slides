@@ -30,7 +30,7 @@ For completeness they are also listed in this directory.
 ### Functions
 
 -   [Functions](functions2.go)
--   [Variadic Functions](variadic_functions.go)
+-   [Variadic Functions](variadic.go)
 -   [Closures](closures.go)
 
 ### Data structures and interfaces
@@ -44,11 +44,13 @@ For completeness they are also listed in this directory.
 
 -   [Errors](errors.go)
 -   [Panic](panic.go)
--   [Recover](recover.go)
 -   [Defer](defer.go)
 
 ### Concurrency
 
 -   [Goroutines](goroutines.go)
 -   [Channels](channels.go)
+-   [Buffered Channels](buffered_channels.go)
+-   [Range and close](channel_range.go)
 -   [Select](select.go)
+-   [Deadlocks](channels2.go)
