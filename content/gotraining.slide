@@ -751,23 +751,25 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 * A RESTful API starter (1/3)
 
-[[https://goplay.space/#YJqaOpvxiKT][Full basic sample]]
-[[https://goplay.space/#aXy28QMEiNK][Full sample]] with error handling
+Full sample code on Go Play Space -
+not executable to due 3rd party dependency `chi`:
+[[https://goplay.space/#YJqaOpvxiKT][basic sample]]
+[[https://goplay.space/#aXy28QMEiNK][sample with error handling]]
 
 	type TeapotHandler interface {
 		handlePost(w http.ResponseWriter, r *http.Request)
 		handleGet(w http.ResponseWriter, r *http.Request)
 	}
 
-	func SetupRoutes(h TeapotHandler, r chi.Router) {
+	func SetupRoutes(r chi.Router, h TeapotHandler) {
 		r.Post("/api/teapot", h.handlePost)
 		r.Get("/api/teapot/{id}", h.handleGet)
 	}
 
 	func main() {
 		r := chi.NewRouter()
-		th := NewMapTeapotHandler()
-		SetupRoutes(th, r)
+		h := NewMapTeapotHandler()
+		SetupRoutes(r, h)
 		http.ListenAndServe(":7735", r)
 	}
 
@@ -787,7 +789,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 	}
 
 	func NewMapTeapotHandler() *MapTeapotHandler {
-		return &MapTeapotHandler{store: make(map[int]Teapot), maxID: 0}
+		return &MapTeapotHandler{store: map[int]Teapot{}}
 	}
 
 
