@@ -429,6 +429,53 @@ As part of all labs
 - Create a PR following the [[https://github.com/anz-bank/go-training#pre-pr-checklist][PR checklist]]
 
 
+* PR from own fork - initial setup
+
+Issue PRs from `feature` branch of your own fork to `master` on upstream:
+
+- Login to github.com
+- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-training-slides]]
+- Set up the following remotes (`USERNAME` is your GitHub username):
+
+	language:none
+	git remote -v
+		origin	https://github.com/USERNAME/go-training-slides.git (fetch)
+		origin	https://github.com/USERNAME/go-training-slides.git (push)
+		upstream	https://github.com/anz-bank/go-training-slides.git (fetch)
+		upstream	https://github.com/anz-bank/go-training-slides.git (push)
+
+- Learn more about remotes and modify them with:
+
+	language:none
+	git help remote
+	git remote add
+	git remote rename
+	git remote delete
+
+
+* PR from own fork - typical git workflow
+
+Start work on a new branch `lab1` with:
+
+	git checkout master
+	git pull upstream master
+	git checkout -b lab1
+
+Write, test and commit code code, then:
+
+	git push -u origin
+
+Create PR on github.com
+
+If `master` on upstream has advanced in the meantime:
+
+	git checkout master
+	git pull upstream master
+	git checkout lab1
+	git rebase master
+	git push -f
+
+
 * Lab 1 - Fibonacci
 
 - Create an executable go program in directory `01_fib`
