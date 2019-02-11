@@ -197,7 +197,7 @@ Execute with
 
 	func main() {
 		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
-			time.Sleep(2 * time.Second)
+			time.Sleep(2000 * time.Millisecond)
 			fmt.Fprint(w, "pong")
 		})
 		addr := ":9090"
@@ -584,7 +584,7 @@ Use `panic` rarely and judiciously in your own code!
 * Lab 7 - Errors
 
 - Create an executable go program in directory `07_errors`
-- Copy the CRUD puppy from upstream master
+- Copy the CRUD puppy from upstream master `06_puppy`
 - Add a custom error type `Error` with fields `Message` and `Code`
 - Extend the `Storer` interface for all methods to also return `error`
 - Create errors for:
@@ -654,6 +654,33 @@ Abridged version:
 	└── vendor
 
 
+* Lab 8 - Project Layout
+
+- Copy the CRUD puppy from upstream master `07_errors`
+- Create directory `08_project` containing
+
+	language:none
+	├── README.md
+	├── go.mod
+	├── go.sum
+	├── pkg
+	│   └── puppy
+	│       ├── types.go
+	│       ├── types_test.go
+	│       ├── errors.go
+	│       ├── errors_test.go
+	│       └── store
+	│           ├── storer.go
+	│           └── .... store files and tests, e.g. mapstore.go
+	├── cmd
+	│   └── puppyerver
+	│       └── main.go
+	└── vendor
+
+- Add project introduction and how to build, run & test it to `README.md`
+
+
+
 * Go tool chain
 
 	language:bash
@@ -686,7 +713,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - fmt
 - strings
 - time
-- encoding/json
+- [[https://goplay.space/#zp5qANw7LCZ][encoding/json]]
 - net/http
 - regexp
 - sort
@@ -695,6 +722,14 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - path
 - bytes
 - ...
+
+
+* Lab 9 - JSON puppy
+
+- Create directory `09_json` containing a copy of upstream master `08_project`
+- Add JSON tags to puppy data type
+- Test marshalling and unmarshalling using [[https://godoc.org/github.com/stretchr/testify/require#JSONEq][require.JSONEq]]
+- Add command line flag `-d` `FILE` with long form `--data` `FILE` using [[https://godoc.org/gopkg.in/alecthomas/kingpin.v2][kingpin.v2]]. FILE should contain an array of puppies in JSON format. Parse this file and store its contents.
 
 
 * Useful third party packages
@@ -713,11 +748,109 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 [[https://godoc.org/gopkg.in/square/go-jose.v2][go-jose]] - JWT utils
  ...
 
-* Project work
+
+* A RESTful API starter (1/3)
+
+Full sample code on Go Play Space -
+not executable to due 3rd party dependency `chi`:
+[[https://goplay.space/#YJqaOpvxiKT][basic sample]]
+[[https://goplay.space/#aXy28QMEiNK][sample with error handling]]
+
+	type TeapotHandler interface {
+		handlePost(w http.ResponseWriter, r *http.Request)
+		handleGet(w http.ResponseWriter, r *http.Request)
+	}
+
+	func SetupRoutes(r chi.Router, h TeapotHandler) {
+		r.Post("/api/teapot", h.handlePost)
+		r.Get("/api/teapot/{id}", h.handleGet)
+	}
+
+	func main() {
+		r := chi.NewRouter()
+		h := NewMapTeapotHandler()
+		SetupRoutes(r, h)
+		http.ListenAndServe(":7735", r)
+	}
+
+
+* A RESTful API starter (2/3)
+
+	type Teapot struct {
+		ID          int
+		Colour      string
+		Temperature int
+	}
+
+	// MapTeapotHandler implements TeapotHandler
+	type MapTeapotHandler struct {
+		store map[int]Teapot  // Race condition
+		maxID int
+	}
+
+	func NewMapTeapotHandler() *MapTeapotHandler {
+		return &MapTeapotHandler{store: map[int]Teapot{}}
+	}
+
+
+* A RESTful API starter (3/3)
+
+	// MapTeapotHandler implements  TeapotHandler
+	func (mt *MapTeapotHandler) handleGet(w http.ResponseWriter, r *http.Request) {
+		id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+		teapot, _ := mt.store[id]
+		render.JSON(w, r, teapot)
+	}
+
+	func (mt *MapTeapotHandler) handlePost(w http.ResponseWriter, r *http.Request) {
+		var teapot Teapot
+		render.DecodeJSON(r.Body, &teapot)
+		mt.maxID++ // Race condition
+		teapot.ID = mt.maxID
+		mt.store[mt.maxID] = teapot
+		render.JSON(w, r, teapot)
+	}
+
+
+* Lab 10 - Puppy REST
+
+- Create directory `10_rest` containing a copy of upstream master `09_json`
+- Add file `pkg/puppy/rest.go` implementing:
+
+	GET    /api/puppy/{id}
+	POST   /api/puppy/          Payload: Puppy JSON without ID
+	PUT    /api/puppy/{id}      Payload: Puppy JSON without ID
+	DELETE /api/puppy/{id}
+
+- Use [[https://golang.org/pkg/net/http/httptest/][net/http/httptest]] for testing
+- Add flag `-p` `PORT` with long flag `--port` `PORT` to command line flags
+- Add flag `-s` `STORE` with long flag `--store` `STORE` with accepted values:
+
+	map, sync, db
+
+- Document the API in README.md
+
+
+* Lab 11 - Puppy Notifications
+
+- Create directory `11_notify` containing a copy of upstream master `10_rest`
+- Create `cmd/lostpuppy-service/main.go` running single endpoint:
+
+	POST   /api/lostpuppy/          Payload: { id: PUPPY_ID }
+
+- This stubbed endpoint returns with 2 second delay:
+
+	HTTP status 201 for even IDs
+	HTTP status 500 for odd IDs
+
+- Update Puppy `Delete` method to notify lostpuppy-service in a goroutine and log response code asynchronously.
+
+
+* Further project work
 
 - Sample-rest
 - decimal
-- slackbot for ghe
+- Slackbot for Github Enterprise
 - JSON custom tags
 
 
