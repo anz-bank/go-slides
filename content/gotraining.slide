@@ -79,6 +79,7 @@ Hello world in Go
 
 Execute with
 
+	language:bash
 	go run hello.go
 
 
@@ -175,12 +176,14 @@ Execute with
 * Go Implementation
 Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/go][GitHub]]
 
+	language:none
 	├── go.mod
 	├── go.sum
 	└── main.go
 
 Execute with
 
+	language:bash
 	go run main.go
 
 
@@ -398,6 +401,7 @@ Document them
 
 * Zero values
 
+	language:none
 	0      for numeric types
 	false  for the boolean type
 	""     for strings
