@@ -13,15 +13,15 @@ type TeapotHandler interface {
 	handleGet(w http.ResponseWriter, r *http.Request)
 }
 
-func SetupRoutes(h TeapotHandler, r chi.Router) {
+func SetupRoutes(r chi.Router, h TeapotHandler) {
 	r.Post("/api/teapot", h.handlePost)
 	r.Get("/api/teapot/{id}", h.handleGet)
 }
 
 func main() {
 	r := chi.NewRouter()
-	th := NewMapTeapotHandler()
-	SetupRoutes(th, r)
+	h := NewMapTeapotHandler()
+	SetupRoutes(r, h)
 	http.ListenAndServe(":7735", r)
 }
 
@@ -33,12 +33,12 @@ type Teapot struct {
 
 // MapTeapotHandler implements TeapotHandler
 type MapTeapotHandler struct {
-	store map[int]Teapot
+	store map[int]Teapot // Race condition: don't use in production
 	maxID int
 }
 
 func NewMapTeapotHandler() *MapTeapotHandler {
-	return &MapTeapotHandler{store: make(map[int]Teapot), maxID: 0}
+	return &MapTeapotHandler{store: map[int]Teapot{}}
 }
 
 func (mt *MapTeapotHandler) handleGet(w http.ResponseWriter, r *http.Request) {
@@ -50,7 +50,7 @@ func (mt *MapTeapotHandler) handleGet(w http.ResponseWriter, r *http.Request) {
 func (mt *MapTeapotHandler) handlePost(w http.ResponseWriter, r *http.Request) {
 	var teapot Teapot
 	render.DecodeJSON(r.Body, &teapot)
-	mt.maxID += 1
+	mt.maxID++ // Race condition: don't use in production
 	teapot.ID = mt.maxID
 	mt.store[mt.maxID] = teapot
 	render.JSON(w, r, teapot)

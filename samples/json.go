@@ -9,7 +9,7 @@ import (
 
 // Use `json:` tags on struct fields to customize JSON property names.
 type Person struct {
-	FirstName string `json:"firstName,omitempty"` // TDOO
+	FirstName string `json:"firstName,omitempty"`
 	LastName  string `json:"lastName"`
 	Age       int    `json:"age"`
 }
@@ -29,7 +29,7 @@ func main() {
 	bytes, _ = json.Marshal(person)
 	fmt.Println(string(bytes))
 
-	bytes = []byte(`{"firstName": "Julius", "lastName": "Cesar", "age": 55}`) // todo
+	bytes = []byte(`{"firstName": "Julius", "lastName": "Caesar", "age": 55}`)
 	if err := json.Unmarshal(bytes, &person); err != nil {
 		log.Fatal(err)
 	}

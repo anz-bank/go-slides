@@ -713,7 +713,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - fmt
 - strings
 - time
-- [[https://goplay.space/#ywqEGKzI7T6][encoding/json]]
+- [[https://goplay.space/#zp5qANw7LCZ][encoding/json]]
 - net/http
 - regexp
 - sort
@@ -724,7 +724,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - ...
 
 
-* Lab 9 - JSON pupppy
+* Lab 9 - JSON puppy
 
 - Create directory `09_json` containing a copy of upstream master `08_project`
 - Add JSON tags to puppy data type
@@ -751,8 +751,8 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 * A RESTful API starter (1/3)
 
-[[https://goplay.space/#oPHSAHa_Zo1][Full basic sample]]
-[[https://goplay.space/#ddCcD-1JdDJ][Full sample]] with error handling
+[[https://goplay.space/#YJqaOpvxiKT][Full basic sample]]
+[[https://goplay.space/#aXy28QMEiNK][Full sample]] with error handling
 
 	type TeapotHandler interface {
 		handlePost(w http.ResponseWriter, r *http.Request)
@@ -782,7 +782,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 	// MapTeapotHandler implements TeapotHandler
 	type MapTeapotHandler struct {
-		store map[int]Teapot
+		store map[int]Teapot  // Race condition
 		maxID int
 	}
 
@@ -803,7 +803,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 	func (mt *MapTeapotHandler) handlePost(w http.ResponseWriter, r *http.Request) {
 		var teapot Teapot
 		render.DecodeJSON(r.Body, &teapot)
-		mt.maxID += 1
+		mt.maxID++ // Race condition
 		teapot.ID = mt.maxID
 		mt.store[mt.maxID] = teapot
 		render.JSON(w, r, teapot)
@@ -822,7 +822,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 - Use [[https://golang.org/pkg/net/http/httptest/][net/http/httptest]] for testing
 - Add flag `-p` `PORT` with long flag `--port` `PORT` to command line flags
-- Add flag `-s` `STORE` with long flag `--store` `STORE` with accepted values
+- Add flag `-s` `STORE` with long flag `--store` `STORE` with accepted values:
 
 	map, sync, db
 
@@ -836,13 +836,12 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 	POST   /api/lostpuppy/          Payload: { id: PUPPY_ID }
 
-- This stubbed endpoint returns with 2 second delay
+- This stubbed endpoint returns with 2 second delay:
 
 	HTTP status 201 for even IDs
 	HTTP status 500 for odd IDs
 
-- Update Puppyt `Delete` method to notify lostpuppy-service in a goroutine
-  and log response code asynchronously.
+- Update Puppy `Delete` method to notify lostpuppy-service in a goroutine and log response code asynchronously.
 
 
 * Further project work

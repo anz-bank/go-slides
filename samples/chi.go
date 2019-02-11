@@ -14,7 +14,7 @@ import (
 type Teapot struct {
 	ID          int    `json:"id"`
 	Colour      string `json:"colour"`
-	Temperature int    `json:"temperature"`
+	Temperature int    `json:"temperature"` // Celsius
 }
 
 type TeapotHandler interface {
@@ -22,7 +22,7 @@ type TeapotHandler interface {
 	handleGet(w http.ResponseWriter, r *http.Request)
 }
 
-func SetupRoutes(h TeapotHandler, r chi.Router) {
+func SetupRoutes(r chi.Router, h TeapotHandler) {
 	r.Post("/api/teapot", h.handlePost)
 	r.Get("/api/teapot/{id}", h.handleGet)
 }
@@ -35,27 +35,26 @@ func main() {
 	r.Use(middleware.Recoverer)
 
 	h := NewMapTeapotHandler()
-	SetupRoutes(h, r)
+	SetupRoutes(r, h)
 
 	addr := ":7735"
 	fmt.Printf("Starting server on port %s. Try:\n", addr)
 	fmt.Printf("  curl localhost%s/api/teapot -d ", addr)
-	fmt.Println(`'{"colour" : "blue","temperature": 88}'`)
+	fmt.Println(`'{"colour": "blue","temperature": 88}'`)
 	fmt.Printf("  curl localhost%s/api/teapot/1 \n", addr)
 	if err := http.ListenAndServe(addr, r); err != nil {
 		log.Fatal(err)
 	}
-
 }
 
 type MapTeapotHandler struct {
+	// Race condition, don't use `map` in production for concurrent access
 	store map[int]Teapot
 	maxID int
 }
 
 func NewMapTeapotHandler() *MapTeapotHandler {
-	m := make(map[int]Teapot)
-	return &MapTeapotHandler{store: m, maxID: 0}
+	return &MapTeapotHandler{store: map[int]Teapot{}}
 }
 
 func (mt *MapTeapotHandler) handleGet(w http.ResponseWriter, r *http.Request) {
@@ -78,7 +77,8 @@ func (mt *MapTeapotHandler) handlePost(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	mt.maxID += 1
+	// Race condition, don't do this in production
+	mt.maxID++
 	teapot.ID = mt.maxID
 	mt.store[mt.maxID] = teapot
 	render.Status(r, http.StatusCreated)
