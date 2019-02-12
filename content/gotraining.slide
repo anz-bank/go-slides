@@ -522,11 +522,11 @@ If `master` on upstream has advanced in the meantime:
 
 	func letters(s string) map[rune]int
 
-- Write a function that prints the contents of a map as `{key}:{val}\n` for each key/value pair sorted by keys. Use package [[https://golang.org/pkg/sort/][sort]]:
+- Write a function that returns a sorted slice of strings with elements `"{key}:{val}"`. Use package [[https://golang.org/pkg/sort/][sort]]:
 
-	func print(m map[rune]int)
+	func sortLetters(m map[rune]int) []string
 
-- Call `print(letters("aba"))` in `main` to print:
+- Call `fmt.Println(strings.Join(sortLetters(letters("aba"))),` `"\n")` in `main` to print:
 
 	a:2
 	b:1
