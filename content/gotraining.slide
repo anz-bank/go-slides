@@ -444,7 +444,7 @@ Issue PRs from `feature` branch of your own fork to `master` on upstream:
 - Create `upstream` remote pointing to [[https://github.com/anz-bank/go-training][anz-bank/go-training]]:
 
 	language:bash
-	git remote add upstream https://github.com/anz-bank/go-training.get
+	git remote add upstream https://github.com/anz-bank/go-training.git
 	git remote update
 	git branch -u upstream/master master
 	git pull
