@@ -79,6 +79,7 @@ Hello world in Go
 
 Execute with
 
+	language:bash
 	go run hello.go
 
 
@@ -175,12 +176,14 @@ Execute with
 * Go Implementation
 Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/go][GitHub]]
 
+	language:none
 	├── go.mod
 	├── go.sum
 	└── main.go
 
 Execute with
 
+	language:bash
 	go run main.go
 
 
@@ -398,6 +401,7 @@ Document them
 
 * Zero values
 
+	language:none
 	0      for numeric types
 	false  for the boolean type
 	""     for strings
@@ -423,6 +427,50 @@ As part of all labs
 
 - Test your code
 - Create a PR following the [[https://github.com/anz-bank/go-training#pre-pr-checklist][PR checklist]]
+
+
+* PR from own fork - initial setup
+
+Issue PRs from `feature` branch of your own fork to `master` on upstream:
+
+- Login to github.com
+- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-training]]
+- Clone your fork - `USERNAME` is your GitHub username:
+
+	language:bash
+	git clone https://github.com/USERNAME/go-training.git
+	cd go-training
+
+- Create `upstream` remote pointing to [[https://github.com/anz-bank/go-training][anz-bank/go-training]]:
+
+	language:bash
+	git remote add upstream https://github.com/anz-bank/go-training.git
+	git remote update
+	git branch -u upstream/master master
+	git pull
+
+
+* PR from own fork - typical git workflow
+
+Start work on a new branch `lab1` with:
+
+	git checkout master
+	git pull upstream master  # with upstream/master tracking just use `git pull`
+	git checkout -b lab1
+
+Write, test and commit code code, then:
+
+	git push -u origin
+
+Create PR on github.com
+
+If `master` on upstream has advanced in the meantime:
+
+	git checkout master
+	git pull upstream master
+	git checkout lab1
+	git rebase master
+	git push -f
 
 
 * Lab 1 - Fibonacci
