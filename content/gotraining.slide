@@ -613,7 +613,7 @@ The calling code should handle errors by testing whether the error equals nil:
 
 Panic should be used when something went unexpectedly wrong.
 For instance, initialise a regular expression with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if the pattern is a string constant.
-`MustCompile` will `panic` during `go` `build` if the pattern is invalid.
+`MustCompile` will `panic` at initialisation.
 
 	var re = regexp.MustCompile(`^[a-c]+$`)
 	var re2 = regexp.MustCompile(`^[a-c+$`) // panic
