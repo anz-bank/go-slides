@@ -434,23 +434,20 @@ As part of all labs
 Issue PRs from `feature` branch of your own fork to `master` on upstream:
 
 - Login to github.com
-- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-training-slides]]
-- Set up the following remotes (`USERNAME` is your GitHub username):
+- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-training]]
+- Clone your fork - `USERNAME` is your GitHub username:
 
-	language:none
-	git remote -v
-		origin	https://github.com/USERNAME/go-training-slides.git (fetch)
-		origin	https://github.com/USERNAME/go-training-slides.git (push)
-		upstream	https://github.com/anz-bank/go-training-slides.git (fetch)
-		upstream	https://github.com/anz-bank/go-training-slides.git (push)
+	language:bash
+	git clone https://github.com/USERNAME/go-training.git
+	cd go-training
 
-- Learn more about remotes and modify them with:
+- Create `upstream` remote pointing to [[https://github.com/anz-bank/go-training][anz-bank/go-training]]:
 
-	language:none
-	git help remote
-	git remote add
-	git remote rename
-	git remote delete
+	language:bash
+	git remote add upstream https://github.com/anz-bank/go-training.get
+	git remote update
+	git branch -u upstream/master master
+	git pull
 
 
 * PR from own fork - typical git workflow
@@ -458,7 +455,7 @@ Issue PRs from `feature` branch of your own fork to `master` on upstream:
 Start work on a new branch `lab1` with:
 
 	git checkout master
-	git pull upstream master
+	git pull upstream master  # with upstream/master tracking just use `git pull`
 	git checkout -b lab1
 
 Write, test and commit code code, then:
