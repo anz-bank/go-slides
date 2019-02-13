@@ -639,7 +639,8 @@ If `master` on upstream has advanced in the meantime:
 - Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
 - Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
-- Bonus points: Write tests against the `Storer` interface in a [[https://godoc.org/github.com/stretchr/testify/suite][suite]] and run the suite with both implementations
+- Find hints at [[https://github.com/anz-bank/go-samplerest/blob/master/pkg/pet/types.go][anz-bank/go-samplerest]]
+- Tests against the `Storer` interface and run in [[https://godoc.org/github.com/stretchr/testify/suite][suite]] with both implementations
 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
