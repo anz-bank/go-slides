@@ -348,10 +348,11 @@ Try it out on a new, throwaway branch.
 	d558e36 Add coverage and pre-pr checklist to README.md
 	c9724be Fix copyright holder in LICENCE
 	aa3b728 Added Apache 2.0 LICENSE
+	8a2fd40 Initial commit
 
 Drop the latest commit, reword `Added...` to `Add` and fold in the `Fix...` commit with:
 
-	git reabse -i d558e36
+	git reabse -i 8a2fd40
 
 and update commits in your editor with:
 

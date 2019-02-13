@@ -111,7 +111,7 @@
         var textContent = el.innerText
         var match = reLanguageTag.exec(textContent)
         var languageTag
-     
+
         if (!match) {
           hljs.highlightBlock(el)
 
@@ -119,7 +119,7 @@
         }
 
         languageTag = match[1]
-        el.innerText = match[2].trim()
+        el.innerText = match[2]
         el.classList.add(languageTag)
         if (languageTag !== 'none') {
           hljs.highlightBlock(el)
