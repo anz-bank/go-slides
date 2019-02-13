@@ -341,7 +341,7 @@ Try it out on a new, throwaway branch.
 
 * Rebase interactively
 
-[[https://stackoverflow.com/a/36644561][Follow instruction]] to setup VSCode as `git` editor (iff that's your preferred editor).
+[[https://stackoverflow.com/a/36644561][Follow instruction]] to setup VSCode as `git` editor (if that's your preferred editor).
 
 	git log --oneline
 	58b250e WIP
@@ -640,7 +640,7 @@ If `master` on upstream has advanced in the meantime:
 - Write a `MapStore` implementation of `Storer` backed by a `map`
 - Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
 - Find hints at [[https://github.com/anz-bank/go-samplerest/blob/master/pkg/pet/types.go][anz-bank/go-samplerest]]
-- Tests against the `Storer` interface and run in [[https://godoc.org/github.com/stretchr/testify/suite][suite]] with both implementations
+- Test against the `Storer` interface and run in [[https://godoc.org/github.com/stretchr/testify/suite][suite]] with both implementations
 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
