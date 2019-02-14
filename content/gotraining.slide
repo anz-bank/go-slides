@@ -1031,10 +1031,8 @@ not executable to due 3rd party dependency `chi`:
 
 * Further project work
 
-- Sample-rest
-- decimal
-- Slackbot for Github Enterprise
-- JSON custom tags
+- [[https://github.com/anz-bank/go-samplerest]]
+- [[https://github.com/anz-bank/decimal]]
 
 
 * References
