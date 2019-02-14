@@ -847,7 +847,7 @@ Abridged version:
 	├── go.mod
 	├── go.sum
 	├── pkg
-	│   └── puppy
+	│   └── USERNAME-puppy
 	│       ├── types.go
 	│       ├── types_test.go
 	│       ├── errors.go
@@ -856,7 +856,7 @@ Abridged version:
 	│           ├── storer.go
 	│           └── .... store files and tests, e.g. mapstore.go
 	├── cmd
-	│   └── puppyerver
+	│   └── USERNAME-puppy-server
 	│       └── main.go
 	└── vendor
 
