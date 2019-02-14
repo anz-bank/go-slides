@@ -622,6 +622,27 @@ If `master` on upstream has advanced in the meantime:
 
 "The bigger the interface, the weaker the abstraction." - [[https://go-proverbs.github.io/][Rob Pike]]
 
+
+* Embedding
+
+"Go does not provide the typical, type-driven notion of subclassing, but it does have the ability to “borrow” pieces of an implementation by embedding types within a struct or interface." - [[https://golang.org/doc/effective_go.html#embedding][Effective Go]]
+
+
+	type Reader interface {
+	    Read(p []byte) (n int, err error)
+	}
+
+	type Writer interface {
+	    Write(p []byte) (n int, err error)
+	}
+
+	// ReadWriter is the interface that combines the Reader and Writer interfaces.
+	type ReadWriter interface {
+	    Reader
+	    Writer
+	}
+
+
 * Lab 5 - Stringer
 
 - Create an executable go program in directory `05_stringer/USERNAME`
