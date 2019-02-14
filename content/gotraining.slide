@@ -653,6 +653,59 @@ If `master` on upstream has advanced in the meantime:
 	127.0.0.1
 
 
+* Test two implementations of interface in suite (1/2)
+
+	// scaler.go
+	type scaler interface {
+		scale(float64)
+	}
+
+	type rect struct {
+		a, b int
+	}
+
+	func (r *rect) scale(s float64) {
+		r.a = int(float64(r.a) * s)
+		r.b = int(float64(r.b) * s)
+	}
+
+	type circle struct {
+		r int
+	}
+
+	func (c *circle) scale(s float64) {
+		c.r = int(float64(c.r) * s)
+	}
+
+
+* Test two implementations of interface in suite (2/2)
+
+	type scalerSuite struct {
+		suite.Suite
+		scaler scaler
+	}
+
+	func (s *scalerSuite) TestScaler() {
+		r := assert.New(s.T())
+		initial := fmt.Sprintf("%#v", s.scaler)
+
+		s.scaler.scale(2.0)
+		scaled := fmt.Sprintf("%#v", s.scaler)
+
+		s.scaler.scale(0.5)
+		scaledBack := fmt.Sprintf("%#v", s.scaler)
+
+		fmt.Printf("%s\n%s\n%s\n", initial, scaled, scaledBack)
+		r.Equal(initial, scaledBack)
+		r.NotEqual(initial, scaled)
+	}
+
+	func TestStorer(t *testing.T) {
+		suite.Run(t, &scalerSuite{scaler: &circle{2}})
+		suite.Run(t, &scalerSuite{scaler: &rect{1, 1}})
+	}
+
+
 * Lab 6 - CRUD puppy with interface
 
 - Create an executable go program in directory `06_puppy/USERNAME`
