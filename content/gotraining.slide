@@ -685,7 +685,7 @@ Use `panic` rarely and judiciously in your own code!
 
 * Errors (3/3)
 
-- [[https://goplay.space/#h1kA3qKaO6B][Errors]]
+- Error [[https://goplay.space/#h4c7gQxzQsN][create]], [[https://goplay.space/#mze1De36XjV][handle]], [[https://goplay.space/#h1kA3qKaO6B][custom error]]
 - [[https://goplay.space/#9vu6iJHXMHC][Panic]]
 - [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
 
