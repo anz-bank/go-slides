@@ -339,6 +339,66 @@ Don't be afraid!
 Try it out on a new, throwaway branch.
 
 
+* Rebase interactively
+
+[[https://stackoverflow.com/a/36644561][Follow instruction]] to setup VSCode as `git` editor (if that's your preferred editor).
+
+	git log --oneline
+	58b250e WIP
+	d558e36 Add coverage and pre-pr checklist to README.md
+	c9724be Fix copyright holder in LICENCE
+	aa3b728 Added Apache 2.0 LICENSE
+	8a2fd40 Initial commit
+
+Drop the latest commit, reword `Added...` to `Add` and fold in the `Fix...` commit with:
+
+	git reabse -i 8a2fd40
+
+and update commits in your editor with:
+
+	reword aa3b728 Added Apache 2.0 LICENSE
+	fixup  c9724be Fix copyright holder in LICENCE
+	pick   d558e36 Add coverage and pre-pr checklist to README.md
+	drop   58b250e WIP
+
+
+* Rebase a feature branch
+
+Rebase will sequentially take the commits from `feature` and reapply them to `master`:
+
+	language:none
+	         A---B---C feature
+	        /
+	   D---E---F---G master
+
+will become
+
+	language:none
+	                 A'--B'--C' feature
+	                /
+	   D---E---F---G master
+
+
+Use the following commands:
+
+	language:none
+	git checkout master
+	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
+	git checkout feature
+	git rebase master
+	git push -f
+
+
+* Update branch on Github
+
+For an existing PR you can alternatively click `Update` `branch` on Github.
+This will merge `upstream/master` into `origin/feature`.
+Before adding any commits to `feature` locally run:
+
+	git pull origin feature
+
+
+
 * Pull Request (PR) recommendations (1/2)
 
 - Choose a meaningful *PR* *title*, it will become your Squash Merge message
@@ -579,7 +639,8 @@ If `master` on upstream has advanced in the meantime:
 - Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
 - Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
-- Bonus points: Write tests against the `Storer` interface in a [[https://godoc.org/github.com/stretchr/testify/suite][suite]] and run the suite with both implementations
+- Find hints at [[https://github.com/anz-bank/go-samplerest/blob/master/pkg/pet/types.go][anz-bank/go-samplerest]]
+- Test against the `Storer` interface and run in [[https://godoc.org/github.com/stretchr/testify/suite][suite]] with both implementations
 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
