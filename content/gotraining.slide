@@ -622,6 +622,27 @@ If `master` on upstream has advanced in the meantime:
 
 "The bigger the interface, the weaker the abstraction." - [[https://go-proverbs.github.io/][Rob Pike]]
 
+
+* Embedding
+
+"Go does not provide the typical, type-driven notion of subclassing, but it does have the ability to “borrow” pieces of an implementation by embedding types within a struct or interface." - [[https://golang.org/doc/effective_go.html#embedding][Effective Go]]
+
+
+	type Reader interface {
+	    Read(p []byte) (n int, err error)
+	}
+
+	type Writer interface {
+	    Write(p []byte) (n int, err error)
+	}
+
+	// ReadWriter is the interface that combines the Reader and Writer interfaces.
+	type ReadWriter interface {
+	    Reader
+	    Writer
+	}
+
+
 * Lab 5 - Stringer
 
 - Create an executable go program in directory `05_stringer/USERNAME`
@@ -632,14 +653,67 @@ If `master` on upstream has advanced in the meantime:
 	127.0.0.1
 
 
+* Test two implementations of interface in suite (1/2)
+
+	// scaler.go
+	type scaler interface {
+		scale(float64)
+	}
+
+	type rect struct {
+		a, b int
+	}
+
+	func (r *rect) scale(s float64) {
+		r.a = int(float64(r.a) * s)
+		r.b = int(float64(r.b) * s)
+	}
+
+	type circle struct {
+		r int
+	}
+
+	func (c *circle) scale(s float64) {
+		c.r = int(float64(c.r) * s)
+	}
+
+
+* Test two implementations of interface in suite (2/2)
+
+	type scalerSuite struct {
+		suite.Suite
+		scaler scaler
+	}
+
+	func (s *scalerSuite) TestScaler() {
+		r := assert.New(s.T())
+		initial := fmt.Sprintf("%#v", s.scaler)
+
+		s.scaler.scale(2.0)
+		scaled := fmt.Sprintf("%#v", s.scaler)
+
+		s.scaler.scale(0.5)
+		scaledBack := fmt.Sprintf("%#v", s.scaler)
+
+		fmt.Printf("%s\n%s\n%s\n", initial, scaled, scaledBack)
+		r.Equal(initial, scaledBack)
+		r.NotEqual(initial, scaled)
+	}
+
+	func TestStorer(t *testing.T) {
+		suite.Run(t, &scalerSuite{scaler: &circle{2}})
+		suite.Run(t, &scalerSuite{scaler: &rect{1, 1}})
+	}
+
+
 * Lab 6 - CRUD puppy with interface
 
-- Create an executable go program in directory `06_puppy/USERNAME`
+- Create an executable go program in directory `06_puppy/USERNAME` (see [[https://github.com/anz-bank/go-samplerest/blob/master/pkg/pet/types.go][hints]])
 - Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
 - Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
 - Write a `MapStore` implementation of `Storer` backed by a `map`
 - Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
-- Find hints at [[https://github.com/anz-bank/go-samplerest/blob/master/pkg/pet/types.go][anz-bank/go-samplerest]]
+- Keep all implementation files in the same folder and in package `main`
 - Test against the `Storer` interface and run in [[https://godoc.org/github.com/stretchr/testify/suite][suite]] with both implementations
 
 .image _img/crud_puppy.jpg
@@ -685,7 +759,7 @@ Use `panic` rarely and judiciously in your own code!
 
 * Errors (3/3)
 
-- [[https://goplay.space/#h1kA3qKaO6B][Errors]]
+- Error [[https://goplay.space/#h4c7gQxzQsN][create]], [[https://goplay.space/#mze1De36XjV][handle]], [[https://goplay.space/#h1kA3qKaO6B][custom error]]
 - [[https://goplay.space/#9vu6iJHXMHC][Panic]]
 - [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
 
@@ -773,7 +847,7 @@ Abridged version:
 	├── go.mod
 	├── go.sum
 	├── pkg
-	│   └── puppy
+	│   └── USERNAME-puppy
 	│       ├── types.go
 	│       ├── types_test.go
 	│       ├── errors.go
@@ -782,7 +856,7 @@ Abridged version:
 	│           ├── storer.go
 	│           └── .... store files and tests, e.g. mapstore.go
 	├── cmd
-	│   └── puppyerver
+	│   └── USERNAME-puppy-server
 	│       └── main.go
 	└── vendor
 
