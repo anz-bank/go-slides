@@ -1,16 +1,15 @@
 Go training
-Go development - lectures and labs
+Melbourne, May-June 2019
 
+Angelo Perera
 Julia Ogris
-Engineer, ANZ
-Julia.Ogris@anz.com
-https://github.com/anz-bank/go-training
-
+Ryan O'Kane
+Sai Kiran Gummaraj
 
 * Introduction
 
 
-* Agenda (11 - 15 February)
+* Agenda
 
 - Introduction to Go
 - Go language fundamentals
@@ -57,6 +56,8 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 - Compiled to native machine code, but has a fast development cycle
 - Language-level concurrency features
 - Comprehensive and clear standard library
+- Garbage collected
+- Unicode support
 - Great tools
 - Open source
 
@@ -74,7 +75,7 @@ Hello world in Go
 	)
 
 	func main() {
-		fmt.Println("Hello, ಬೆಂಗಳೂರು")
+		fmt.Println("Hello, Melbourne ☕️🎸🏈❤️")
 	}
 
 Execute with
