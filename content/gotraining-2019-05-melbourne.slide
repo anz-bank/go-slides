@@ -1,0 +1,1052 @@
+Go training
+Melbourne, May-June 2019
+
+Angelo Perera
+Julia Ogris
+Ryan O'Kane
+Sai Kiran Gummaraj
+
+* Introduction
+
+
+* Agenda
+
+- Introduction to Go
+- Go language fundamentals
+- Go standard library
+- Go tool chain
+- Third party Go libraries commonly used
+- Project work
+
+Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
+
+
+* Day 1 - Schedule
+
+*Morning:* Introduction to Go
+
+- Overview and history
+- Demo
+
+*Afternoon:* Hello world and first PR
+
+- Interlude: towards continuous deployment (CD)
+- Go language fundamentals
+- First lab
+
+
+* History and Overview
+
+
+* History of Go
+
+.image _img/xkcd_compiling.png
+.caption [[https://xkcd.com/303/]]
+
+2007: Robert Griesemer, Rob Pike, and Ken Thompson start working on Go at Google
+2008: Russ Cox (go mod) and Ian Taylor (gcc frontend) join
+2009: Go goes Open Source
+2012: Go version 1.0
+
+
+* What is Go?
+
+- A simple language that is easy to learn and read
+- Statically typed, but with a dynamic feel
+- Compiled to native machine code, but has a fast development cycle
+- Language-level concurrency features
+- Comprehensive and clear standard library
+- Garbage collected
+- Unicode support
+- Great tools
+- Open source
+
+(Source: [[https://talks.golang.org/2012/zen.slide#2][Go and the Zen of Python]])
+
+
+* What does Go look like?
+
+Hello world in Go
+
+	package main
+
+	import (
+		"fmt"
+	)
+
+	func main() {
+		fmt.Println("Hello, Melbourne ☕️🎸🏈❤️")
+	}
+
+Execute with
+
+	language:bash
+	go run hello.go
+
+
+* What is Go NOT?
+
+Go favours simplicity and directness resulting in some purposeful omissions:
+
+- No type hierarchies or inheritance
+- No exceptions
+- No method overloading
+- No generics
+- No decorators
+- No named or optional arguments
+- No operator overloading
+- No macros
+- No arguments about code style :)
+
+
+* Motivation and Demo
+
+
+* Why Go
+
+- simple: easy to learn and read
+- a single obvious right way to do most things
+- tools - `gofmt`, `goimports`, `go` `mod`, `go` `test`, `golangci-lint`, coverage
+- standard library
+- productive and fun
+- lightweight concurrency
+
+
+* Demo
+
+- 2 seconds latency Pingserver
+- Java Spring Boot implementation
+- Go implementation
+- Benchmark
+
+
+* Java Spring Boot Initializr
+
+	── build.gradle
+	├── gradle
+	│   └── wrapper
+	│       ├── gradle-wrapper.jar
+	│       └── gradle-wrapper.properties
+	├── gradlew
+	├── gradlew.bat
+	├── settings.gradle
+	└── src
+	    ├── main
+	    │   ├── java
+	    │   │   └── com
+	    │   │       └── anz
+	    │   │           └── demo
+	    │   │               └── pingserver
+	    │   │                   ├── PingserverApplication.java
+	    │   │                   └── controller
+	    │   │                       └── PingController.java        <--------- THAT'S THE ONE
+	    │   └── resources
+	    │       └── application.properties
+	    └── test
+	          .....
+		                                └── PingserverApplicationTests.java
+
+
+* PingController.java
+
+Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/java][GitHub]]
+
+	package com.anz.dcx.serverdemo.controller;
+
+	import org.springframework.http.MediaType;
+	import org.springframework.web.bind.annotation.GetMapping;
+	import org.springframework.web.bind.annotation.ResponseBody;
+	import org.springframework.web.bind.annotation.RestController;
+
+	@RestController
+	public class PingController {
+
+	    @GetMapping(path = "/ping", produces = MediaType.TEXT_PLAIN_VALUE)
+	    @ResponseBody
+	    String ping() throws Exception {
+	        Thread.sleep(2000L);
+	        return "pong";
+	    }
+	}
+
+Execute with
+
+	./gradlew clean bootRun
+
+
+* Go Implementation
+Source on [[https://github.com/anz-bank/go-slides/tree/master/pingserver/go][GitHub]]
+
+	language:none
+	├── go.mod
+	├── go.sum
+	└── main.go
+
+Execute with
+
+	language:bash
+	go run main.go
+
+
+* Main.go
+
+	package main
+
+	import (
+		"fmt"
+		"log"
+		"net/http"
+		"time"
+	)
+
+	func main() {
+		http.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+			time.Sleep(2000 * time.Millisecond)
+			fmt.Fprint(w, "pong")
+		})
+		addr := ":9090"
+		fmt.Println("Starting webserver on port", addr)
+		log.Fatal(http.ListenAndServe(addr, nil))
+	}
+
+
+* Benchmark
+
+- 7,000 concurrent requests
+- Apache's `ab` command on MacBook Pro
+
+    ab -n 7000 -c 7000 -s 200 localhost:8080/ping  # Java
+    ab -n 7000 -c 7000 -s 200 localhost:9090/ping  # go
+
+- Results
+
+	Java mean: 36.3 sec
+	Go mean:    2.8 sec
+
+- Further details on [[https://github.com/anz-bank/go-slides/tree/master/pingserver#benchmark][GitHub]]
+
+
+* Interlude: Towards Continuous Deployment
+
+
+* What is Continuous Deployment (CD)?
+
+Continuous Deployment != Continuous Delivery
+
+.image _img/cd.jpg
+.caption [[https://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment][Yassal Sundman, Continuous Delivery vs Continuous Deployment]]
+
+
+* Continuous Deployment Quotes
+
+"Continuous Deployment is a strategy for software releases wherein any code commit that passes the automated testing phase is automatically released into the production environment."
+[[https://searchitoperations.techtarget.com/definition/continuous-deployment][TechTarget definition]]
+
+
+"Continuous deployment requires a highly developed culture of monitoring, being on call, and having the capacity to recover quickly."
+[[https://semaphoreci.com/blog/2017/07/27/what-is-the-difference-between-continuous-integration-continuous-deployment-and-continuous-delivery.html][Marko Anastasov, Semaphore Engineering Blog]]
+
+
+* Recommendations for CD (1/3)
+
+- Use *trunk* *based* *development* (not GitFlow)
+- Create *small* *PRs* (Pull Requests) that can be Squash Merged
+- ... which lead to revertible commits that have passed automated tests
+- Protect `master` branch on GitHub
+
+
+* Recommendations for CD (2/3)
+
+Quality leads to the confidence to automatically deploy, so we need
+ways to increase and maintain quality.
+
+- Write great commit messages
+- Think about the reviewer and review your own PRs first
+- *Lint* strictly `golangci-lint` `run`
+- Ensure *100%* *coverage*
+
+
+* Recommendations for CD (3/3)
+
+- Test (unit & system), lint & cover as part of *CI* (Continuous Integration)
+- *Version* all deployments (use [[https://semver.org/][semver]]; tag source, images etc.)
+- *Document* for newbies in the README.md (must!) and use godoc
+- Enjoy your CD as last step after successful CI run on master
+
+
+* Protect master branch on GitHub
+
+	Settings -> Options:
+	[ ] Allow merge commits
+	[x] Allow squash merging
+	[ ] Allow rebase merging
+
+	Settings -> Branches -> [Add rule|Edit] `master`:
+	[x] Require pull request reviews before merging
+	[x] Dismiss stale pull request approvals when new commits are pushed
+	[x] Require status checks to pass before merging
+	[x] Require branches to be up to date before merging
+	[x] Include administrators
+
+
+* Commit messages
+
+.image _img/xkcd_git_commit.png
+.caption [[https://xkcd.com/1296/]]
+
+
+* Commit messages - spot the difference
+
+[[https://chris.beams.io/posts/git-commit/]]
+
+	$ git log --oneline -5 --author cbeams --before "Fri Mar 26 2009"
+
+	e5f4b49 Re-adding ConfigurationPostProcessorTests after its brief removal in r814. @Ignore-ing the testCglibClassesAreLoadedJustInTimeForEnhancement() method as it turns out this was one of the culprits in the recent build breakage. The classloader hacking causes subtle downstream effects, breaking unrelated tests. The test method is still useful, but should only be run on a manual basis to ensure CGLIB is not prematurely classloaded, and should not be run as part of the automated build.
+	2db0f12 fixed two build-breaking issues: + reverted ClassMetadataReadingVisitor to revision 794 + eliminated ConfigurationPostProcessorTests until further investigation determines why it causes downstream tests to fail (such as the seemingly unrelated ClassPathXmlApplicationContextTests)
+	147709f Tweaks to package-info.java files
+	22b25e0 Consolidated Util and MutableAnnotationUtils classes into existing AsmUtils
+	7f96f57 polishing
+
+versus
+
+	$ git log --oneline -5 --author pwebb --before "Sat Aug 30 2014"
+
+	5ba3db6 Fix failing CompositePropertySourceTests
+	84564a0 Rework @PropertySource early parsing logic
+	e142fd1 Add tests for ImportSelector meta-data
+	887815f Update docbook dependency and generate epub
+	ac8326d Polish mockito usage
+
+
+* Recipe for great commit messages
+
+[[https://chris.beams.io/posts/git-commit/]]
+
+- Separate subject from body with a blank line
+- Limit the subject line to 60 characters
+- *Capitalize* the subject line
+- Do not end the subject line with a period
+- Use the *imperative* *mood* in the subject line
+- Wrap the body at 80 characters
+- Use the body to explain what and why vs. how
+
+
+* Two git commands for precision work
+
+- Use `git` `rebase` `-i` `COMMIT_HASH` to rework your commits if necessary
+- Use `git` `add` `-p` for two separate concerns addressed in the one file
+
+Don't be afraid!
+Try it out on a new, throwaway branch.
+
+
+* Rebase interactively
+
+[[https://stackoverflow.com/a/36644561][Follow instruction]] to setup VSCode as `git` editor (if that's your preferred editor).
+
+	git log --oneline
+	58b250e WIP
+	d558e36 Add coverage and pre-pr checklist to README.md
+	c9724be Fix copyright holder in LICENCE
+	aa3b728 Added Apache 2.0 LICENSE
+	8a2fd40 Initial commit
+
+Drop the latest commit, reword `Added...` to `Add` and fold in the `Fix...` commit with:
+
+	git reabse -i 8a2fd40
+
+and update commits in your editor with:
+
+	reword aa3b728 Added Apache 2.0 LICENSE
+	fixup  c9724be Fix copyright holder in LICENCE
+	pick   d558e36 Add coverage and pre-pr checklist to README.md
+	drop   58b250e WIP
+
+
+* Rebase a feature branch
+
+Rebase will sequentially take the commits from `feature` and reapply them to `master`:
+
+	language:none
+	         A---B---C feature
+	        /
+	   D---E---F---G master
+
+will become
+
+	language:none
+	                 A'--B'--C' feature
+	                /
+	   D---E---F---G master
+
+
+Use the following commands:
+
+	language:none
+	git checkout master
+	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
+	git checkout feature
+	git rebase master
+	git push -f
+
+
+* Update branch on Github
+
+For an existing PR you can alternatively click `Update` `branch` on Github.
+This will merge `upstream/master` into `origin/feature`.
+Before adding any commits to `feature` locally run:
+
+	git pull origin feature
+
+
+
+* Pull Request (PR) recommendations (1/2)
+
+- Choose a meaningful *PR* *title*, it will become your Squash Merge message
+- Fill in *PR* *description* and reference an Issue for instance with #6
+- Review the *Files* *changed* tab - many reviewers start here
+- Review the *Commits* tab - some reviewers start here
+- Review the *Checks* tab - all checks must pass
+
+
+* Pull Request (PR) recommendations (2/2)
+
+- "Think of the reviewer: your code needs to be reviewable and that should be a prime concern when writing your code, commits and PRs." (@camh-anz)
+- Tag your PR Title with `[WIP]` if adjustments are needed
+- Rework fixup commits with `git` `rebase` `-i`  `COMMIT_HASH` and force push
+- Add reviewers and remove `[WIP]` tag when all of the above are met
+- Delete branch once merged, especially when using a single remote (no forks)
+
+
+* Go language fundamentals
+
+
+* Tutorials, references and tools
+
+- [[https://tour.golang.org/][Tour of Go]]
+- [[https://gobyexample.com/][Go by example]]
+- [[https://play.golang.org/][Go playground]]
+- [[https://golangbot.com/learn-golang-series/][Golangbot]]
+- [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
+- [[https://golang.org/ref/spec][The Go Programming Language Specification]]
+
+
+* Getting started
+
+- [[https://goplay.space/#ZgnRgImb2mv][Packages]], imports and exported names
+- [[https://goplay.space/#0sIugrcfh_z][Functions]]
+
+_Notes:_
+Keep your exported Names to as few as possible
+Document them
+
+
+* Basic types
+
+	bool
+
+	string
+
+	int  int8  int16  int32  int64
+	uint uint8 uint16 uint32 uint64 uintptr
+
+	byte // alias for uint8
+
+	rune // alias for int32
+	     // represents a Unicode code point
+
+	float32 float64
+
+	complex64 complex128
+
+
+* Zero values
+
+	language:none
+	0      for numeric types
+	false  for the boolean type
+	""     for strings
+
+
+* Values and control flow
+
+- [[https://goplay.space/#TOqGA-5RjUi][Values]]
+- [[https://goplay.space/#gs20cFjl-gs][Variables]]
+- [[https://goplay.space/#2X57Ha4ldNV][Constants]]
+- [[https://goplay.space/#Rbz8FhL3PxU][Type conversion]]
+- [[https://goplay.space/#ugMD-VYlwjI][For]]
+- [[https://goplay.space/#AbYAd6LB2c3][If/Else]]
+- [[https://goplay.space/#GpoaMY8dboJ][Switch]]
+
+
+* Lab setup
+
+- Clone [[https://github.com/anz-bank/go-training][https://github.com/anz-bank/go-training]]
+- Follow instructions on [[https://github.com/anz-bank/go-training/blob/master/README.md][README.md]]
+
+As part of all labs
+
+- Test your code
+- Create a PR following the [[https://github.com/anz-bank/go-training#pre-pr-checklist][PR checklist]]
+
+
+* PR from own fork - initial setup
+
+Issue PRs from `feature` branch of your own fork to `master` on upstream:
+
+- Login to github.com
+- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-training]]
+- Clone your fork - `USERNAME` is your GitHub username throughout these slides:
+
+	language:bash
+	git clone https://github.com/USERNAME/go-training.git
+	cd go-training
+
+- Create `upstream` remote pointing to [[https://github.com/anz-bank/go-training][anz-bank/go-training]]:
+
+	language:bash
+	git remote add upstream https://github.com/anz-bank/go-training.git
+	git remote update
+	git branch -u upstream/master master
+	git pull
+
+
+* PR from own fork - typical git workflow
+
+Start work on a new branch `lab1` with:
+
+	git checkout master
+	git pull upstream master  # with upstream/master tracking just use `git pull`
+	git checkout -b lab1
+
+Write, test and commit code code, then:
+
+	git push -u origin
+
+Create PR on github.com
+
+If `master` on upstream has advanced in the meantime:
+
+	git checkout master
+	git pull upstream master
+	git checkout lab1
+	git rebase master
+	git push -f
+
+
+* Lab 1 - Fibonacci
+
+- Create an executable go program in directory `01_fib/USERNAME`
+- Write a function that prints the first n Fibonacci numbers
+
+	func fib(n int)
+
+- Call `fib(7)` in `main` to print
+
+	1
+	1
+	2
+	3
+	5
+	8
+	13
+
+- Bonus points: For negative n print [[https://en.wikipedia.org/wiki/Fibonacci_number#Negafibonacci][Negafibonacci numbers]].
+
+* Iterable data types and Range
+
+- [[https://goplay.space/#XrEt6YEl7QC][Arrays]]
+- [[https://goplay.space/#_KaPpZeRNPA][Slices]]
+- [[https://goplay.space/#lMZT_vCRchI][Maps]]
+- [[https://goplay.space/#S3KObilbh7H][Range]]
+
+
+* Lab 2 - Bubble sort
+
+- Create an executable go program in directory `02_bubble/USERNAME`
+- Write a function that returns a sorted copy of `int` slice `s` using [[https://en.wikipedia.org/wiki/Bubble_sort][Bubble sort]]:
+
+	func bubble(s []int) []int
+
+- Call `fmt.Println(bubble([]int{3,` `2,` `1,` `5}))` in `main` to print:
+
+	[1 2 3 5]
+
+- Bonus points: implement [[https://en.wikipedia.org/wiki/Insertion_sort][Insertion sort]]
+- Extra bonus points: implement an _O(n_ _log(n))_ sorting algorithm
+
+
+* Lab 3 - Letter frequency
+
+- Create an executable go program in directory `03_letters/USERNAME`
+- Write a function that returns a mapping of each letter to its frequency:
+
+	func letters(s string) map[rune]int
+
+- Write a function that returns a sorted slice of strings with elements `"{key}:{val}"`. Use package [[https://golang.org/pkg/sort/][sort]]:
+
+	func sortLetters(m map[rune]int) []string
+
+- Call `fmt.Println(strings.Join(sortLetters(letters("aba"))),` `"\n")` in `main` to print:
+
+	a:2
+	b:1
+
+- Bonus points: comprehensive tests
+
+
+* Functions
+
+- [[https://goplay.space/#gHOzTi05LkI][Functions]]: parameters and return values
+- [[https://goplay.space/#-G75RWA1DW1][Variadic Functions]]
+- [[https://goplay.space/#olrpJoSte3n][Closures]]
+
+
+* Lab 4 - numeronym
+
+- Create an executable go program in directory `04_numeronym/USERNAME`
+- Write a function that returns a slice of numeronyms for its input strings:
+
+	func numeronyms(vals ...string) []string
+
+- Call `fmt.Println(numeronyms("accessibility",` `"Kubernetes",` `"abc"))` in `main` to print:
+
+	[a11y K8s abc]
+
+
+* Data structures and interfaces
+
+- [[https://goplay.space/#MYeoiSdP4tp][Pointers]]
+- [[https://goplay.space/#eoBLEu8lRvl][Structs]]
+- [[https://goplay.space/#OkA4buOlTe1][Methods]]
+- [[https://goplay.space/#An9Um8oSShm][Interfaces]]
+
+"The bigger the interface, the weaker the abstraction." - [[https://go-proverbs.github.io/][Rob Pike]]
+
+
+* Embedding
+
+"Go does not provide the typical, type-driven notion of subclassing, but it does have the ability to “borrow” pieces of an implementation by embedding types within a struct or interface." - [[https://golang.org/doc/effective_go.html#embedding][Effective Go]]
+
+
+	type Reader interface {
+	    Read(p []byte) (n int, err error)
+	}
+
+	type Writer interface {
+	    Write(p []byte) (n int, err error)
+	}
+
+	// ReadWriter is the interface that combines the Reader and Writer interfaces.
+	type ReadWriter interface {
+	    Reader
+	    Writer
+	}
+
+
+* Lab 5 - Stringer
+
+- Create an executable go program in directory `05_stringer/USERNAME`
+- Make the `IPAddr` type implement `fmt.Stringer` to print the address as a dotted quad
+- Find hints at [[https://tour.golang.org/methods/18][Tour of Go Exercise: Stringers]]
+- Call `fmt.Println(IPAddr{127,` `0,` `0,` `1})` in `main` to print:
+
+	127.0.0.1
+
+
+* Test two implementations of interface in suite (1/2)
+
+	// scaler.go
+	type scaler interface {
+		scale(float64)
+	}
+
+	type rect struct {
+		a, b int
+	}
+
+	func (r *rect) scale(s float64) {
+		r.a = int(float64(r.a) * s)
+		r.b = int(float64(r.b) * s)
+	}
+
+	type circle struct {
+		r int
+	}
+
+	func (c *circle) scale(s float64) {
+		c.r = int(float64(c.r) * s)
+	}
+
+
+* Test two implementations of interface in suite (2/2)
+
+	type scalerSuite struct {
+		suite.Suite
+		scaler scaler
+	}
+
+	func (s *scalerSuite) TestScaler() {
+		r := assert.New(s.T())
+		initial := fmt.Sprintf("%#v", s.scaler)
+
+		s.scaler.scale(2.0)
+		scaled := fmt.Sprintf("%#v", s.scaler)
+
+		s.scaler.scale(0.5)
+		scaledBack := fmt.Sprintf("%#v", s.scaler)
+
+		fmt.Printf("%s\n%s\n%s\n", initial, scaled, scaledBack)
+		r.Equal(initial, scaledBack)
+		r.NotEqual(initial, scaled)
+	}
+
+	func TestStorer(t *testing.T) {
+		suite.Run(t, &scalerSuite{scaler: &circle{2}})
+		suite.Run(t, &scalerSuite{scaler: &rect{1, 1}})
+	}
+
+
+* Lab 6 - CRUD puppy with interface
+
+- Create an executable go program in directory `06_puppy/USERNAME` (see [[https://github.com/anz-bank/go-samplerest/blob/master/pkg/pet/types.go][hints]])
+- Implement a `Puppy` struct containing `ID`, `Breed`, `Colour`, `Value`.
+- Create `Storer` interface with [[https://en.wikipedia.org/wiki/Create,_read,_update_and_delete][CRUD]] methods for `Puppy`
+- Write a `MapStore` implementation of `Storer` backed by a `map`
+- Write a `SyncStore` implementation of `Storer` backed by a [[https://golang.org/pkg/sync/#Map][sync.Map]]
+- Keep all implementation files in the same folder and in package `main`
+- Test against the `Storer` interface and run in [[https://godoc.org/github.com/stretchr/testify/suite][suite]] with both implementations
+
+.image _img/crud_puppy.jpg
+.caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
+
+
+* Errors (1/3)
+
+"Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
+
+The `error` type is a built-in interface:
+
+	type error interface {
+	    Error() string
+	}
+
+By convention, functions often return `error` as the second/last return value.
+The calling code should handle errors by testing whether the error equals nil:
+
+	func getCat(strID string) (*Cat, error) {
+		id, err := strconv.Atoi(strID)
+		if err != nil {
+		    return nil, CatError(err)
+		}
+		return catStore.cats[id], nil
+	}
+
+
+* Errors (2/3)
+
+"Don't panic." - [[https://go-proverbs.github.io/][Rob Pike]]
+
+Panic should be used when something went unexpectedly wrong.
+For instance, initialise a regular expression with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if the pattern is a string constant.
+`MustCompile` will `panic` at initialisation.
+
+	var re = regexp.MustCompile(`^[a-c]+$`)
+	var re2 = regexp.MustCompile(`^[a-c+$`) // panic
+
+
+Use `panic` rarely and judiciously in your own code!
+
+
+* Errors (3/3)
+
+- Error [[https://goplay.space/#h4c7gQxzQsN][create]], [[https://goplay.space/#mze1De36XjV][handle]], [[https://goplay.space/#h1kA3qKaO6B][custom error]]
+- [[https://goplay.space/#9vu6iJHXMHC][Panic]]
+- [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
+
+
+* Lab 7 - Errors
+
+- Create an executable go program in directory `07_errors/USERNAME`
+- Copy the CRUD puppy from upstream master `06_puppy/USERNAME`
+- Add a custom error type `Error` with fields `Message` and `Code`
+- Extend the `Storer` interface for all methods to also return `error`
+- Create errors for:
+
+	language:none
+	- Value < 0
+	- ID not found in Read, Update and Delete
+
+- Add locking for proper use of sync.Map
+- Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
+
+
+* Concurrency (1/2)
+
+"Don't communicate by sharing memory, share memory by communicating."
+"Concurrency is not parallelism."
+"Concurrency is about structure, parallelism is about execution."
+ - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
+
+*Overview:* *built-in* *language* *features*
+Goroutines (`go`)
+Channels (`chan`, `<-`)
+Select (`select`)
+
+
+* Concurrency (2/2)
+
+Concurrency isn't easy - we are only scratching the surface.
+
+- [[https://goplay.space/#YtuJgIuIswH][Goroutines]] ([[https://play.golang.org/p/YtuJgIuIswH][Playground]]`*`)
+- [[https://goplay.space/#5M0f3-YY44W][Channels]] ([[https://play.golang.org/p/5M0f3-YY44W][Playground]]`*`)
+- [[https://goplay.space/#FEWHmUA0QtN][Buffered Channels]]
+- [[https://goplay.space/#ANO8rpfNynY][Range and close]] ([[https://play.golang.org/p/ANO8rpfNynY][Playground]]`*`)
+- [[https://goplay.space/#R1qgjOsPSGk][Select]] ([[https://play.golang.org/p/R1qgjOsPSGk][Playground]]`*`)
+- [[https://goplay.space/#4TGM29YbvX4][Deadlocks]] ([[https://play.golang.org/p/4TGM29YbvX4][Playground]]`*`)
+
+`*` The [[https://play.golang.org/][official Go Playground]] prints in real-time with delays but lacks syntax colouring.
+
+
+* Tools and Conventions
+
+
+* Project layout
+
+For non-trivial size projects follow the layout suggested by [[https://github.com/golang-standards/project-layout][golang-standards]]
+Abridged version:
+
+	language:none
+	├── README.md
+	├── go.mod
+	├── go.sum
+	├── cloudbuild.yaml
+	├── .gitignore
+	├── .golangci.yml
+	├── pkg
+	│   ├── bar
+	│   │   ├── bar.go
+	│   │   ├── baz.go
+	│   │   └── bar_test.go
+	│   └── foo
+	│       ├── foo.go
+	│       └── foo_test.go
+	├── cmd
+	│   └── fooserver
+	│       └── main.go
+	├── docs
+	└── vendor
+
+
+* Lab 8 - Project Layout
+
+- Copy the CRUD puppy from upstream master `07_errors/USERNAME`
+- Create directory `08_project/USERNAME` containing
+
+	language:none
+	├── README.md
+	├── go.mod
+	├── go.sum
+	├── pkg
+	│   └── USERNAME-puppy
+	│       ├── types.go
+	│       ├── types_test.go
+	│       ├── errors.go
+	│       ├── errors_test.go
+	│       └── store
+	│           ├── storer.go
+	│           └── .... store files and tests, e.g. mapstore.go
+	├── cmd
+	│   └── USERNAME-puppy-server
+	│       └── main.go
+	└── vendor
+
+- Add project introduction and how to build, run & test it to `README.md`
+
+
+
+* Go tool chain
+
+	language:bash
+	go help
+	go version
+	go build ./...
+	go test ./...
+	go install ./...
+	go mod init
+	go mod vendor
+	go mod tidy
+	go clean -modcache
+	go test -coverprofile=coverage.out ./... && go tool cover -html=coverage.out
+
+
+* Other tools
+
+Lint with
+
+	golangci-lint run
+
+and configure the linter in `.golangci.yml`
+
+Use `gofmt` or `goimport` as part of your editor/IDE setup
+
+
+* Go standard library
+
+[[https://golang.org/pkg/]]
+- fmt
+- strings
+- time
+- [[https://goplay.space/#zp5qANw7LCZ][encoding/json]]
+- net/http
+- regexp
+- sort
+- database/sql
+- os
+- path
+- bytes
+- ...
+
+
+* Lab 9 - JSON puppy
+
+- Create directory `09_json/USERNAME` containing a copy of upstream master `08_project/USERNAME`
+- Add JSON tags to puppy data type
+- Test marshalling and unmarshalling using [[https://godoc.org/github.com/stretchr/testify/require#JSONEq][require.JSONEq]]
+- Add command line flag `-d` `FILE` with long form `--data` `FILE` using [[https://godoc.org/gopkg.in/alecthomas/kingpin.v2][kingpin.v2]]. FILE should contain an array of puppies in JSON format. Parse this file and store its contents.
+
+
+* Useful third party packages
+
+[[https://godoc.org/github.com/stretchr/testify][testify]] - testing toolkit
+[[https://godoc.org/github.com/go-chi/chi][chi]] - lightweight router for Go HTTP services
+[[https://godoc.org/gopkg.in/alecthomas/kingpin.v2][kingpin.v2]] - command line and flag parser
+[[https://godoc.org/github.com/sirupsen/logrus][logrus]] - structured logger
+
+[[https://godoc.org/github.com/lib/pq][pq]] - Postgres driver for the database/sql
+[[https://godoc.org/github.com/gomodule/redigo/redis][redigo]] - lightweight client for Redis
+[[https://godoc.org/github.com/globalsign/mgo][mgo]] - MongoDB driver for Go
+[[https://godoc.org/gopkg.in/goracle.v2][goracle]] - Oracle driver for the database/sql
+
+[[https://github.com/santhosh-tekuri/jsonschema][jsonschema]] - JSON schema compilation and validation
+[[https://godoc.org/gopkg.in/square/go-jose.v2][go-jose]] - JWT utils
+ ...
+
+
+* A RESTful API starter (1/3)
+
+Full sample code on Go Play Space -
+not executable to due 3rd party dependency `chi`:
+[[https://goplay.space/#YJqaOpvxiKT][basic sample]]
+[[https://goplay.space/#aXy28QMEiNK][sample with error handling]]
+
+	type TeapotHandler interface {
+		handlePost(w http.ResponseWriter, r *http.Request)
+		handleGet(w http.ResponseWriter, r *http.Request)
+	}
+
+	func SetupRoutes(r chi.Router, h TeapotHandler) {
+		r.Post("/api/teapot", h.handlePost)
+		r.Get("/api/teapot/{id}", h.handleGet)
+	}
+
+	func main() {
+		r := chi.NewRouter()
+		h := NewMapTeapotHandler()
+		SetupRoutes(r, h)
+		http.ListenAndServe(":7735", r)
+	}
+
+
+* A RESTful API starter (2/3)
+
+	type Teapot struct {
+		ID          int
+		Colour      string
+		Temperature int
+	}
+
+	// MapTeapotHandler implements TeapotHandler
+	type MapTeapotHandler struct {
+		store map[int]Teapot  // Race condition
+		maxID int
+	}
+
+	func NewMapTeapotHandler() *MapTeapotHandler {
+		return &MapTeapotHandler{store: map[int]Teapot{}}
+	}
+
+
+* A RESTful API starter (3/3)
+
+	// MapTeapotHandler implements  TeapotHandler
+	func (mt *MapTeapotHandler) handleGet(w http.ResponseWriter, r *http.Request) {
+		id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+		teapot, _ := mt.store[id]
+		render.JSON(w, r, teapot)
+	}
+
+	func (mt *MapTeapotHandler) handlePost(w http.ResponseWriter, r *http.Request) {
+		var teapot Teapot
+		render.DecodeJSON(r.Body, &teapot)
+		mt.maxID++ // Race condition
+		teapot.ID = mt.maxID
+		mt.store[mt.maxID] = teapot
+		render.JSON(w, r, teapot)
+	}
+
+
+* Lab 10 - Puppy REST
+
+- Create directory `10_rest/USERNAME` containing a copy of upstream master `09_json/USERNAME`
+- Add file `pkg/puppy/rest.go` implementing:
+
+	GET    /api/puppy/{id}
+	POST   /api/puppy/          Payload: Puppy JSON without ID
+	PUT    /api/puppy/{id}      Payload: Puppy JSON without ID
+	DELETE /api/puppy/{id}
+
+- Use [[https://golang.org/pkg/net/http/httptest/][net/http/httptest]] for testing
+- Add flag `-p` `PORT` with long flag `--port` `PORT` to command line flags
+- Add flag `-s` `STORE` with long flag `--store` `STORE` with accepted values:
+
+	map, sync, db
+
+- Document the API in README.md
+
+
+* Lab 11 - Puppy Notifications
+
+- Create directory `11_notify/USERNAME` containing a copy of upstream master `10_rest/USERNAME`
+- Create `cmd/lostpuppy-service/main.go` running single endpoint:
+
+	POST   /api/lostpuppy/          Payload: { id: PUPPY_ID }
+
+- This stubbed endpoint returns with 2 second delay:
+
+	HTTP status 201 for even IDs
+	HTTP status 500 for odd IDs
+
+- Update Puppy `Delete` method to notify lostpuppy-service in a goroutine and log response code asynchronously.
+
+
+* Further project work
+
+- [[https://github.com/anz-bank/go-samplerest]]
+- [[https://github.com/anz-bank/decimal]]
+
+
+* References
+
+- [[https://golang.org/doc/faq]]
+- [[https://en.wikipedia.org/wiki/Go_(programming_language)][Wikipedia]]
+- [[https://talks.golang.org/2015/gophercon-goevolution.slide][The Evolution of Go]]
+- [[https://talks.golang.org/2012/zen.slide]]
+- [[https://www.youtube.com/watch?v=ytEkHepK08c][Talk: A Tour of Go]]
+
+
+* Feedback
+
+Please take a moment to give anonymous [[https://docs.google.com/forms/d/e/1FAIpQLSeLKHWpq77ATHzgyVLMDsRAzuemJn-o9h4S8pMjdx8B9_IM4w/viewform][feedback]].
+
+Thank you! 🙏
