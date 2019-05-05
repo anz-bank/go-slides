@@ -6,8 +6,10 @@ Julia Ogris
 Ryan O'Kane
 Sai Kiran Gummaraj
 
-* Introduction
+* Go Gopher
 
+.image _img/gopher.png
+.caption [[https://blog.golang.org/gopher]]
 
 * Agenda
 
@@ -23,13 +25,10 @@ Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank
 
 * Day 1 - Schedule
 
-*Morning:* Introduction to Go
-
+- Introduction to Go
 - Overview and history
 - Demo
-
-*Afternoon:* Hello world and first PR
-
+- Hello world and first PR
 - Interlude: towards continuous deployment (CD)
 - Go language fundamentals
 - First lab
@@ -110,6 +109,8 @@ Go favours simplicity and directness resulting in some purposeful omissions:
 - standard library
 - productive and fun
 - lightweight concurrency
+
+Here is a great read on Rob Pike's blog about "Why Go" - ([[https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html][Less is Exponentially More]])
 
 
 * Demo
@@ -1034,6 +1035,17 @@ not executable to due 3rd party dependency `chi`:
 
 - [[https://github.com/anz-bank/go-samplerest]]
 - [[https://github.com/anz-bank/decimal]]
+
+* Future of Go
+
+- Goal to fix the most significant ways Go 1 fails to scale.
+- Based on [[https://github.com/golang/go/wiki/ExperienceReports][Experience Reports]] 3 pain points were identified
+- Dependency Management (Addressed via Go Modules from version 1.11 onwards)
+- Error handling
+- Generics
+
+Rob Pike's Talk ([[https://blog.golang.org/toward-go2][Towards Go 2]])
+Dave Cheney Blog ([[https://dave.cheney.net/paste/the-past-present-and-future-of-go2.pdf][Past Present and Future of Go]])
 
 
 * References
