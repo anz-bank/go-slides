@@ -1,4 +1,4 @@
-Go training
+Go Course
 Melbourne, May-June 2019
 
 Angelo Perera
@@ -20,7 +20,7 @@ Sai Kiran Gummaraj
 - Third party Go libraries commonly used
 - Project work
 
-Find Slides at [[https://gotraining.appspot.com]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
+Find Slides at [[https://go-course.org]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
 
 
 * Day 1 - Schedule
@@ -366,7 +366,7 @@ and update commits in your editor with:
 
 * Rebase a feature branch
 
-Rebase will sequentially take the commits from `feature` and reapply them to `master`:
+Rebase will sequentially take the commits from `master` and reapply them to `feature`:
 
 	language:none
 	         A---B---C feature
@@ -482,13 +482,13 @@ Document them
 
 * Lab setup
 
-- Clone [[https://github.com/anz-bank/go-training][https://github.com/anz-bank/go-training]]
-- Follow instructions on [[https://github.com/anz-bank/go-training/blob/master/README.md][README.md]]
+- Clone [[https://github.com/anz-bank/go-course][https://github.com/anz-bank/go-course]]
+- Follow instructions on [[https://github.com/anz-bank/go-course/blob/master/README.md][README.md]]
 
 As part of all labs
 
 - Test your code
-- Create a PR following the [[https://github.com/anz-bank/go-training#pre-pr-checklist][PR checklist]]
+- Create a PR following the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
 
 
 * PR from own fork - initial setup
@@ -496,17 +496,17 @@ As part of all labs
 Issue PRs from `feature` branch of your own fork to `master` on upstream:
 
 - Login to github.com
-- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-training]]
+- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
 - Clone your fork - `USERNAME` is your GitHub username throughout these slides:
 
 	language:bash
-	git clone https://github.com/USERNAME/go-training.git
-	cd go-training
+	git clone https://github.com/USERNAME/go-course.git
+	cd go-course
 
-- Create `upstream` remote pointing to [[https://github.com/anz-bank/go-training][anz-bank/go-training]]:
+- Create `upstream` remote pointing to [[https://github.com/anz-bank/go-course][anz-bank/go-course]]:
 
 	language:bash
-	git remote add upstream https://github.com/anz-bank/go-training.git
+	git remote add upstream https://github.com/anz-bank/go-course.git
 	git remote update
 	git branch -u upstream/master master
 	git pull
