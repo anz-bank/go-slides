@@ -625,7 +625,7 @@ If `master` on upstream has advanced in the meantime:
 "The bigger the interface, the weaker the abstraction." - [[https://go-proverbs.github.io/][Rob Pike]]
 
 
-* Embedding
+* Embedding - Interfaces
 
 "Go does not provide the typical, type-driven notion of subclassing, but it does have the ability to “borrow” pieces of an implementation by embedding types within a struct or interface." - [[https://golang.org/doc/effective_go.html#embedding][Effective Go]]
 
@@ -643,6 +643,28 @@ If `master` on upstream has advanced in the meantime:
 	    Reader
 	    Writer
 	}
+
+
+* Embedding - Structs
+
+"When we embed a type, the methods of that type become methods of the outer type, but when they are invoked the receiver of the method is the inner type, not the outer one." - [[https://golang.org/doc/effective_go.html#embedding][Effective Go]]
+
+- The same applies for all fields within an embedded type
+
+
+* Precedence when Embedding
+
+Embedding types introduces the possiblity for naming conflicts. Go follows some simple rules to help resolve this:
+
+- A field or method `X` will hide any other field or method `X` found in a more deeply nested part of the type
+- If a field or method appears at the same nesting level, it will return an error
+
+
+* Examples
+
+- [[https://goplay.space/#_qQ0bGxwt7f][Embedded Structs]]
+- [[https://goplay.space/#vLgi3SMtLZp][Embedded Interfaces]]
+- [[https://goplay.space/#3BUfQW3MxG9][Precedence]]
 
 
 * Lab 5 - Stringer
