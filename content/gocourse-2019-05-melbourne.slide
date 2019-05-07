@@ -11,27 +11,60 @@ Sai Kiran Gummaraj
 .image _img/gopher.png
 .caption [[https://blog.golang.org/gopher]]
 
-* Agenda
+* Course Overview
 
 - Introduction to Go
-- Go language fundamentals
+- Go programming language
 - Go standard library
 - Go tool chain
 - Third party Go libraries commonly used
-- Project work
+- JSON and RESTful API
 
 Find Slides at [[https://go-course.org]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
 
 
-* Day 1 - Schedule
+* Course Completion
 
-- Introduction to Go
-- Overview and history
-- Demo
-- Hello world and first PR
-- Interlude: towards continuous deployment (CD)
-- Go language fundamentals
-- First lab
+- Complete the *Go* *Fundamentals* *Course* by finishing 5 lab assignments
+- Complete the *Full* *Go* *Course* by finishing 10 lab assignments
+- Complete the first lab assignments as described in these *slides*
+- *Merge* your approved Pull Request (PR) to complete a lab assignment
+- *Review* a colleague's PR and add a link to the review in your own PR description
+- Submit your last PR before *15/7/2019* for a final re-review deadline on *31/7/2019*
+- Receive a printed *certificate* if you complete 5 or 10 labs
+
+
+* Talks
+
+All talks take place at the Charles Goode Auditorium.
+Attendance is optional.
+The last 30 minutes of each talk are reserved for Q&A and help.
+
+- 27 May 2019, 2-5pm: *Introduction* and *Lab* *Overview*
+- 29 May 2019, 9-11am: *Values*, *Control* *Flow*, *Iterable* *Data* *Types* and *Range*
+- 31 May 2019, 9-11am: *Functions*, *Data* *Structures* and *Interfaces*
+- 7 June 2019, 9-11am: *Errors*, *Concurrency* and *Project* *Layout*
+- 13 June 2019, 9-11am:*Toolchain*, *Standard* *Library*, *JSON* and *RESTful* *API*
+
+
+* Prerequisites
+
+- No prior Go knowledge required
+- Some programming experience strongly recommended
+- Basic understanding of *JSON* and *RESTful* *APIs* recommended
+- Install [[https://golang.org/doc/install][go 1.12]]
+- Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
+
+
+* Contact
+
+Please join [[https://anzengineering.slack.com/messages/CFCPLHFT2/convo/CFCPLHFT2-1557100844.007600/][#go-course]] on [[https://anzengineering.slack.com]]
+
+*Instructors*
+[[https://anzengineering.slack.com/team/UEVMPCL2C][@Angelo]], angelo.perera@anz.com
+[[https://anzengineering.slack.com/team/U84CTGB0F][@julia]], Julia.Ogris@anz.com
+[[https://anzengineering.slack.com/team/U7M6DMFMY][@ryanokane]], Ryan.O'Kane@anz.com
+[[https://anzengineering.slack.com/team/UC9C4K2ES][@saikirian]], SaiKiran.Gummaraj@anz.com
 
 
 * History and Overview
