@@ -199,7 +199,7 @@ and update commits in your editor with:
 
 * Rebase a feature branch
 
-Rebase will sequentially take the commits from `master` and reapply them to `feature`:
+Rebase will sequentially take the commits from `feature` and reapply them to `master`:
 
 	language:none
 	         A---B---C feature

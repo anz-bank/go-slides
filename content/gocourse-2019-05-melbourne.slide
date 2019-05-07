@@ -520,22 +520,27 @@ Document them
 
 * Lab setup
 
-- Clone [[https://github.com/anz-bank/go-course][https://github.com/anz-bank/go-course]]
-- Follow instructions on [[https://github.com/anz-bank/go-course/blob/master/README.md][README.md]]
+* Prerequisites
 
-As part of all labs
-
-- Test your code
-- Create a PR following the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
+- Install [[https://git-scm.com/downloads][git]]
+- Install [[https://golang.org/doc/install][go 1.12]]
+- Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
 
 
-* PR from own fork - initial setup
+* Repository setup overview
 
-Issue PRs from `feature` branch of your own fork to `master` on upstream:
+Clone your fork of [[https://github.com/anz-bank/go-course][anz-bank/go-course]]
+
+Create PRs
+
+-  from `feature` branch of your own fork (remote `origin`)
+-  to `master` on [[https://github.com/anz-bank/go-course][anz-bank/go-course]] (remote `upstream`)
+
+* Repository setup details
 
 - Login to github.com
 - Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
-- Clone your fork - `USERNAME` is your GitHub username throughout these slides:
+- Clone your fork. `USERNAME` is your GitHub username:
 
 	language:none
 	git clone https://github.com/USERNAME/go-course.git
@@ -562,15 +567,37 @@ Write, test and commit code code, then:
 
 	git push -u origin
 
-Create PR on github.com
+Create PR on [[https://github.com/anz-bank/go-course][anz-bank/go-course]]:
+Click `Pull` `requests` tab → `New` `pull` `request` button
 
-If `master` on upstream has advanced in the meantime:
 
+Follow the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
+
+
+* Update feature branch
+
+If `master` has advanced after `feature` branch and PR creation you have two options:
+
+*Rebase* *feature* *branch*
+
+	language:none
 	git checkout master
-	git pull upstream master
-	git checkout lab1
+	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
+	git checkout feature
 	git rebase master
 	git push -f
+
+or
+
+*Update* *branch* *on* *GitHub*
+
+For an existing PR you can alternatively click `Update` `branch` on Github.
+This will merge `upstream/master` into `origin/feature`.
+Before adding any commits to `feature` locally run:
+
+	language:bash
+	git pull origin feature
+
 
 
 * Lab 1 - Fibonacci
