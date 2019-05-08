@@ -27,13 +27,14 @@ or test the coudbuild with
 
 ## Attribution
 
-The training materials in this project as of February 2019 were collated by [@juliaogris](https://github.com/juliaogris) with many cues taken from [A Tour of Go](https://tour.golang.org/) and [Go by Example](https://gobyexample.com/).
+The Go course materials in this project were collated by [@juliaogris](https://github.com/juliaogris) with many cues taken from [A Tour of Go](https://tour.golang.org/) and [Go by Example](https://gobyexample.com/).
 
 Extra special thanks to [@camh-anz](https://github.com/camh-anz) for countless reviews, improvement suggestions and code contributions.
 
 Many thanks also to [@anzdaddy](https://github.com/anzdaddy) for suggesting the pingserver comparison, to [@pentaphobe](https://github.com/pentaphobe) for the syntax colouring contribution and to [@anzboi](https://github.com/anzboi) for creating [go-samplerest](https://github.com/anz-bank/go-samplerest) - they and [@anz-rfc](https://github.com/anz-rfc) also contributed in many reviews.
 
+[@anzboi](https://github.com/anzboi), [@camh-anz](https://github.com/camh-anz), [@linuxmonk](https://github.com/linuxmonk), [@Joshcarp](https://github.com/Joshcarp), [@juliaogris](https://github.com/juliaogris) and [@rokane](https://github.com/rokane) collaborated on an updated version of the materials for a follow up course.
+
 ## License
 
 This work is copyright _Australia and New Zealand Banking Group Limited_ and licensed under a [Creative Commons Attribution 3.0 Unported License](https://creativecommons.org/licenses/by/3.0/).
-
