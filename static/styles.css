@@ -377,7 +377,7 @@ pre {
   line-height: 24px;
   letter-spacing: -1px;
 
-  color: black;
+  color: #444;
 }
 
 pre.numbers span:before {

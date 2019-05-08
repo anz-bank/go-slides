@@ -1,0 +1,255 @@
+Towards Continuous Deployment
+Melbourne, May 2019
+
+Julia Ogris
+
+
+* Agenda
+
+- Continuous Deployment (CD) definition
+- Engineering Recommendations
+- GitHub Settings
+- Git
+- Pull Requests (PRs) Recommendations
+
+Find Slides at [[https://git-dot-anzedu.appspot.com/]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
+
+
+* What is Continuous Deployment (CD)?
+
+Continuous Deployment != Continuous Delivery
+
+.image _img/cd.jpg
+.caption [[https://blog.crisp.se/2013/02/05/yassalsundman/continuous-delivery-vs-continuous-deployment][Yassal Sundman, Continuous Delivery vs Continuous Deployment]]
+
+
+* Continuous Deployment Quotes
+
+"Continuous Deployment is a strategy for software releases wherein any code commit that passes the automated testing phase is automatically released into the production environment."
+[[https://searchitoperations.techtarget.com/definition/continuous-deployment][TechTarget definition]]
+
+
+"Continuous deployment requires a highly developed culture of monitoring, being on call, and having the capacity to recover quickly."
+[[https://semaphoreci.com/blog/2017/07/27/what-is-the-difference-between-continuous-integration-continuous-deployment-and-continuous-delivery.html][Marko Anastasov, Semaphore Engineering Blog]]
+
+
+* Recommendations for CD (1/3)
+
+- Use *trunk* *based* *development* (not GitFlow)
+- Create *small* *PRs* (Pull Requests) that can be Squash Merged
+- ... which lead to revertible commits that have passed automated tests
+- Protect `master` branch on GitHub
+
+
+* Recommendations for CD (2/3)
+
+Quality leads to the confidence to automatically deploy, so we need
+ways to increase and maintain quality.
+
+- Write great commit messages
+- Think about the reviewer and review your own PRs first
+- *Lint* strictly from day one
+- Ensure *100%* *coverage*
+
+
+* Recommendations for CD (3/3)
+
+- Test (unit & system), lint & cover as part of *CI* (Continuous Integration)
+- *Version* all deployments (use [[https://semver.org/][semver]]; tag source, images etc.)
+- *Document* for newbies in the README.md (must!) and use source doc tags
+- Enjoy your CD as last step after successful CI run on master
+
+
+* Protect master branch on GitHub
+
+	language:none
+	Settings -> Options:
+	[ ] Allow merge commits
+	[x] Allow squash merging
+	[ ] Allow rebase merging
+
+	Settings -> Branches -> [Add rule|Edit] `master`:
+	[x] Require pull request reviews before merging
+	[x] Dismiss stale pull request approvals when new commits are pushed
+	[x] Require status checks to pass before merging
+	[x] Require branches to be up to date before merging
+	[x] Include administrators
+
+
+* Pull Request (PR) from own fork - initial setup
+
+Issue PRs from `feature` branch of your own fork to `master` on upstream:
+
+- Login to github.com
+- Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-slides]]
+- Clone your fork - `USERNAME` is your GitHub username throughout these slides:
+
+	language:none
+	git clone https://github.com/USERNAME/go-slides.git
+	cd go-slides
+
+- Create `upstream` remote pointing to [[https://github.com/anz-bank/go-slides][anz-bank/go-slides]]:
+
+	language:bash
+	git remote add upstream https://github.com/anz-bank/go-slides.git
+	git remote update
+	git branch -u upstream/master master
+	git pull
+
+
+* PR from own fork - typical git workflow
+
+Start work on a new branch `fix-git-sample` with:
+
+	git checkout master
+	git pull upstream master  # with upstream/master tracking just use `git pull`
+	git checkout -b fix-git-sample
+
+Write, test and commit code code, then:
+
+	git push -u origin
+
+Create PR on github.com
+
+If `master` on upstream has advanced in the meantime:
+
+	git checkout master
+	git pull upstream master
+	git checkout fix-git-sample
+	git rebase master
+	git push -f
+
+
+* Commit messages
+
+.image _img/xkcd_git_commit.png
+.caption [[https://xkcd.com/1296/]]
+
+
+* Commit messages - spot the difference
+
+[[https://chris.beams.io/posts/git-commit/]]
+
+	language:none
+	$ git log --oneline -5 --author cbeams --before "Fri Mar 26 2009"
+
+	e5f4b49 Re-adding ConfigurationPostProcessorTests after its brief removal in r814. @Ignore-ing the testCglibClassesAreLoadedJustInTimeForEnhancement() method as it turns out this was one of the culprits in the recent build breakage. The classloader hacking causes subtle downstream effects, breaking unrelated tests. The test method is still useful, but should only be run on a manual basis to ensure CGLIB is not prematurely classloaded, and should not be run as part of the automated build.
+	2db0f12 fixed two build-breaking issues: + reverted ClassMetadataReadingVisitor to revision 794 + eliminated ConfigurationPostProcessorTests until further investigation determines why it causes downstream tests to fail (such as the seemingly unrelated ClassPathXmlApplicationContextTests)
+	147709f Tweaks to package-info.java files
+	22b25e0 Consolidated Util and MutableAnnotationUtils classes into existing AsmUtils
+	7f96f57 polishing
+
+versus
+
+	language:none
+	$ git log --oneline -5 --author pwebb --before "Sat Aug 30 2014"
+
+	5ba3db6 Fix failing CompositePropertySourceTests
+	84564a0 Rework @PropertySource early parsing logic
+	e142fd1 Add tests for ImportSelector meta-data
+	887815f Update docbook dependency and generate epub
+	ac8326d Polish mockito usage
+
+
+* Recipe for great commit messages
+
+[[https://chris.beams.io/posts/git-commit/]]
+
+- Separate subject from body with a blank line
+- Limit the subject line to 60 characters
+- *Capitalize* the subject line
+- Do not end the subject line with a period
+- Use the *imperative* *mood* in the subject line
+- Wrap the body at 80 characters
+- Use the body to explain what and why vs. how
+
+
+* Two git commands for precision work
+
+- Use `git` `rebase` `-i` `COMMIT_HASH` to rework your commits if necessary
+- Use `git` `add` `-p` for two separate concerns addressed in the one file
+
+Don't be afraid!
+Try it out on a new, throwaway branch.
+
+
+* Rebase interactively
+
+	language:none
+	git log --oneline
+	58b250e WIP
+	d558e36 Add coverage and pre-pr checklist to README.md
+	c9724be Fix copyright holder in LICENCE
+	aa3b728 Added Apache 2.0 LICENSE
+	8a2fd40 Initial commit
+
+Drop the latest commit, reword `Added...` to `Add` and fold in the `Fix...` commit with:
+
+	language:none
+	git rebase -i 8a2fd40
+
+and update commits in your editor with:
+
+	language:none
+	reword aa3b728 Added Apache 2.0 LICENSE
+	fixup  c9724be Fix copyright holder in LICENCE
+	pick   d558e36 Add coverage and pre-pr checklist to README.md
+	drop   58b250e WIP
+
+
+* Rebase a feature branch
+
+Rebase will sequentially take the commits from `feature` and reapply them to `master`:
+
+	language:none
+	         A---B---C feature
+	        /
+	   D---E---F---G master
+
+will become
+
+	language:none
+	                 A'--B'--C' feature
+	                /
+	   D---E---F---G master
+
+
+Use the following commands:
+
+	language:none
+	git checkout master
+	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
+	git checkout feature
+	git rebase master
+	git push -f
+
+
+* Update branch on Github
+
+For an existing PR you can alternatively click `Update` `branch` on Github.
+This will merge `upstream/master` into `origin/feature`.
+Before adding any commits to `feature` locally run:
+
+	language:bash
+	git pull origin feature
+
+
+
+* Pull Request (PR) recommendations (1/2)
+
+- Choose a meaningful *PR* *title*, it will become your Squash Merge message
+- Fill in *PR* *description* and reference an Issue for instance with #6
+- Review the *Files* *changed* tab - many reviewers start here
+- Review the *Commits* tab - some reviewers start here
+- Review the *Checks* tab - all checks must pass
+
+
+* Pull Request (PR) recommendations (2/2)
+
+- "Think of the reviewer: your code needs to be reviewable and that should be a prime concern when writing your code, commits and PRs." (@camh-anz)
+- Tag your PR Title with `[WIP]` if adjustments are needed
+- Rework fixup commits with `git` `rebase` `-i`  `COMMIT_HASH` and force push
+- Add reviewers and remove `[WIP]` tag when all of the above are met
+- Delete branch once merged, especially when using a single remote (no forks)
+
+

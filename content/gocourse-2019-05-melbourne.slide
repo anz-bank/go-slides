@@ -11,27 +11,60 @@ Sai Kiran Gummaraj
 .image _img/gopher.png
 .caption [[https://blog.golang.org/gopher]]
 
-* Agenda
+* Course Overview
 
 - Introduction to Go
-- Go language fundamentals
+- Go programming language
 - Go standard library
 - Go tool chain
 - Third party Go libraries commonly used
-- Project work
+- JSON and RESTful API
 
 Find Slides at [[https://go-course.org]] ([[https://github.com/anz-bank/go-slides][source]] on GitHub)
 
 
-* Day 1 - Schedule
+* Course Completion
 
-- Introduction to Go
-- Overview and history
-- Demo
-- Hello world and first PR
-- Interlude: towards continuous deployment (CD)
-- Go language fundamentals
-- First lab
+- Complete the *Go* *Fundamentals* *Course* by finishing 5 lab assignments
+- Complete the *Full* *Go* *Course* by finishing 10 lab assignments
+- Complete the first lab assignments as described in these *slides*
+- *Merge* your approved Pull Request (PR) to complete a lab assignment
+- *Review* a colleague's PR and add a link to the review in your own PR description
+- Submit your last PR before *15/7/2019* for a final re-review deadline on *31/7/2019*
+- Receive a printed *certificate* if you complete 5 or 10 labs
+
+
+* Talks
+
+All talks take place at the Charles Goode Auditorium.
+Attendance is optional.
+The last 30 minutes of each talk are reserved for Q&A and help.
+
+- 27 May 2019, 2-5pm: *Introduction* and *Lab* *Overview*
+- 29 May 2019, 9-11am: *Values*, *Control* *Flow*, *Iterable* *Data* *Types* and *Range*
+- 31 May 2019, 9-11am: *Functions*, *Data* *Structures* and *Interfaces*
+- 7 June 2019, 9-11am: *Errors*, *Concurrency* and *Project* *Layout*
+- 13 June 2019, 9-11am:*Toolchain*, *Standard* *Library*, *JSON* and *RESTful* *API*
+
+
+* Prerequisites
+
+- No prior Go knowledge required
+- Some programming experience strongly recommended
+- Basic understanding of *JSON* and *RESTful* *APIs* recommended
+- Install [[https://golang.org/doc/install][go 1.12]]
+- Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
+
+
+* Contact
+
+Please join [[https://anzengineering.slack.com/messages/CFCPLHFT2/convo/CFCPLHFT2-1557100844.007600/][#go-course]] on [[https://anzengineering.slack.com]]
+
+*Instructors*
+[[https://anzengineering.slack.com/team/UEVMPCL2C][@Angelo]], angelo.perera@anz.com
+[[https://anzengineering.slack.com/team/U84CTGB0F][@julia]], Julia.Ogris@anz.com
+[[https://anzengineering.slack.com/team/U7M6DMFMY][@ryanokane]], Ryan.O'Kane@anz.com
+[[https://anzengineering.slack.com/team/UC9C4K2ES][@saikirian]], SaiKiran.Gummaraj@anz.com
 
 
 * History and Overview
@@ -277,6 +310,7 @@ ways to increase and maintain quality.
 
 * Protect master branch on GitHub
 
+	language:none
 	Settings -> Options:
 	[ ] Allow merge commits
 	[x] Allow squash merging
@@ -300,6 +334,7 @@ ways to increase and maintain quality.
 
 [[https://chris.beams.io/posts/git-commit/]]
 
+	language:none
 	$ git log --oneline -5 --author cbeams --before "Fri Mar 26 2009"
 
 	e5f4b49 Re-adding ConfigurationPostProcessorTests after its brief removal in r814. @Ignore-ing the testCglibClassesAreLoadedJustInTimeForEnhancement() method as it turns out this was one of the culprits in the recent build breakage. The classloader hacking causes subtle downstream effects, breaking unrelated tests. The test method is still useful, but should only be run on a manual basis to ensure CGLIB is not prematurely classloaded, and should not be run as part of the automated build.
@@ -310,6 +345,7 @@ ways to increase and maintain quality.
 
 versus
 
+	language:none
 	$ git log --oneline -5 --author pwebb --before "Sat Aug 30 2014"
 
 	5ba3db6 Fix failing CompositePropertySourceTests
@@ -343,8 +379,7 @@ Try it out on a new, throwaway branch.
 
 * Rebase interactively
 
-[[https://stackoverflow.com/a/36644561][Follow instruction]] to setup VSCode as `git` editor (if that's your preferred editor).
-
+	language:none
 	git log --oneline
 	58b250e WIP
 	d558e36 Add coverage and pre-pr checklist to README.md
@@ -354,10 +389,12 @@ Try it out on a new, throwaway branch.
 
 Drop the latest commit, reword `Added...` to `Add` and fold in the `Fix...` commit with:
 
-	git reabse -i 8a2fd40
+	language:none
+	git rebase -i 8a2fd40
 
 and update commits in your editor with:
 
+	language:none
 	reword aa3b728 Added Apache 2.0 LICENSE
 	fixup  c9724be Fix copyright holder in LICENCE
 	pick   d558e36 Add coverage and pre-pr checklist to README.md
@@ -366,7 +403,7 @@ and update commits in your editor with:
 
 * Rebase a feature branch
 
-Rebase will sequentially take the commits from `master` and reapply them to `feature`:
+Rebase will sequentially take the commits from `feature` and reapply them to `master`:
 
 	language:none
 	         A---B---C feature
@@ -397,6 +434,7 @@ For an existing PR you can alternatively click `Update` `branch` on Github.
 This will merge `upstream/master` into `origin/feature`.
 Before adding any commits to `feature` locally run:
 
+	language:bash
 	git pull origin feature
 
 
@@ -482,24 +520,29 @@ Document them
 
 * Lab setup
 
-- Clone [[https://github.com/anz-bank/go-course][https://github.com/anz-bank/go-course]]
-- Follow instructions on [[https://github.com/anz-bank/go-course/blob/master/README.md][README.md]]
+* Prerequisites
 
-As part of all labs
-
-- Test your code
-- Create a PR following the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
+- Install [[https://git-scm.com/downloads][git]]
+- Install [[https://golang.org/doc/install][go 1.12]]
+- Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
 
 
-* PR from own fork - initial setup
+* Repository setup overview
 
-Issue PRs from `feature` branch of your own fork to `master` on upstream:
+Clone your fork of [[https://github.com/anz-bank/go-course][anz-bank/go-course]]
+
+Create PRs
+
+-  from `feature` branch of your own fork (remote `origin`)
+-  to `master` on [[https://github.com/anz-bank/go-course][anz-bank/go-course]] (remote `upstream`)
+
+* Repository setup details
 
 - Login to github.com
 - Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
-- Clone your fork - `USERNAME` is your GitHub username throughout these slides:
+- Clone your fork. `USERNAME` is your GitHub username:
 
-	language:bash
+	language:none
 	git clone https://github.com/USERNAME/go-course.git
 	cd go-course
 
@@ -524,15 +567,37 @@ Write, test and commit code code, then:
 
 	git push -u origin
 
-Create PR on github.com
+Create PR on [[https://github.com/anz-bank/go-course][anz-bank/go-course]]:
+Click `Pull` `requests` tab → `New` `pull` `request` button
 
-If `master` on upstream has advanced in the meantime:
 
+Follow the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
+
+
+* Update feature branch
+
+If `master` has advanced after `feature` branch and PR creation you have two options:
+
+*Rebase* *feature* *branch*
+
+	language:none
 	git checkout master
-	git pull upstream master
-	git checkout lab1
+	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
+	git checkout feature
 	git rebase master
 	git push -f
+
+or
+
+*Update* *branch* *on* *GitHub*
+
+For an existing PR you can alternatively click `Update` `branch` on Github.
+This will merge `upstream/master` into `origin/feature`.
+Before adding any commits to `feature` locally run:
+
+	language:bash
+	git pull origin feature
+
 
 
 * Lab 1 - Fibonacci
