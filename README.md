@@ -13,7 +13,73 @@ Run the present tool locally with
     go build .
     ./go-slides -base . -content content
 
-## Manual Appengine deployment
+
+## Appengine deployment
+
+The "production" slides are deployed to the `gotraining` project. There is
+limited access to this project - slides are automatically deployed when
+the master branch of this repository is updated (usually merging a PR).
+
+The `gotraining-testing` project is available with laxer permissions to
+allow you to deploy pre-release versions of the slides for testing, and
+should be used to deploy your PR version for review.
+
+You should set up one or both of these projects with the `gcloud`
+command so that you can deploy PR versions and/or manually deploy the
+production version as necessary:
+
+    gcloud config configurations create gotraining
+    gcloud config set account your@email.address
+    gcloud config set project gotraining
+
+Use `gotraining-testing` instead of `gotraining` for the testing
+project.
+
+If you are on the ANZ corp network and are having SSL validation issues
+due to the proxy certs, you can disable SSL validation as a last resort:
+
+    gcloud config set auth/disable_ssl_validation
+
+You with need to authenticate the new configuration:
+
+    gcloud auth login
+
+
+### Deployment for PR review
+
+When you have a PR open for review, you can deploy the changes under
+review as an appengine "service" so it can be deployed alongside the
+master/default version of the slides as well as other open PRs. It can
+easily be cleaned up when your PR is closed.
+
+1. Edit `app.yaml` and add `service: prNN` to the end of the file
+   (top-level yaml key) where `NN` is your pull request number. You
+   could put it at the top of the file if that is easier.
+
+1. Deploy to app engine: `gcloud --configuration=gotraining-testing app deploy`
+
+1. In your browser, go to https://prNN-dot-gotraining-testing.appspot.com/
+
+1. Review the changes as your reviewer will see them
+
+1. When done, delete the app engine service:
+     `gcloud --configuration=gotraining-testing app services delete prNN`
+
+1. Undo changes to `app.yaml`: `git checkout -- app.yaml`
+
+Please make sure you do not commit a version of `app.yaml` with your
+`service:` line in it. This should only ever be local to your workspace.
+
+You should also make sure your workspace is clean of changes so what you
+deploy is what is on the PR branch in github. run `git describe --all
+--dirty` and if that outputs a string with `-dirty` on the end, you have
+uncommitted changes. Stash them before you deploy (`git stash -u`) and
+unstash after (`git stash pop`). Note that you should check this before
+modifying the `app.yaml` file as that will make your workspace dirty.
+You can run `git status` and `git diff` if you need to and ensure the
+only dirtyness is the `service: prNN` line in `app.yaml`.
+
+### Manual production Appengine deployment
 
 Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors) or update [`app.yaml`](app.yaml) on your own fork with _your_ GCP project.
 
