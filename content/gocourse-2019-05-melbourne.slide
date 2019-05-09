@@ -604,7 +604,7 @@ Before adding any commits to `feature` locally run:
 
 * Lab PR approval flow - Reviewer
 
-- Remove `Ready for review` and add `Under review`
+- Remove `Ready` `for` `review` and add `Under` `review`
 - Label with either `Approved` `by` `colleague` or `Changes` `requested` and remove `Under` `review`
 
 * Lab 1 - Fibonacci
