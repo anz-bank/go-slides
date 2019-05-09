@@ -672,7 +672,7 @@ Before adding any commits to `feature` locally run:
 - [[https://goplay.space/#olrpJoSte3n][Closures]]
 
 
-* Lab 4 - numeronym
+* Lab 4 - Numeronym
 
 - Create an executable go program in directory `04_numeronym/USERNAME`
 - Write a function that returns a slice of numeronyms for its input strings:
