@@ -534,7 +534,7 @@ Document them
 
 - Login to github.com
 - Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
-- Clone your fork. `USERNAME` is your GitHub username.
+- Clone your fork. `USERNAME` is your GitHub username:
 
 	language:none
 	git clone https://github.com/USERNAME/go-course.git
