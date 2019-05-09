@@ -530,7 +530,7 @@ Document them
 - Install [[https://golang.org/doc/install][go 1.12]]
 - Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
 
-* Repository setup details
+* Repository setup
 
 - Login to github.com
 - Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
@@ -578,7 +578,7 @@ If `master` has advanced after `feature` branch and PR creation you have two opt
 
 	language:none
 	git checkout master
-	git pull upstream master # or just `git` `pull` if `master` is set to track `upstream/master`
+	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
 	git checkout feature
 	git rebase master
 	git push -f
@@ -596,16 +596,16 @@ Before adding any commits to `feature` locally run:
 
 * Lab PR approval flow - Programmer
 
-- Tag with the appropriate lab tag (eg: `lab1`)
-- When ready, tag with `Ready` `for` `review`
-- Wait for PR to be tagged `Approved` `by` `colleague` or `Changed` `requested`
-- If approved by colleague, wait for a CODEOWNER to approve and tag with `Merge` `me`
+- Label with the appropriate lab tag (eg: `lab1`)
+- When ready, label with `Ready` `for` `review`
+- Wait for PR to be labelled `Approved` `by` `colleague` or `Changes` `requested`
+- If approved by colleague, wait for a CODEOWNER to approve and label with `Merge` `me`
 - Merge
 
 * Lab PR approval flow - Reviewer
 
-- Remove `ready for review` and add `under review`
-- Tag with either `Approved by colleague` or `changes requested`
+- Remove `Ready for review` and add `Under review`
+- Label with either `Approved` `by` `colleague` or `Changes` `requested` and remove `Under` `review`
 
 * Lab 1 - Fibonacci
 
