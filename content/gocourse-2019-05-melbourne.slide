@@ -530,21 +530,11 @@ Document them
 - Install [[https://golang.org/doc/install][go 1.12]]
 - Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
 
-
-* Repository setup overview
-
-Clone your fork of [[https://github.com/anz-bank/go-course][anz-bank/go-course]]
-
-Create PRs
-
--  from `feature` branch of your own fork (remote `origin`)
--  to `master` on [[https://github.com/anz-bank/go-course][anz-bank/go-course]] (remote `upstream`)
-
 * Repository setup details
 
 - Login to github.com
 - Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
-- Clone your fork. `USERNAME` is your GitHub username:
+- Clone your fork. `USERNAME` is your GitHub username.
 
 	language:none
 	git clone https://github.com/USERNAME/go-course.git
@@ -571,12 +561,14 @@ Write, test and commit code code, then:
 
 	git push -u origin
 
-Create PR on [[https://github.com/anz-bank/go-course][anz-bank/go-course]]:
-Click `Pull` `requests` tab → `New` `pull` `request` button
+* Creating PRs
 
+-  from `feature` branch of your own fork (remote `origin`)
+-  to `master` on [[https://github.com/anz-bank/go-course][anz-bank/go-course]] (remote `upstream`)
 
-Follow the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
+Follow the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]] before submitting
 
+When ready, submit and add the `Ready` `for` `review` tag
 
 * Update feature branch
 
@@ -586,7 +578,7 @@ If `master` has advanced after `feature` branch and PR creation you have two opt
 
 	language:none
 	git checkout master
-	git pull upstream master # or just `git pull` if `master` is set to track `upstream/master`
+	git pull upstream master # or just `git` `pull` if `master` is set to track `upstream/master`
 	git checkout feature
 	git rebase master
 	git push -f
@@ -602,7 +594,18 @@ Before adding any commits to `feature` locally run:
 	language:bash
 	git pull origin feature
 
+* Lab PR approval flow - Programmer
 
+- Tag with the appropriate lab tag (eg: `lab1`)
+- When ready, tag with `Ready` `for` `review`
+- Wait for PR to be tagged `Approved` `by` `colleague` or `Changed` `requested`
+- If approved by colleague, wait for a CODEOWNER to approve and tag with `Merge` `me`
+- Merge
+
+* Lab PR approval flow - Reviewer
+
+- Remove `ready for review` and add `under review`
+- Tag with either `Approved by colleague` or `changes requested`
 
 * Lab 1 - Fibonacci
 
