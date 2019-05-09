@@ -1,7 +1,9 @@
 Go Course
 Melbourne, May-June 2019
 
-Angelo Perera
+Cameron Hutchison
+Daniel Cantos
+Joshua Carpeggiani
 Julia Ogris
 Ryan O'Kane
 Sai Kiran Gummaraj
@@ -61,7 +63,9 @@ The last 30 minutes of each talk are reserved for Q&A and help.
 Please join [[https://anzengineering.slack.com/messages/CFCPLHFT2/convo/CFCPLHFT2-1557100844.007600/][#go-course]] on [[https://anzengineering.slack.com]]
 
 *Instructors*
-[[https://anzengineering.slack.com/team/UEVMPCL2C][@Angelo]], angelo.perera@anz.com
+[[https://anzengineering.slack.com/team/U5PTX8C1F][@camh]], Cameron.Hutchison@anz.com
+[[https://anzengineering.slack.com/team/UCUUKEWGZ][@Dan]], Daniel.Cantos@anz.com
+[[https://anzengineering.slack.com/team/UJC0EUZ3P][@Joshua Carpeggiani]], Joshua.Carpeggiani@anz.com
 [[https://anzengineering.slack.com/team/U84CTGB0F][@julia]], Julia.Ogris@anz.com
 [[https://anzengineering.slack.com/team/U7M6DMFMY][@ryanokane]], Ryan.O'Kane@anz.com
 [[https://anzengineering.slack.com/team/UC9C4K2ES][@saikirian]], SaiKiran.Gummaraj@anz.com
@@ -668,7 +672,7 @@ Before adding any commits to `feature` locally run:
 - [[https://goplay.space/#olrpJoSte3n][Closures]]
 
 
-* Lab 4 - numeronym
+* Lab 4 - Numeronym
 
 - Create an executable go program in directory `04_numeronym/USERNAME`
 - Write a function that returns a slice of numeronyms for its input strings:
