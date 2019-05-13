@@ -816,49 +816,102 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
 
-* Errors (1/3)
+* Errors in Go
+
+- `error` a builtin type. ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
+- Check errors explicitly
+- The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error type.
+- Creation of new error type can be done in a few ways:
+
+	func Sqrt(f float64) (float64, error) {
+		if f < 0 {
+			return 0, errors.New("math: square root of negative number")
+		}
+		// implementation
+	}
+- Or use formatted error message using `fmt.Errorf`
+	if f < 0 {
+		return 0, fmt.Errorf("math: square root of negative number %g", f)
+	}
+
+* Errors in Go (...cotd)
+
+- Custom error types can be created. Example from `net` package -
+
+	type Error interface {
+		error
+		Timeout() bool
+		Temporary() bool
+	}
+- Implementation of the `Error` interface here - [[https://golang.org/pkg/net/#AddrError][net/AddrError]]
+- The error values can be logged and printed. Example -
+
+	g, err := Sqrt(-1); err != nil {
+		log.Println(err)
+	}
+
+
+* Error Handling
+
+- Error handling: Check for the presence of an error (compare with nil).
+- Do not compare error variables. ([[https://goplay.space/#mgw9QAmeLUP][Example]])
+- Errors are values so it can be programmed. ([[https://goplay.space/#MTqqxwEdq-A][Example]])
+	g, err := Sqrt(-1); err != nil {
+		log.Println(err)
+	}
+- Handle errors gracefully ([[https://goplay.space/#kpFwYYBE0ND][A useful pattern]])
+- To check if an `error` is of certain type use custom error types with type assertion
+- Example: ([[https://goplay.space/#t4s_BrAQTLt][Errors and type assertion]])
+- By convention many standard library functions return `error` as the second return value.
 
 "Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
 
-The `error` type is a built-in interface:
+* Defer
 
-	type error interface {
-	    Error() string
-	}
-
-By convention, functions often return `error` as the second/last return value.
-The calling code should handle errors by testing whether the error equals nil:
-
-	func getCat(strID string) (*Cat, error) {
-		id, err := strconv.Atoi(strID)
-		if err != nil {
-		    return nil, CatError(err)
-		}
-		return catStore.cats[id], nil
-	}
+- `defer` (keyword) allows you to postpone execution.
+- When `defer` statement executes, "the parameters to call are evaluated and saved anew"
+- Deferred functions are called when "function returns" or "stack unwinds".
+- Deferred functions are called in reverse order.
+- Used for resource cleanup (close IO resources, release locks etc.).
+- Syntax
+	defer <expression>
+- Example [[https://goplay.space/#wvwUzU1TpNw][How defer works]]
 
 
-* Errors (2/3)
+* Panic and Recover
 
-"Don't panic." - [[https://go-proverbs.github.io/][Rob Pike]]
+`panic` and `recover` behaves similar to `try/catch` in other languages.
 
-Panic should be used when something went unexpectedly wrong.
-For instance, initialise a regular expression with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if the pattern is a string constant.
-`MustCompile` will `panic` at initialisation.
+- `panic` causes
+- |__ stack unwinding
+- |__ calls deferred Functions
+- |__ can pass value into `panic(v)`
 
-	var re = regexp.MustCompile(`^[a-c]+$`)
-	var re2 = regexp.MustCompile(`^[a-c+$`) // panic
+- `recover`
+- |__ stops the stack unwinding process
+- |__ must be called from within a deferred function (in the same goroutine)
+- |__ returns the value passed by call to panic
+
+	func panic(interface{})
+	func recover() interface{}
 
 
-Use `panic` rarely and judiciously in your own code!
+* Don't Panic
 
+- Because panic terminates the program/goroutine.
+- Don't use it like a `try/catch`.
+- Use it in deeply nested internal methods/functions and expose an error/status to the caller.
+- Example: How to use panic and recover
+- |_ [[https://goplay.space/#wmA0ylSivKf][Basic illustration]]
+- |_ [[https://goplay.space/#Gq3PimH0dQG][Recover and return value]]
 
-* Errors (3/3)
+* More Examples on errors
 
-- Error [[https://goplay.space/#h4c7gQxzQsN][create]], [[https://goplay.space/#mze1De36XjV][handle]], [[https://goplay.space/#h1kA3qKaO6B][custom error]]
+- [[https://goplay.space/#h4c7gQxzQsN][Create Error]]
+- [[https://goplay.space/#mze1De36XjV][Handle Error]]
+- [[https://goplay.space/#h1kA3qKaO6B][Custom error type]]
 - [[https://goplay.space/#9vu6iJHXMHC][Panic]]
 - [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
-
 
 * Lab 7 - Errors
 
