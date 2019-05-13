@@ -30,10 +30,11 @@ production version as necessary:
 
     gcloud config configurations create gotraining
     gcloud config set account your@email.address
-    gcloud config set project gotraining
+    gcloud config set project gotraining-testing
 
-Use `gotraining-testing` instead of `gotraining` for the testing
-project.
+Use project `gotraining` instead of `gotraining-testing` for the
+deployment project. You may also create two separate configurations
+for `gotraining` and `gotraining-testing`.
 
 If you are on the ANZ corp network and are having SSL validation issues
 due to the proxy certs, you can disable SSL validation as a last resort:
@@ -56,14 +57,14 @@ easily be cleaned up when your PR is closed.
    (top-level yaml key) where `NN` is your pull request number. You
    could put it at the top of the file if that is easier.
 
-1. Deploy to app engine: `gcloud --configuration=gotraining-testing app deploy`
+1. Deploy to app engine: `gcloud --project=gotraining-testing app deploy`
 
 1. In your browser, go to https://prNN-dot-gotraining-testing.appspot.com/
 
 1. Review the changes as your reviewer will see them
 
 1. When done, delete the app engine service:
-     `gcloud --configuration=gotraining-testing app services delete prNN`
+     `gcloud --project=gotraining-testing app services delete prNN`
 
 1. Undo changes to `app.yaml`: `git checkout -- app.yaml`
 
