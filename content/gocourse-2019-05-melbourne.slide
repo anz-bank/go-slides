@@ -530,17 +530,7 @@ Document them
 - Install [[https://golang.org/doc/install][go 1.12]]
 - Install [[https://github.com/golangci/golangci-lint#install][golangci-lint]]
 
-
-* Repository setup overview
-
-Clone your fork of [[https://github.com/anz-bank/go-course][anz-bank/go-course]]
-
-Create PRs
-
--  from `feature` branch of your own fork (remote `origin`)
--  to `master` on [[https://github.com/anz-bank/go-course][anz-bank/go-course]] (remote `upstream`)
-
-* Repository setup details
+* Repository setup
 
 - Login to github.com
 - Click `Fork` in the top right corner of [[https://github.com/anz-bank/go-course]]
@@ -571,12 +561,14 @@ Write, test and commit code code, then:
 
 	git push -u origin
 
-Create PR on [[https://github.com/anz-bank/go-course][anz-bank/go-course]]:
-Click `Pull` `requests` tab → `New` `pull` `request` button
+* Creating PRs
 
+-  from `feature` branch of your own fork (remote `origin`)
+-  to `master` on [[https://github.com/anz-bank/go-course][anz-bank/go-course]] (remote `upstream`)
 
-Follow the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]]
+Follow the [[https://github.com/anz-bank/go-course#pre-pr-checklist][PR checklist]] before submitting
 
+When ready, submit and add the `Ready` `for` `review` tag
 
 * Update feature branch
 
@@ -602,7 +594,18 @@ Before adding any commits to `feature` locally run:
 	language:bash
 	git pull origin feature
 
+* Lab PR approval flow - Programmer
 
+- Label with the appropriate lab tag (eg: `lab1`)
+- When ready, label with `Ready` `for` `review`
+- Wait for PR to be labelled `Approved` `by` `colleague` or `Changes` `requested`
+- If approved by colleague, wait for a CODEOWNER to approve and label with `Merge` `me`
+- Merge
+
+* Lab PR approval flow - Reviewer
+
+- Remove `Ready` `for` `review` and add `Under` `review`
+- Label with either `Approved` `by` `colleague` or `Changes` `requested` and remove `Under` `review`
 
 * Lab 1 - Fibonacci
 
