@@ -32,15 +32,15 @@ production version as necessary:
     gcloud config set account your@email.address
     gcloud config set project gotraining-testing
 
-You with need to authenticate the new configuration:
-
-    gcloud auth login
-    
 If you are having SSL validation issues (due to a corporate network or
 otherwise), you can disable SSL validation as a last resort:
 
     gcloud config set auth/disable_ssl_validation
 
+You will need to authenticate the new configuration:
+
+    gcloud auth login
+    
 ### Deployment for PR review
 
 When you have a PR open for review, you can deploy the changes under
