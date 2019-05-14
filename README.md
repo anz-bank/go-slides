@@ -28,7 +28,7 @@ You should set up one or both of these projects with the `gcloud`
 command so that you can deploy PR versions and/or manually deploy the
 production version as necessary:
 
-    gcloud config configurations create gotraining
+    gcloud config configurations create gotraining-testing
     gcloud config set account your@email.address
     gcloud config set project gotraining-testing
 
@@ -36,8 +36,8 @@ Use project `gotraining` instead of `gotraining-testing` for the
 deployment project. You may also create two separate configurations
 for `gotraining` and `gotraining-testing`.
 
-If you are on the ANZ corp network and are having SSL validation issues
-due to the proxy certs, you can disable SSL validation as a last resort:
+If you are having SSL validation issues (due to a corporate network or
+otherwise), you can disable SSL validation as a last resort:
 
     gcloud config set auth/disable_ssl_validation
 
@@ -57,14 +57,14 @@ easily be cleaned up when your PR is closed.
    (top-level yaml key) where `NN` is your pull request number. You
    could put it at the top of the file if that is easier.
 
-1. Deploy to app engine: `gcloud --project=gotraining-testing app deploy`
+1. Deploy to app engine: `gcloud --configuration=gotraining-testing app deploy`
 
 1. In your browser, go to https://prNN-dot-gotraining-testing.appspot.com/
 
 1. Review the changes as your reviewer will see them
 
 1. When done, delete the app engine service:
-     `gcloud --project=gotraining-testing app services delete prNN`
+     `gcloud --configuration=gotraining-testing app services delete prNN`
 
 1. Undo changes to `app.yaml`: `git checkout -- app.yaml`
 
@@ -82,9 +82,11 @@ only dirtyness is the `service: prNN` line in `app.yaml`.
 
 ### Manual production Appengine deployment
 
-Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors) or update [`app.yaml`](app.yaml) on your own fork with _your_ GCP project.
+Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors). 
 
-Execute
+Add a new gcloud configuration as described in the [Appengine deployment](#appengine-deployment) section, using `gotraining` instead of `gotraining-testing`.
+
+With the `gotraining` configuration active, Execute
 
     gcloud app deploy
 
