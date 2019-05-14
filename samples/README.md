@@ -40,6 +40,12 @@ For completeness they are also listed in this directory.
 -   [Methods](methods.go)
 -   [Interfaces](interfaces.go)
 
+### Embedding
+
+-   [Structs](embedding_structs.go)
+-   [Interfaces](embedding_interfaces.go)
+-   [Precedence](embedding_precedence.go)
+
 ### Errors
 
 -   [Errors](errors.go)
