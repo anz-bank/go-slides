@@ -818,9 +818,9 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Errors in Go
 
-- `error` a builtin type. ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
+- `error` a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
 - Check errors explicitly
-- The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error type.
+- The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error type
 - Creation of new error type can be done in a few ways:
 
 	func Sqrt(f float64) (float64, error) {
@@ -836,45 +836,50 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Errors in Go (...cotd)
 
-- Custom error types can be created. Example from `net` package -
-
-	type Error interface {
-		error
-		Timeout() bool
-		Temporary() bool
+- Custom error types can be created. Example from `net` package [[https://golang.org/pkg/net/#AddrError][net/AddrError]] -
+	type AddrError struct {
+		Err  string
+		Addr string
 	}
-- Implementation of the `Error` interface here - [[https://golang.org/pkg/net/#AddrError][net/AddrError]]
-- The error values can be logged and printed. Example -
 
-	g, err := Sqrt(-1); err != nil {
+	func (e *AddrError) Error() string {
+		if e == nil {
+			return "<nil>"
+		}
+		s := e.Err
+		if e.Addr != "" {
+			s = "address " + e.Addr + ": " + s
+		}
+		return s
+	}
+- The error values can be logged and printed
+
+	_, err := Sqrt(-1); err != nil {
 		log.Println(err)
 	}
 
 
 * Error Handling
 
-- Error handling: Check for the presence of an error (compare with nil).
-- Do not compare error variables. ([[https://goplay.space/#mgw9QAmeLUP][Example]])
-- Errors are values so it can be programmed. ([[https://goplay.space/#MTqqxwEdq-A][Example]])
-	g, err := Sqrt(-1); err != nil {
-		log.Println(err)
-	}
+- Error handling: Check for the presence of an error (compare with nil)
+- Do not compare error variables ([[https://goplay.space/#mgw9QAmeLUP][Example]])
+- Errors are values so it can be programmed ([[https://goplay.space/#MTqqxwEdq-A][Example]])
 - Handle errors gracefully ([[https://goplay.space/#kpFwYYBE0ND][A useful pattern]])
 - To check if an `error` is of certain type use custom error types with type assertion
 - Example: ([[https://goplay.space/#t4s_BrAQTLt][Errors and type assertion]])
-- By convention many standard library functions return `error` as the second return value.
+- By convention many standard library functions return `error` as the second return value
 
 "Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
 
 * Defer
 
-- `defer` (keyword) allows you to postpone execution.
-- When `defer` statement executes, "the parameters to call are evaluated and saved anew"
-- Deferred functions are called when "function returns" or "stack unwinds".
-- Deferred functions are called in reverse order.
-- Used for resource cleanup (close IO resources, release locks etc.).
+- `defer` (keyword) allows you to postpone execution
+- When `defer` statement executes, the parameters to call are evaluated and saved anew
+- Deferred functions are called when function returns or stack unwinds
+- Deferred functions are called in reverse order
+- Used for resource cleanup (close IO resources, release locks etc.)
 - Syntax
-	defer <expression>
+	defer <function call>
 - Example [[https://goplay.space/#wvwUzU1TpNw][How defer works]]
 
 
@@ -882,15 +887,15 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 `panic` and `recover` behaves similar to `try/catch` in other languages.
 
-- `panic` causes
-- |__ stack unwinding
-- |__ calls deferred Functions
-- |__ can pass value into `panic(v)`
+- `panic`
+- stack unwinding
+- calls deferred Functions
+- can pass value into `panic(v)`
 
 - `recover`
-- |__ stops the stack unwinding process
-- |__ must be called from within a deferred function (in the same goroutine)
-- |__ returns the value passed by call to panic
+- stops the stack unwinding process
+-  must be called from within a deferred function (in the same goroutine)
+- returns the value passed by call to panic
 
 	func panic(interface{})
 	func recover() interface{}
@@ -898,12 +903,12 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Don't Panic
 
-- Because panic terminates the program/goroutine.
+- Panic could terminate the program/goroutine
 - Don't use it like a `try/catch`.
-- Use it in deeply nested internal methods/functions and expose an error/status to the caller.
+- Use it in deeply nested internal methods/functions and expose an error/status to the caller
 - Example: How to use panic and recover
-- |_ [[https://goplay.space/#wmA0ylSivKf][Basic illustration]]
-- |_ [[https://goplay.space/#Gq3PimH0dQG][Recover and return value]]
+- [[https://goplay.space/#wmA0ylSivKf][Basic illustration]]
+- [[https://goplay.space/#Gq3PimH0dQG][Recover and return value]]
 
 * More Examples on errors
 

@@ -9,7 +9,6 @@ import (
 // DOES NOT COMPILE.
 // Only shows usage
 func main() {
-
 	// call to scan the input using Scan method.
 	// Note that it returns a bool.
 	scanner := bufio.NewScanner(os.Stdin)

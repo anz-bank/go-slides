@@ -20,12 +20,10 @@ func f2() {
 
 // returns 42
 func f3() (result int) {
-
 	defer func() {
 		result *= 7
 	}()
 	return 6
-
 }
 
 func main() {
@@ -37,4 +35,3 @@ func main() {
 	fmt.Println()
 	fmt.Print("f3: ", f3())
 }
-

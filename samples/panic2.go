@@ -10,7 +10,6 @@ func main() {
 }
 
 func panicTest() int {
-
 	var n int
 
 	defer func() {
@@ -18,11 +17,6 @@ func panicTest() int {
 			fmt.Println(r)
 		}
 	}()
-
-	n = 2
 	panic("failed")
-	n = 3
-
 	return n
 }
-
