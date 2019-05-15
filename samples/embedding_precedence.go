@@ -29,13 +29,13 @@ func main() {
 		Name: "Charly",
 	}
 	fmt.Printf("pet.Name:  %s\n", pet.Name)
-	fmt.Printf("cat.Name:  %s \n\n", cat.Name)
+	fmt.Printf("cat.Name:  %s\n\n", cat.Name)
 
 	dog := Dog{
 		Animal: Animal{Name: "Watchdog"},
 		Pet:    Pet{Name: "Rover"},
 	}
-	fmt.Printf("dog.Animal.Name:  %s \n", dog.Animal.Name)
-	fmt.Printf("dog.Pet.Name:     %s \n", dog.Pet.Name)
-	//fmt.Printf("dog.Name:         %s \n", dog.Name) // compilation error
+	fmt.Printf("dog.Animal.Name:  %s\n", dog.Animal.Name)
+	fmt.Printf("dog.Pet.Name:     %s\n", dog.Pet.Name)
+	//fmt.Printf("dog.Name:         %s\n", dog.Name) // compilation error
 }

@@ -17,6 +17,6 @@ func main() {
 		Lives: 9,
 	}
 
-	fmt.Printf("My name is %s \n", cat.Name)
-	fmt.Printf("I have %d lives \n", cat.Lives)
+	fmt.Printf("My name is %s\n", cat.Name)
+	fmt.Printf("I have %d lives\n", cat.Lives)
 }

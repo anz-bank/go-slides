@@ -734,9 +734,9 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Examples
 
-- [[https://goplay.space/#_qQ0bGxwt7f][Embedded Structs]]
+- [[https://goplay.space/#lAl70x0QACE][Embedded Structs]]
 - [[https://goplay.space/#vLgi3SMtLZp][Embedded Interfaces]]
-- [[https://goplay.space/#3BUfQW3MxG9][Precedence]]
+- [[https://goplay.space/#cmWFJ26jm2E][Precedence]]
 
 
 * Lab 5 - Stringer
