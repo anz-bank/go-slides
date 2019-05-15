@@ -1142,6 +1142,35 @@ Rob Pike's Talk ([[https://blog.golang.org/toward-go2][Towards Go 2]])
 Dave Cheney Blog ([[https://dave.cheney.net/paste/the-past-present-and-future-of-go2.pdf][Past Present and Future of Go]])
 
 
+* Go for Java devs
+
+- Functions are lambdas
+- Typed constants are enums
+- exported = public
+- unexported = protected, not private
+- struct != class
+An empty struct is pointless
+
+- embedding = composition + inheritence
+- map[type]struct{} = Set<type>
+- Beware of pointers
+- Pointers will also save your day
+
+
+* Go for Java devs
+
+- Not everything is object oriented. Pure functions are just fine
+- Don't worry about abstraction up front, it is easy to abstract in go
+- Don't worry about starting thousands of goroutines (worry when you get to millions)
+- Don't worry about access scope within an package
+- Don't worry about frameworks
+- Don't worry about patterns
+- Don't overstructure your project
+- Remember to check for errors
+- Don't fight the formatter
+- Don't panic
+
+
 * References
 
 - [[https://golang.org/doc/faq]]
