@@ -862,11 +862,11 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 * Error Handling
 
 - Check for the presence of an error (compare with nil)
-- Do not compare error variables ([[https://goplay.space/#mgw9QAmeLUP][Example]])
-- Errors are values so it can be programmed ([[https://goplay.space/#MTqqxwEdq-A][Example]])
-- Handle errors gracefully ([[https://goplay.space/#kpFwYYBE0ND][A useful pattern]])
+- Do not compare error variables ([[https://goplay.space/#mgw9QAmeLUP][samples/errors4.go]])
+- Errors are values so it can be programmed ([[https://goplay.space/#kbBftimqvuF][samples/errors5.go]])
+- Handle errors gracefully ([[https://goplay.space/#GkfuGGvpL0F][A useful pattern (samples/errors6.go)]])
 - To check if an `error` is of certain type use custom error types with type assertion
-- Example: ([[https://goplay.space/#t4s_BrAQTLt][Errors and type assertion]])
+- Example: ([[https://goplay.space/#t4s_BrAQTLt][Errors and type assertion (samples/errors7.go)]])
 - By convention many standard library functions return `error` as the second return value
 
 "Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
@@ -880,7 +880,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Used for resource cleanup (close IO resources, release locks etc.)
 - Syntax:
 	defer <function call>
-- Example [[https://goplay.space/#wvwUzU1TpNw][How defer works]]
+- Example [[https://goplay.space/#wvwUzU1TpNw][How defer works (samples/defer3.go)]]
 
 
 * Panic and Recover
@@ -905,8 +905,8 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Panic could terminate the program/goroutine
 - Use it in deeply nested internal methods/functions and return an error/status to the caller
 - Example: How to use panic and recover
-- [[https://goplay.space/#wmA0ylSivKf][Basic illustration]]
-- [[https://goplay.space/#Gq3PimH0dQG][Recover and return value]]
+- [[https://goplay.space/#qnkJbfVI7LB][Basic illustration (samples/panic2.go)]]
+- [[https://goplay.space/#Xnj7OOb3Vk8][Recover and return value (samples/panic3.go)]]
 
 * More Examples on errors
 
@@ -914,7 +914,8 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - [[https://goplay.space/#mze1De36XjV][Handle Error]]
 - [[https://goplay.space/#h1kA3qKaO6B][Custom error type]]
 - [[https://goplay.space/#9vu6iJHXMHC][Panic]]
-- [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
+- [[https://goplay.space/#pMbrba6y9cY][Defer]]
+- [[https://goplay.space/#pc68j1BPMxn][Defer extended sample]]
 
 * Lab 7 - Errors
 
