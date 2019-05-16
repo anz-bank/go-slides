@@ -1003,6 +1003,47 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - ...
 
 
+* JSON - (De-)Serialisation
+
+- `Encode` converts Go struct, pointer or primitive data type into JSON encoded stream
+- `Marshal` converts Go struct, pointer or primitive data type into JSON byte array
+- `Decode` and `Unmarshall` are the inverse functions to `Encode` and `Marshal`
+
+	func Marshal(v interface{}) ([]byte, error) {
+
+	}
+
+	func Unmarshal(data []byte, v interface{}) error {
+
+	}
+
+
+* JSON - Tags
+
+- Attach `json` tag to specify JSON property name
+- Common error is making Go fields private (lower case) which results in the fields not being (un)marshalled
+
+
+	type Car struct {
+		Manufacturer string `json:"manufacturer"`
+		Model        string `json:"model"`
+		Year         int64  `json:"year,omitempty"`
+	}
+
+
+* JSON - Zero Values
+
+- Basic types will be set explicity to it's zero value, if it is omitted from the json during decoding
+- Pointer types have a zero value of `nil`
+- To be able to differentiate between a field which has been set explicitly to it's zero value or omitted, you must use pointer types
+
+
+* Examples
+
+- [[https://goplay.space/#_LVQLCOKYNT][JSON Marshal / Unmarshal]]
+- [[https://goplay.space/#KkPDLf_PvQP][JSON Zero Values]]
+
+
 * Lab 9 - JSON puppy
 
 - Create directory `09_json/USERNAME` containing a copy of upstream master `08_project/USERNAME`

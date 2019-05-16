@@ -1,4 +1,4 @@
-// json
+// json - marshal / unmarshal
 package main
 
 import (
