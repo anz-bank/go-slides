@@ -829,14 +829,14 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 		}
 		// implementation
 	}
-- Or use formatted error message using `fmt.Errorf`
+- Or use formatted error message using `fmt.Errorf`:
 	if f < 0 {
 		return 0, fmt.Errorf("math: square root of negative number %g", f)
 	}
 
 * Errors in Go (...cotd)
 
-- Custom error types can be created. Example from `net` package [[https://golang.org/pkg/net/#AddrError][net/AddrError]] -
+- Custom error types can be created. Example from `net` package [[https://golang.org/pkg/net/#AddrError][net/AddrError]]:
 	type AddrError struct {
 		Err  string
 		Addr string
@@ -852,7 +852,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 		}
 		return s
 	}
-- The error values can be logged and printed
+- The error values can be logged and printed:
 
 	_, err := Sqrt(-1); err != nil {
 		log.Println(err)
@@ -861,7 +861,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Error Handling
 
-- Error handling: Check for the presence of an error (compare with nil)
+- Check for the presence of an error (compare with nil)
 - Do not compare error variables ([[https://goplay.space/#mgw9QAmeLUP][Example]])
 - Errors are values so it can be programmed ([[https://goplay.space/#MTqqxwEdq-A][Example]])
 - Handle errors gracefully ([[https://goplay.space/#kpFwYYBE0ND][A useful pattern]])
@@ -878,7 +878,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Deferred functions are called when function returns or stack unwinds
 - Deferred functions are called in reverse order
 - Used for resource cleanup (close IO resources, release locks etc.)
-- Syntax
+- Syntax:
 	defer <function call>
 - Example [[https://goplay.space/#wvwUzU1TpNw][How defer works]]
 
@@ -887,25 +887,23 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 `panic` and `recover` behaves similar to `try/catch` in other languages.
 
-- `panic`
+- `panic`:
+	func panic(interface{})
 - stack unwinding
 - calls deferred Functions
 - can pass value into `panic(v)`
 
-- `recover`
+- `recover`:
+	func recover() interface{}
 - stops the stack unwinding process
 -  must be called from within a deferred function (in the same goroutine)
 - returns the value passed by call to panic
-
-	func panic(interface{})
-	func recover() interface{}
 
 
 * Don't Panic
 
 - Panic could terminate the program/goroutine
-- Don't use it like a `try/catch`.
-- Use it in deeply nested internal methods/functions and expose an error/status to the caller
+- Use it in deeply nested internal methods/functions and return an error/status to the caller
 - Example: How to use panic and recover
 - [[https://goplay.space/#wmA0ylSivKf][Basic illustration]]
 - [[https://goplay.space/#Gq3PimH0dQG][Recover and return value]]

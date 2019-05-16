@@ -6,29 +6,29 @@ import (
 	"os"
 )
 
-// DOES NOT COMPILE.
-// Only shows usage
-func main() {
-	// call to scan the input using Scan method.
-	// Note that it returns a bool.
+// If scanner.Scan() returned an error object instead
+// of bool the loop would have been something like:
+// for {
+//     if token, err := scanner.Scan(); err != nil {
+//     	   break
+//     }
+// }
+// Every iteration would have to check for the presence
+// of an error explicitly.
+//
+func easyErrHandling() {
+	fmt.Println("Enter the input to tokenize (Type Ctrl-D to terminate):")
 	scanner := bufio.NewScanner(os.Stdin)
+	scanner.Split(bufio.ScanWords)
 	for scanner.Scan() {
 		token := scanner.Text()
-		fmt.Println(token)
+		fmt.Println("> ", token)
 	}
 	if err := scanner.Err(); err != nil {
 		fmt.Println("Error processing tokens: ", err)
 	}
+}
 
-	// While it could have been more tedious if Scan
-	// returned an error instead of a bool
-	// The caller would then have to write
-	scanner := bufio.NewScanner(input)
-	for {
-		token, err := scanner.Scan()
-		if err != nil {
-			return err // or maybe break
-		}
-		// process token
-	}
+func main() {
+	easyErrHandling()
 }
