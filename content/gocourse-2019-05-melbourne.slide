@@ -866,7 +866,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Errors are values so it can be programmed ([[https://goplay.space/#kbBftimqvuF][samples/errors5.go]])
 - Handle errors gracefully ([[https://goplay.space/#GkfuGGvpL0F][A useful pattern (samples/errors6.go)]])
 - To check if an `error` is of certain type use custom error types with type assertion
-- Example: ([[https://goplay.space/#t4s_BrAQTLt][Errors and type assertion (samples/errors7.go)]])
+- Example: ([[https://goplay.space/#dGGJ_0KcoZ1][Errors and type assertion (samples/errors7.go)]])
 - By convention many standard library functions return `error` as the second return value
 
 "Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
