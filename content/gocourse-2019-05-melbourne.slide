@@ -818,7 +818,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Errors in Go
 
-- `error` a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
+- `error` is a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
 - Check errors explicitly
 - The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error type
 - Creation of new error type can be done in a few ways:
