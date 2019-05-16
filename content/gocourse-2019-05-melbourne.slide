@@ -834,7 +834,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 		return 0, fmt.Errorf("math: square root of negative number %g", f)
 	}
 
-* Errors in Go (...cotd)
+* Errors in Go (continued)
 
 - Custom error types can be created. Example from `net` package [[https://golang.org/pkg/net/#AddrError][net/AddrError]]:
 	type AddrError struct {
