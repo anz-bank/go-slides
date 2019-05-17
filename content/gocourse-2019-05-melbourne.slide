@@ -815,50 +815,15 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
+* Defer
 
-* Errors (1/3)
-
-"Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
-
-The `error` type is a built-in interface:
-
-	type error interface {
-	    Error() string
-	}
-
-By convention, functions often return `error` as the second/last return value.
-The calling code should handle errors by testing whether the error equals nil:
-
-	func getCat(strID string) (*Cat, error) {
-		id, err := strconv.Atoi(strID)
-		if err != nil {
-		    return nil, CatError(err)
-		}
-		return catStore.cats[id], nil
-	}
-
-
-* Errors (2/3)
-
-"Don't panic." - [[https://go-proverbs.github.io/][Rob Pike]]
-
-Panic should be used when something went unexpectedly wrong.
-For instance, initialise a regular expression with [[https://golang.org/pkg/regexp/#MustCompile][regexp.MustCompile]] if the pattern is a string constant.
-`MustCompile` will `panic` at initialisation.
-
-	var re = regexp.MustCompile(`^[a-c]+$`)
-	var re2 = regexp.MustCompile(`^[a-c+$`) // panic
-
-
-Use `panic` rarely and judiciously in your own code!
-
-
-* Errors (3/3)
-
-- Error [[https://goplay.space/#h4c7gQxzQsN][create]], [[https://goplay.space/#mze1De36XjV][handle]], [[https://goplay.space/#h1kA3qKaO6B][custom error]]
-- [[https://goplay.space/#9vu6iJHXMHC][Panic]]
-- [[https://goplay.space/#pMbrba6y9cY][Defer]] with [[https://goplay.space/#pc68j1BPMxn][extended sample]]
-
+- `defer` delays the execution of a function until the surrounding function returns
+- When `defer` is called the function value and parameters to the call are evaluated and saved
+- Deferred functions are called when function returns or stack unwinds
+- Syntax:
+	defer <function call>
+- [[https://goplay.space/#Yne2XHUz3MH][Deferred functions are called]] in reverse order
+- Most commonly used for [[https://goplay.space/#mh9MhO9rDXt][resource cleanup]] (close IO resources, release locks etc.)
 
 * Lab 7 - Errors
 
