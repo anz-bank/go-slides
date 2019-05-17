@@ -28,23 +28,19 @@ You should set up one or both of these projects with the `gcloud`
 command so that you can deploy PR versions and/or manually deploy the
 production version as necessary:
 
-    gcloud config configurations create gotraining
+    gcloud config configurations create gotraining-testing
     gcloud config set account your@email.address
-    gcloud config set project gotraining
+    gcloud config set project gotraining-testing
 
-Use `gotraining-testing` instead of `gotraining` for the testing
-project.
-
-If you are on the ANZ corp network and are having SSL validation issues
-due to the proxy certs, you can disable SSL validation as a last resort:
+If you are having SSL validation issues (due to a corporate network or
+otherwise), you can disable SSL validation as a last resort:
 
     gcloud config set auth/disable_ssl_validation
 
-You with need to authenticate the new configuration:
+You will need to authenticate the new configuration:
 
     gcloud auth login
-
-
+    
 ### Deployment for PR review
 
 When you have a PR open for review, you can deploy the changes under
@@ -81,9 +77,11 @@ only dirtyness is the `service: prNN` line in `app.yaml`.
 
 ### Manual production Appengine deployment
 
-Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors) or update [`app.yaml`](app.yaml) on your own fork with _your_ GCP project.
+Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors). 
 
-Execute
+Add a new gcloud configuration as described in the [Appengine deployment](#appengine-deployment) section, using `gotraining` instead of `gotraining-testing`.
+
+With the `gotraining` configuration active, Execute
 
     gcloud app deploy
 
