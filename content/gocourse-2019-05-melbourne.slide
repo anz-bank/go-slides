@@ -1144,15 +1144,13 @@ Dave Cheney Blog ([[https://dave.cheney.net/paste/the-past-present-and-future-of
 
 * Go for Java devs
 
-- Functions are lambdas
-- Typed constants are enums
-- exported = public
-- unexported = protected, not private
+- Functions are lambdas ([[https://goplay.space/#5gm9iC7sNct][Function usage]])
+- Typed constants are enums ([[https://goplay.space/#KFO6kxGCLV0][ErrorEnum]])
+- exported == public
+- unexported == protected, not private
 - struct != class
-An empty struct is pointless
-
-- embedding = composition + inheritence
-- map[type]struct{} = Set<type>
+- embedding == composition + inheritence
+- map[type]struct{} == Set<type>
 - Beware of pointers
 - Pointers will also save your day
 
