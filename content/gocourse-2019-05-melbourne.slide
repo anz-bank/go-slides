@@ -135,9 +135,6 @@ Go favours simplicity and directness resulting in some purposeful omissions:
 - No arguments about code style :)
 
 
-* Motivation and Demo
-
-
 * Why Go
 
 - simple: easy to learn and read
@@ -148,6 +145,9 @@ Go favours simplicity and directness resulting in some purposeful omissions:
 - lightweight concurrency
 
 Here is a great read on Rob Pike's blog about "Why Go" - ([[https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html][Less is Exponentially More]])
+
+
+* Demo
 
 
 * Demo
