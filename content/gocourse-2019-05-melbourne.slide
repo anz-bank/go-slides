@@ -251,18 +251,23 @@ Execute with
 * Benchmark
 
 - 7,000 concurrent requests
-- Apache's `ab` command on MacBook Pro
+- Apache's `ab` command on Ubuntu server
 
     ab -n 7000 -c 7000 -s 200 localhost:8080/ping  # Java
     ab -n 7000 -c 7000 -s 200 localhost:9090/ping  # go
 
 - Results
 
-	Java mean: 36.3 sec
-	Go mean:    2.8 sec
+	Java median: 36.2 sec
+	Java max:    70.3 sec
+	Go median:   2.3 sec
+	Go max:      3.0 sec
 
 - Further details on [[https://github.com/anz-bank/go-slides/tree/master/pingserver#benchmark][GitHub]]
 
+* Benchmark
+- Range of concurrent requests from 1,000 to 9,000
+.image _img/JavaVsGoLoadTest.png
 
 * Interlude: Towards Continuous Deployment
 
