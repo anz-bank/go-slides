@@ -847,6 +847,9 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - High level Synchronization primitives `WaitGroup` and `Once`
 - Intended for low level programming `Mutex`, `RWMutex`, `Cond`
 - Waiting for goroutines to finish [[https://play.golang.org/p/mMOBMJNtVT2][with WaitGroup]]
+- [[https://play.golang.org/p/OUAncJlBbmS][Unmatched `waitgroup.Add()` and `waitgroup.Done()` calls]]
+- More `Add()` than `Done()` causes Deadlock
+- More `Done()` than `Add()` causes negative WaitGroup error
 - Synchronization primitives are used for orchestration, Channels are used for communication
 
 * Tools and Conventions
