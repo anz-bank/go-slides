@@ -1151,8 +1151,8 @@ Dave Cheney Blog ([[https://dave.cheney.net/paste/the-past-present-and-future-of
 - struct != class
 - embedding == composition + inheritence
 - map[type]struct{} == Set<type>
-- Beware of pointers
-- Pointers will also save your day ([[https://goplay.space/#wBWe0l3YFim][Pointers in loops]])
+- Beware of pointers ([[https://goplay.space/#cL8GEUOhlb5][Pointers ruining your day]])
+- Pointers will also save your day ([[https://goplay.space/#wBWe0l3YFim][Pointers saving your day]])
 
 
 * Go for Java devs

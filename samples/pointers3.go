@@ -1,5 +1,6 @@
 package main
 
+// Pointers
 import "fmt"
 
 type MyStruct struct {
