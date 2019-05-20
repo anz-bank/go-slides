@@ -21,9 +21,9 @@ func main() {
 	fmt.Println("sum:", sum)
 
 	// `range` on map iterates over key/value pairs
-	m := map[string]int{"India": 1340, "Australia": 25}
+	m := map[string]string{"Melbourne": "VIC", "Sydney": "NSW"}
 	for k, v := range m {
-		fmt.Printf("%s: %d\n", k, v)
+		fmt.Printf("%s: %s\n", k, v)
 	}
 
 	// `range` can also iterate over just the keys of a map.
