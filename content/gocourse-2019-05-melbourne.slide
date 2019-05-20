@@ -1026,7 +1026,7 @@ Definition
 - Runs concurrently like threads
 - Scheduler tracks goroutines and schedules them to run on a set of OS threads
 - GOMAXPROCS and runtime.GOMAXPROCS() sets the number of OS threads
-- [[https://play.golang.org/p/2sr6XrkGYKz][Start a goroutine]] using a `go` statement
+- Start a goroutine [[https://play.golang.org/p/2sr6XrkGYKz][using a `go` statement]]
 	go <function-call>
 - Concurrency is not parallelism ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
 
