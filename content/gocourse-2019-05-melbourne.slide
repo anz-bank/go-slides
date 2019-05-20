@@ -251,7 +251,7 @@ Execute with
 * Benchmark
 
 - 7,000 concurrent requests
-- Apache's `ab` command on Ubuntu server
+- Apache's `ab` command on Linux
 
     ab -n 7000 -c 7000 -s 200 localhost:8080/ping  # Java
     ab -n 7000 -c 7000 -s 200 localhost:9090/ping  # go
