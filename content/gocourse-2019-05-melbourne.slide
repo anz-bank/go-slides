@@ -801,6 +801,46 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 		suite.Run(t, &scalerSuite{scaler: &rect{1, 1}})
 	}
 
+* Go for Java devs
+
+- Functions are lambdas ([[https://goplay.space/#5gm9iC7sNct][Function usage]])
+- Typed constants are enums ([[https://goplay.space/#KFO6kxGCLV0][ErrorEnum]])
+- exported == public
+- unexported == protected, not private
+- There are no classes, though most types behave like them
+- embedding == composition + inheritence
+- map[type]struct{} == Set<type>
+- Beware of pointers ([[https://goplay.space/#cL8GEUOhlb5][Pointers ruining your day]])
+- Pointers will also save your day ([[https://goplay.space/#wBWe0l3YFim][Pointers saving your day]])
+
+: Go doesn not support common lambda syntax.
+
+: Go has no classes. Classes perform multiple roles in Java that are not supported by go structs (extending,
+private and static variables). Most go types behave like classes (structs, aliased types, aliased function signatures).
+
+: Map types are limited in the keys they can have. Keys must be comparable (native types, raw structs, arrays).
+Values are not limited in type.
+
+: Pointers can behave strangely in loop variables or as recievers for methods. Pointers also allow you to modify
+values where they would otherwise be copied into new variables
+
+
+* Go for Java devs
+
+- Not everything is object oriented. Pure functions are just fine
+- Don't worry about abstraction up front, it is easy to abstract in go
+- Don't worry about starting thousands of goroutines (worry when you get to millions)
+- Don't worry about access scope within a package
+- Don't worry about frameworks
+- Don't worry about patterns
+- Don't overstructure your project
+- Remember to check for errors
+- Don't fight the formatter
+- Don't panic
+
+: Goroutines are not tightly linked to underlying threads. A sleeping goroutine does not block others from executing.
+Each goroutines takes up 4K memory (1 million goroutines -> 4GB)
+
 
 * Lab 6 - CRUD puppy with interface
 
@@ -1140,33 +1180,6 @@ not executable to due 3rd party dependency `chi`:
 
 Rob Pike's Talk ([[https://blog.golang.org/toward-go2][Towards Go 2]])
 Dave Cheney Blog ([[https://dave.cheney.net/paste/the-past-present-and-future-of-go2.pdf][Past Present and Future of Go]])
-
-
-* Go for Java devs
-
-- Functions are lambdas ([[https://goplay.space/#5gm9iC7sNct][Function usage]])
-- Typed constants are enums ([[https://goplay.space/#KFO6kxGCLV0][ErrorEnum]])
-- exported == public
-- unexported == protected, not private
-- struct != class
-- embedding == composition + inheritence
-- map[type]struct{} == Set<type>
-- Beware of pointers ([[https://goplay.space/#cL8GEUOhlb5][Pointers ruining your day]])
-- Pointers will also save your day ([[https://goplay.space/#wBWe0l3YFim][Pointers saving your day]])
-
-
-* Go for Java devs
-
-- Not everything is object oriented. Pure functions are just fine
-- Don't worry about abstraction up front, it is easy to abstract in go
-- Don't worry about starting thousands of goroutines (worry when you get to millions)
-- Don't worry about access scope within a package
-- Don't worry about frameworks
-- Don't worry about patterns
-- Don't overstructure your project
-- Remember to check for errors
-- Don't fight the formatter
-- Don't panic
 
 
 * References
