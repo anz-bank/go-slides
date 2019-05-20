@@ -6,7 +6,6 @@ import (
 )
 
 func writeCheck() {
-
 	var err error
 
 	buf := make([]byte, 0, 0)

@@ -819,9 +819,15 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 * Errors in Go
 
 - `error` is a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
+	type error interface {
+		Error() string
+	}
 - Check errors explicitly
+
+* Errors in Go (continued)
+
 - The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error values
-- Using `errors.New()`:
+- Using [[https://golang.org/src/errors/errors.go?s=293:320#L1][`errors.New()`]]:
 
 	func Sqrt(f float64) (float64, error) {
 		if f < 0 {
@@ -859,10 +865,10 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 * Error Handling
 
 - Check for the presence of an error by [[https://goplay.space/#40Ho_HWiYrb][comparing with nil]]
-- [[https://goplay.space/#GUSay51SeQh][Comparing error values]]
-- Errors are values so they can be [[https://goplay.space/#wtUDNRIrzAQ][programmed]]
-- [[https://goplay.space/#VWgWUMSPH11][Handle errors gracefully]]
-- Check errors using [[https://goplay.space/#4W7u7VbH08h][type assertions]]
+- [[https://goplay.space/#T2RkoxxpuUV][Comparing error values]]
+- Errors are values so they can be [[https://goplay.space/#F_EG5jM_fZ6][programmed]]
+- [[https://goplay.space/#bTOIkCkGssE][Handle errors gracefully]]
+- Check errors using [[https://goplay.space/#ISKTAUFOyjk][type assertions]]
 - By convention many standard library functions return `error` as the second return value
 
 "Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]

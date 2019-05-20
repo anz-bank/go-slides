@@ -5,27 +5,18 @@ import (
 	"fmt"
 )
 
-var NotEqualErr = errors.New("Inputs not equal")
+var ErrNotEqual = errors.New("not equal")
 
 func main() {
-	err1 := modcheck(5, 3)
-	err2 := modcheck(5, 3)
-	fmt.Println("err1 == err2: ", err1 == err2)
-	err3 := eqcheck(1, 1)
-	err4 := eqcheck(2, 2)
-	fmt.Println("err3 == err4: ", err3 == err4)
-}
-
-func modcheck(m, n int) error {
-	if m%n == 0 {
-		return nil
-	}
-	return fmt.Errorf("Input error: %d mod %d must be 0", m, n)
+	err1 := eqcheck(1, 1)
+	err2 := eqcheck(2, 3)
+	err3 := eqcheck(2, 3)
+	fmt.Printf("err1: %v, err2: %v, err2 == err3: %v\n", err1, err2, err2 == err3)
 }
 
 func eqcheck(m, n int) error {
 	if m != n {
-		return NotEqualErr
+		return ErrNotEqual
 	}
 	return nil
 }
