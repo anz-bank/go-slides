@@ -818,11 +818,11 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 * Defer
 
 - `defer` delays the execution of a function until the surrounding function returns
-- When `defer` is called the function value and parameters to the call are evaluated and saved
+- When `defer` is called the parameters to the call are evaluated and saved
 - Deferred functions are called when function returns or stack unwinds
 - Syntax:
 	defer <function call>
-- [[https://goplay.space/#Yne2XHUz3MH][Deferred functions are called]] in reverse order
+- Deferred functions are called [[https://goplay.space/#ZX5S9xyOS57][in reverse order]]
 - Most commonly used for [[https://goplay.space/#mh9MhO9rDXt][resource cleanup]] (close IO resources, release locks etc.)
 
 * Lab 7 - Errors
