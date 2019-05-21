@@ -1,38 +1,52 @@
-// Enum
 package main
 
 import "fmt"
 
 // Aliasing a type allows type checking
-type ErrorEnum string
+type ErrCode uint8
 
-// Implement the error interface
-func (e ErrorEnum) Error() string {
-	return string(e)
-}
-
+// Declaring a set of constants effectively creates an enum of that type
 const (
-	ErrInvalidArgument ErrorEnum = "Invalid value"
-	ErrNotFound        ErrorEnum = "Not found"
-	ErrUnknown         ErrorEnum = "Unknown"
+	ErrInvalidInput ErrCode = iota
+	ErrDuplicate
+	ErrNotFound
 )
 
-func isEnum(err ErrorEnum) {
-	fmt.Printf("%s is and ErrorEnum\n", err)
+// Aliased types can be given methods too
+func (e ErrCode) String() string {
+	switch e {
+	case ErrInvalidInput:
+		return "invalid input"
+	case ErrDuplicate:
+		return "duplicate"
+	case ErrNotFound:
+		return "not found"
+	}
+	return "unknown"
+}
+
+// Implement the error interface
+func (e ErrCode) Error() string {
+	return e.String()
+}
+
+func printCode(code ErrCode) {
+	// What is printed depends on print directive
+	fmt.Printf("Val: %d\nString: %s\n\n", code, code)
 }
 
 func main() {
 	// Enum constants can be passed in
-	isEnum(ErrInvalidArgument)
+	printCode(ErrInvalidInput)
 
-	// So can raw strings
-	isEnum("WAT")
+	// So can raw values, they may not be a predefined value
+	printCode(127)
 
-	// but variables with type string cannot
-	var s string
-	s = "Hello"
-	// isEnum(s) // Compile error, invalid type
+	// but variables with type uint8 cannot
+	var c uint8
+	c = 1
+	// printCode(c) // Compile error, invalid type
 
 	// However you can typecast it to your enum type
-	isEnum(ErrorEnum(s))
+	printCode(ErrCode(c))
 }
