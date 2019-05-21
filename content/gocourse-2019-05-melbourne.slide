@@ -813,17 +813,6 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Beware of pointers ([[https://goplay.space/#cL8GEUOhlb5][Pointers ruining your day]])
 - Pointers will also save your day ([[https://goplay.space/#wBWe0l3YFim][Pointers saving your day]])
 
-: Go doesn not support common lambda syntax.
-
-: Go has no classes. Classes perform multiple roles in Java that are not supported by go structs (extending,
-private and static variables). Most go types behave like classes (structs, aliased types, aliased function signatures).
-
-: Map types are limited in the keys they can have. Keys must be comparable (native types, raw structs, arrays).
-Values are not limited in type.
-
-: Pointers can behave strangely in loop variables or as recievers for methods. Pointers also allow you to modify
-values where they would otherwise be copied into new variables
-
 
 * Go for Java devs
 
@@ -837,9 +826,6 @@ values where they would otherwise be copied into new variables
 - Remember to check for errors
 - Don't fight the formatter
 - Don't panic
-
-: Goroutines are not tightly linked to underlying threads. A sleeping goroutine does not block others from executing.
-Each goroutines takes up 4K memory (1 million goroutines -> 4GB)
 
 
 * Lab 6 - CRUD puppy with interface
