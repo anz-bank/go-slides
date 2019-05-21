@@ -1,10 +1,16 @@
 package main
 
-// Pointers
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type MyStruct struct {
 	n int
+}
+
+func (m MyStruct) String() string {
+	return strconv.Itoa(m.n)
 }
 
 func RawLoop(arr []MyStruct) {
@@ -26,16 +32,10 @@ func main() {
 	// Looping over raw struct will not allow you to modify them
 	arr := []MyStruct{{0}, {0}, {0}}
 	RawLoop(arr)
-	for _, item := range arr {
-		fmt.Println(item.n)
-	}
-
-	fmt.Println()
+	fmt.Println(arr)
 
 	// Looping over pointers fixes this
 	pointerArr := []*MyStruct{{0}, {0}, {0}}
 	PointerLoop(pointerArr)
-	for _, item := range pointerArr {
-		fmt.Println(item.n)
-	}
+	fmt.Println(pointerArr)
 }

@@ -803,15 +803,15 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Go for Java devs
 
-- Functions are lambdas ([[https://goplay.space/#lQNE-kuVf-N][Function usage]])
-- Typed constants are enums ([[https://goplay.space/#KFO6kxGCLV0][ErrorEnum]])
+- [[https://goplay.space/#lQNE-kuVf-N][Functions are lambdas]]
+- [[https://goplay.space/#KFO6kxGCLV0][Typed constants are enums]]
 - exported == public
 - unexported == protected, not private
 - There are no classes, though most types behave like them
 - embedding == composition + inheritence
 - map[type]struct{} == Set<type>
-- Beware of pointers ([[https://goplay.space/#cL8GEUOhlb5][Pointers ruining your day]])
-- Pointers will also save your day ([[https://goplay.space/#wBWe0l3YFim][Pointers saving your day]])
+- [[https://goplay.space/#cL8GEUOhlb5][Beware of pointers]]
+- [[https://goplay.space/#vrUN36Lkedk][Pointers will also save your day]]
 
 
 * Go for Java devs
