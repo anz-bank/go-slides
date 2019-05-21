@@ -803,7 +803,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Go for Java devs
 
-- Functions are lambdas ([[https://goplay.space/#5gm9iC7sNct][Function usage]])
+- Functions are lambdas ([[https://goplay.space/#lQNE-kuVf-N][Function usage]])
 - Typed constants are enums ([[https://goplay.space/#KFO6kxGCLV0][ErrorEnum]])
 - exported == public
 - unexported == protected, not private

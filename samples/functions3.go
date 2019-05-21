@@ -1,4 +1,3 @@
-// Functions
 package main
 
 import (
@@ -18,20 +17,20 @@ func filter(arr []int, pred func(int) bool) []int {
 func main() {
 	vals := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	// You can pass functions inline
-	filtered := filter(vals, func(val int) bool { return val%2 == 0 })
-	fmt.Println(filtered)
+	even := filter(vals, func(val int) bool { return val%2 == 0 })
+	fmt.Println(even)
 
 	// you can assign functions to variables
 	mul3Pred := func(val int) bool {
 		return val%3 == 0
 	}
-	filtered2 := filter(vals, mul3Pred)
-	fmt.Println(filtered2)
+	mul3 := filter(vals, mul3Pred)
+	fmt.Println(mul3)
 
 	// inline function declarations are closures, they capture surrounding scope
 	mul2and3Pred := func(val int) bool {
 		return val%2 == 0 && mul3Pred(val) // mul3Pred captured from surrounding scope
 	}
-	filtered3 := filter(vals, mul2and3Pred)
-	fmt.Println(filtered3)
+	mul6 := filter(vals, mul2and3Pred)
+	fmt.Println(mul6)
 }
