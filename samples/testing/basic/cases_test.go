@@ -1,28 +1,31 @@
 package main
 
-import "testing"
+import (
+	"reflect"
+	"strings"
+	"testing"
+)
 
-func TestCases(t *testing.T) {
+func TestSplit(t *testing.T) {
 	// You can create many test cases succinctly with an anonymous struct array
-	testCases := []struct {
-		input, expected string
+	testCases := map[string]struct {
+		input string
+		sep   string
+		want  []string
 	}{
-		{"Hello", "Hello M8"},
-		{"Goodbye", "Goodbye M8"},
-		{"💥💥💥", "💥💥💥 M8"},
-		{"", " M8"},
+		"simple":       {input: "a b c", sep: " ", want: []string{"a", "b", "c"}},
+		"Wrong sep":    {input: "a/b/c", sep: " ", want: []string{"a/b/c"}},
+		"no sep":       {input: "abc", sep: " ", want: []string{"abc"}},
+		"trailing sep": {input: "a/b/c/", sep: "/", want: []string{"a", "b", "c", ""}},
 	}
 
-	for _, test := range testCases {
-		result := AddM8(test.input)
-		if result != test.expected {
-			// If one fails, log the failure and fail the test
-			t.Logf("wanted %s, got %s", test.expected, result)
-			t.Fail()
-		}
+	for name, test := range testCases {
+		// t.Run creates a sub test and runs it like a normal test
+		t.Run(name, func(t *testing.T) {
+			result := strings.Split(test.input, test.sep)
+			if !reflect.DeepEqual(result, test.want) {
+				t.Errorf("expected %v, got %v", test.want, result)
+			}
+		})
 	}
-}
-
-func AddM8(str string) string {
-	return str + " M8"
 }

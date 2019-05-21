@@ -3,7 +3,6 @@ package main
 import (
 	"testing"
 
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 )
 
@@ -32,32 +31,30 @@ type DoublerSuite struct {
 	Doubler
 }
 
+// This is the function run by go test
 func TestDoubler(t *testing.T) {
 	// Create the suites with different implementations
-	byAddSuite := &DoublerSuite{
-		Doubler: ByAdd{},
-	}
-	byMulSuite := &DoublerSuite{
-		Doubler: ByMul{},
-	}
+	byAddSuite := &DoublerSuite{Doubler: ByAdd{}}
+	byMulSuite := &DoublerSuite{Doubler: ByMul{}}
 	// Run the suite tests on every implementation of the interface
 	suite.Run(t, byAddSuite)
 	suite.Run(t, byMulSuite)
 }
 
+// Test function run by a suite
 func (d *DoublerSuite) TestDouble() {
-	r := assert.New(d.T())
-
-	testCases := []struct {
+	testCases := map[string]struct {
 		input, expected int
 	}{
-		{1, 2},
-		{2, 4},
-		{3, 6},
+		"input 1": {1, 2},
+		"input 2": {2, 4},
+		"input 3": {3, 6},
 	}
 
-	for _, test := range testCases {
-		result := d.Double(test.input)
-		r.Equalf(test.expected, result, "double %d should be %d, got %d", test.input, test.expected, result)
+	for name, test := range testCases {
+		d.T().Run(name, func(t *testing.T) {
+			result := d.Double(test.input)
+			d.Equalf(test.expected, result, "double %d should be %d, got %d", test.input, test.expected, result)
+		})
 	}
 }

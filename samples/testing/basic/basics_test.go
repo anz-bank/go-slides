@@ -27,8 +27,16 @@ func TestFatal(t *testing.T) {
 	t.Log("THIS SHOULD NOT BE PRINTED")
 }
 
+func TestError(t *testing.T) {
+	// You can log and fail in one line with t.Error()
+	t.Error("Error is equivalent to log then fail")
+
+	// Execution still continues
+	t.Log("Error still allows continued execution")
+}
+
 func TestExample(t *testing.T) {
-	val, err := functionToTest(-1)
+	val, err := assertPositive(-1)
 	if err != nil {
 		t.Fatal("Error should not have occured")
 	}
@@ -40,7 +48,7 @@ func TestExample(t *testing.T) {
 	}
 }
 
-func functionToTest(i int) (int, error) {
+func assertPositive(i int) (int, error) {
 	if i > 0 {
 		return i, nil
 	}
