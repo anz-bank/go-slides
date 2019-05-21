@@ -607,6 +607,17 @@ Before adding any commits to `feature` locally run:
 - Remove `Ready` `for` `review` and add `Under` `review`
 - Label with either `Approved` `by` `colleague` or `Changes` `requested` and remove `Under` `review`
 
+
+* Test samples
+
+- [[https://goplay.space/#HcgMVMtjWJo][Basics]]
+- [[https://goplay.space/#E29I7xTrz69][Multiple cases]]
+- [[https://goplay.space/#dCbjRkHqm_3][Testify]]
+- [[https://goplay.space/#XoXe-FUSoCD][Suites]]
+
+[[https://dave.cheney.net/2019/05/07/prefer-table-driven-tests][Dave Cheney - table driven tests]]
+
+
 * Lab 1 - Fibonacci
 
 - Create an executable go program in directory `01_fib/USERNAME`
@@ -666,14 +677,6 @@ Before adding any commits to `feature` locally run:
 	b:1
 
 - Bonus points: comprehensive tests
-
-
-* Test samples
-
-- [[https://goplay.space/#HcgMVMtjWJo][Basics]]
-- [[https://goplay.space/#eEUHY30Lr9B][Multiple cases]]
-- [[https://goplay.space/#dCbjRkHqm_3][Testify]]
-- [[https://goplay.space/#XoXe-FUSoCD][Suites]]
 
 
 * Functions
