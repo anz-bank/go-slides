@@ -1,4 +1,4 @@
-package testify
+package main
 
 import (
 	"testing"
