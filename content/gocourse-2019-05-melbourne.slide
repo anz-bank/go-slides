@@ -267,7 +267,7 @@ Execute with
 
 * Benchmark
 - Range of concurrent requests from 1,000 to 9,000
-.image _img/JavaVsGoLoadTest.png
+.image _img/JavaVsGoLoadTest.png 500 _
 
 * Interlude: Towards Continuous Deployment
 
