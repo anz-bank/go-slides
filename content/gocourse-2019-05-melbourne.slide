@@ -815,6 +815,64 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
+
+* Errors in Go
+
+- `error` is a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
+	type error interface {
+		Error() string
+	}
+- Check errors explicitly
+
+* Errors in Go (continued)
+
+- The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error values
+- Using [[https://golang.org/src/errors/errors.go?s=293:320#L1][`errors.New()`]]:
+
+	func Sqrt(f float64) (float64, error) {
+		if f < 0 {
+			return 0, errors.New("math: square root of negative number")
+		}
+		// implementation
+	}
+- Alternatively using `fmt.Errorf`:
+	if f < 0 {
+		return 0, fmt.Errorf("math: square root of negative number %g", f)
+	}
+
+* Errors in Go (continued)
+
+- Implement custom error types ([[https://golang.org/pkg/net/#AddrError][source: AddrError]]):
+	type AddrError struct {
+		Err  string
+		Addr string
+	}
+	func (e *AddrError) Error() string {
+		if e == nil {
+			return "<nil>"
+		}
+		s := e.Err
+		if e.Addr != "" {
+			s = "address " + e.Addr + ": " + s
+		}
+		return s
+	}
+- Error values can be logged and printed:
+	if _, err := Sqrt(-1); err != nil {
+		log.Println(err)
+	}
+
+* Error Handling
+
+- Check for the presence of an error by [[https://goplay.space/#40Ho_HWiYrb][comparing with nil]]
+- [[https://goplay.space/#T2RkoxxpuUV][Comparing error values]]
+- Errors are values so they can be [[https://goplay.space/#F_EG5jM_fZ6][programmed]]
+- [[https://goplay.space/#bTOIkCkGssE][Handle errors gracefully]]
+- Check errors using [[https://goplay.space/#ISKTAUFOyjk][type assertions]]
+- By convention many standard library functions return `error` as the second return value
+
+"Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
+
 * Defer
 
 - `defer` delays the execution of a function until the surrounding function returns
@@ -824,6 +882,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 	defer <function call>
 - Deferred functions are called [[https://goplay.space/#ZX5S9xyOS57][in reverse order]]
 - Most commonly used for [[https://goplay.space/#mh9MhO9rDXt][resource cleanup]] (close IO resources, release locks etc.)
+
 
 * Lab 7 - Errors
 
