@@ -914,9 +914,9 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Panic could terminate the goroutine or the program
 - Use `panic` rarely and judiciously in your own code
 - Use it in deeply nested internal methods/functions and return an error/status to the caller
-- [[https://goplay.space/#mal3-RQIUKM][Basic illustration of panic]]
-- [[https://goplay.space/#tDX9bl8bWGX][Basic illustration of panic and recover]]
-- [[https://goplay.space/#Xnj7OOb3Vk8][Recover and return value]]
+- [[https://goplay.space/#_7m83OEuFnh][Basic illustration of panic]]
+- [[https://goplay.space/#wiBpVkHp2Kf][Basic illustration of panic and recover]]
+- [[https://goplay.space/#qzRzYQxv6HI][Recover and return value]]
 
 * Lab 7 - Errors
 

@@ -1,3 +1,4 @@
+// panic_recover_wret.go
 package main
 
 import (
