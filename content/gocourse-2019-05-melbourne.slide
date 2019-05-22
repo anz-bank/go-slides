@@ -914,21 +914,33 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Topics
 
+- Concurrency
 - Concurrency in Go
-- Processes, threads and goroutines
-- Go Scheduler
 - Goroutines
-- Wait Group
 - Channels
-- Mutex
-- Select
+- Range & Select
+- Under the hood: Processes, Threads, Goroutines
+- Under the hood: Go Runtime
 
-* Concurrency in Go
+* Concurrency
+
+Definition
+
+- Concurrency is the ability of different parts or units of a program, algorithm, or problem to be executed out-of-order or in partial order, without affecting the final outcome ([[https://en.wikipedia.org/wiki/Concurrent_computing][Source: Wikipedia]])
+- Parallelism is the ability to run different parts or units of a program simultaneously
+
+[[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
 
 - "Don't communicate by sharing memory, share memory by communicating."
 - "Concurrency is not parallelism."
 - "Concurrency is about structure, parallelism is about execution."
-- [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
+
+* Concurrency in Go
+
+- Go provides:
+- Concurrent execution (goroutines)
+- Synchronisation and message passing (channels)
+- Multi-way concurrent control (select)
 
 * Channels
 
