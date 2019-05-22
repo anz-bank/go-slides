@@ -749,6 +749,33 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 	127.0.0.1
 
 
+* Go for Java devs
+
+- [[https://goplay.space/#lQNE-kuVf-N][Functions are lambdas]]
+- [[https://goplay.space/#HVSd6qpj74R][Typed constants are enums]]
+- exported == public
+- unexported == protected, not private
+- There are no classes, though most types behave like them
+- embedding == composition + inheritence
+- map[type]struct{} == Set<type>
+- [[https://goplay.space/#cL8GEUOhlb5][Beware of pointers]]
+- [[https://goplay.space/#UF61v58dVYT][Pointers will also save your day]]
+
+
+* Go for Java devs
+
+- Not everything is object oriented. Pure functions are just fine
+- Don't worry about abstraction up front, it is easy to abstract in go
+- Don't worry about starting thousands of goroutines (worry when you get to millions)
+- Don't worry about access scope within a package
+- Don't worry about frameworks
+- Don't worry about patterns
+- Don't overstructure your project
+- Remember to check for errors
+- Don't fight the formatter
+- Don't panic
+
+
 * Test two implementations of interface in suite (1/2)
 
 	// scaler.go
@@ -800,32 +827,6 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 		suite.Run(t, &scalerSuite{scaler: &circle{2}})
 		suite.Run(t, &scalerSuite{scaler: &rect{1, 1}})
 	}
-
-* Go for Java devs
-
-- [[https://goplay.space/#lQNE-kuVf-N][Functions are lambdas]]
-- [[https://goplay.space/#HVSd6qpj74R][Typed constants are enums]]
-- exported == public
-- unexported == protected, not private
-- There are no classes, though most types behave like them
-- embedding == composition + inheritence
-- map[type]struct{} == Set<type>
-- [[https://goplay.space/#cL8GEUOhlb5][Beware of pointers]]
-- [[https://goplay.space/#vrUN36Lkedk][Pointers will also save your day]]
-
-
-* Go for Java devs
-
-- Not everything is object oriented. Pure functions are just fine
-- Don't worry about abstraction up front, it is easy to abstract in go
-- Don't worry about starting thousands of goroutines (worry when you get to millions)
-- Don't worry about access scope within a package
-- Don't worry about frameworks
-- Don't worry about patterns
-- Don't overstructure your project
-- Remember to check for errors
-- Don't fight the formatter
-- Don't panic
 
 
 * Lab 6 - CRUD puppy with interface

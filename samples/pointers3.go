@@ -1,41 +1,31 @@
+// Pointers
 package main
 
-import (
-	"fmt"
-	"strconv"
-)
-
-type MyStruct struct {
-	n int
-}
-
-func (m MyStruct) String() string {
-	return strconv.Itoa(m.n)
-}
-
-func RawLoop(arr []MyStruct) {
-	// A loop over structs COPIES each array element into item
-	for _, item := range arr {
-		item.n = 1
-	}
-}
-
-func PointerLoop(arr []*MyStruct) {
-	// Looping over pointers copies the POINTER, which still points to
-	// the original object
-	for _, item := range arr {
-		item.n = 1
-	}
-}
+import "fmt"
 
 func main() {
-	// Looping over raw struct will not allow you to modify them
-	arr := []MyStruct{{0}, {0}, {0}}
-	RawLoop(arr)
-	fmt.Println(arr)
+	var a = [3]*int{}
+	var b = []int{1, 2, 3}
 
-	// Looping over pointers fixes this
-	pointerArr := []*MyStruct{{0}, {0}, {0}}
-	PointerLoop(pointerArr)
-	fmt.Println(pointerArr)
+	// This looks like we are copying the address of each item into a
+	for index, item := range b {
+		a[index] = &item
+	}
+
+	// Instead we have only copied one address into each three spots
+	for _, item := range a {
+		fmt.Println(*item)
+	}
+
+	fmt.Println()
+
+	// Fix is to access b[i] directly and take its address, rather than through a loop variable
+	for index := range b {
+		a[index] = &b[index]
+	}
+
+	// Now the addresses are copied correctly
+	for _, item := range a {
+		fmt.Println(*item)
+	}
 }
