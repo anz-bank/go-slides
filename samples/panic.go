@@ -1,4 +1,4 @@
-// panic.go
+// panic
 package main
 
 import "os"

@@ -1,4 +1,4 @@
-// panic_recover.go
+// panic_recover
 package main
 
 import (

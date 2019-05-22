@@ -1,4 +1,4 @@
-// panic_recover_wret.go
+// panic_recover_wret
 package main
 
 import (
