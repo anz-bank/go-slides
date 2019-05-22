@@ -1,4 +1,4 @@
-// Channel range and close
+// channels_range
 package main
 
 import (

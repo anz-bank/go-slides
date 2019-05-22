@@ -910,32 +910,45 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Add locking for proper use of sync.Map
 - Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
 
-
 * Channels
 
 - Communication mechanism (conduit) that lets goroutines exchange data
 - Each channel allows goroutines to send/receive a particular data type (called element type)
 - Declare channel using `chan` keyword
-- Unbuffered channel
+- Create unbuffered channel
 	ch := make(chan int) // ch is an unbuffered channel of `int` element type
-- Buffered channel
+- Create buffered channel
 	ch := make(chan int, 10) // ch is a buffered channel of size 10 and type `int`
 - Close channel using `close()` function
 
 * Channel Operations
 
-- Write to channel (`->`) operator
-- [[https://play.golang.org/p/GdwJ8aSXO6A][Write to an unbuffered channel]]
-- [[https://play.golang.org/p/CePH_xS01Lv][Write to a buffered channel]]
-- Sender can close the channel to indicate there are no more values
-- Read from a channel (`<-`) operator
-- [[https://play.golang.org/p/1xZSQmNvTah][Read from an unbuffered channel]]
-- [[https://play.golang.org/p/h7kbg6pEgQu][Read from a buffered channel using <-]]
-- [[https://play.golang.org/p/o_STLibULU2][Read from a buffered channel using `range`]]
-- It is good practice [[https://play.golang.org/p/p1_ThV8oAPh][to pass the direction of channel operation]] to a function as argument
+- Send and Receive values with the channel operator <-
+
+	ch <- v // send v to the channel ch
+	v := <-ch // receive from ch and assign it to v
+
+- Send to buffered channel blocks only when the channel is full
+- Sender can close the channel to indicate no more values will be sent
+- Receiver can test whether a channel has been closed
+
+	v, ok := <-ch // ok is false if channel is closed and no more data is available
+
+- Sending message on a closed/nil channel causes the program to panic
+- Range on a channel
+
+	// range ch receives on a channel until it is closed
+	for v := range ch {
+		fmt.Println(v)
+	}
+
+* Channel Examples
+
+- [[https://play.golang.org/p/dIQTgdZ2kvQ][Send and receive on an unbuffered channel]]
+- [[https://play.golang.org/p/8-3x0YnPCIo][Send and receive on a buffered channel]]
+- [[https://play.golang.org/p/840nqny9Y4D][Receive from a channel using 'range']]
 
 * Tools and Conventions
-
 
 * Project layout
 
