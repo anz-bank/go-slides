@@ -1,5 +1,8 @@
 package main
 
+// Attributed to Dave Cheney
+// https://dave.cheney.net/2019/05/07/prefer-table-driven-tests
+
 import (
 	"testing"
 )
