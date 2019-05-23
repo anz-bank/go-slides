@@ -1009,13 +1009,9 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 - `Marshal` converts Go struct, pointer or primitive data type into JSON byte array
 - `Decode` and `Unmarshall` are the inverse functions to `Encode` and `Marshal`
 
-	func Marshal(v interface{}) ([]byte, error) {
+	func Marshal(v interface{}) ([]byte, error) 
 
-	}
-
-	func Unmarshal(data []byte, v interface{}) error {
-
-	}
+	func Unmarshal(data []byte, v interface{}) error 
 
 
 * JSON - Tags
@@ -1033,7 +1029,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 * JSON - Zero Values
 
-- Basic types will be set explicity to it's zero value, if it is omitted from the json during decoding
+- All Go struct fields will be set to their type's zero value if the corresponding JSON property is missing.
 - Pointer types have a zero value of `nil`
 - To be able to differentiate between a field which has been set explicitly to it's zero value or omitted, you must use pointer types
 
