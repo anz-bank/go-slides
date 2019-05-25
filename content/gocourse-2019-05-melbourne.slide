@@ -881,7 +881,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
     var ErrPermission = errors.New("permission denied")
 - Alternatively using `fmt.Errorf`:
     return fmt.Errorf("archive/tar: missed writing %d bytes", nb)
-- Naming convention ErrKind (ErrTimeout, ErrNotFound)
+- Exported error variables start with 'Err' (like ErrTimeout, ErrNotFound)
 
 * Errors in Go (continued)
 
@@ -906,10 +906,10 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 * Error Handling
 
 - Check for the [[https://goplay.space/#X0qqmcrO6om][presence of an error]]
-- Don't compare [[https://goplay.space/#HiLw8Y_D_6T][error values]]
+- Comparing [[https://goplay.space/#HiLw8Y_D_6T][error values]]
+- Checking error types using [[https://goplay.space/#CII8be9-TqW][type assertions]]
 - Errors are values so they can be [[https://goplay.space/#I6UJNHe6C7v][programmed]]
 - Error handling patterns in the standard library
-- Checking error types using [[https://goplay.space/#CII8be9-TqW][type assertions]]
 - By convention many standard library functions return `error` as the second return value
 
 "Errors are values."  - [[https://blog.golang.org/errors-are-values][Rob Pike]]
