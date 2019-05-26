@@ -38,7 +38,7 @@ def compare(filename, address, request_range):
 
 def generate_graph(filename, request_range):
     data = pandas.read_csv(filename)
-    # plt.figure(figsize=(10,6))
+    plt.figure(figsize=(10,6))
     plt.plot(data.numRequests.tolist(), data.java_50.div(1000).tolist(), "o", label = "Java Median", color='#ff9721')
     plt.plot(data.numRequests.tolist(), data.java_95.div(1000).tolist(), "^", label = "Java 95th percentile", color='#ff9721')
     plt.plot(data.numRequests.tolist(), data.go_50.div(1000).tolist(), "o", label = "Go Median", color = '#4f92ff')
