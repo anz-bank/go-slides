@@ -65,7 +65,7 @@ Please join [[https://anzengineering.slack.com/messages/CFCPLHFT2/convo/CFCPLHFT
 *Instructors*
 [[https://anzengineering.slack.com/team/U5PTX8C1F][@camh]], Cameron.Hutchison@anz.com
 [[https://anzengineering.slack.com/team/UCUUKEWGZ][@Dan]], Daniel.Cantos@anz.com
-[[https://anzengineering.slack.com/team/UJC0EUZ3P][@Joshua Carpeggiani]], Joshua.Carpeggiani@anz.com
+[[https://anzengineering.slack.com/team/UJC0EUZ3P][@joshcarp]], Joshua.Carpeggiani@anz.com
 [[https://anzengineering.slack.com/team/U84CTGB0F][@julia]], Julia.Ogris@anz.com
 [[https://anzengineering.slack.com/team/U7M6DMFMY][@ryanokane]], Ryan.O'Kane@anz.com
 [[https://anzengineering.slack.com/team/UC9C4K2ES][@saikirian]], SaiKiran.Gummaraj@anz.com
@@ -250,19 +250,26 @@ Execute with
 
 * Benchmark
 
-- 7,000 concurrent requests
-- Apache's `ab` command on MacBook Pro
+- 19,000 concurrent requests
+- Ubuntu 18.04 2.3GHz quad-core Intel Core i7
+- Apache's `ab` command
 
-    ab -n 7000 -c 7000 -s 200 localhost:8080/ping  # Java
-    ab -n 7000 -c 7000 -s 200 localhost:9090/ping  # go
+    ab -n 19000 -c 19000 -s 200 -r localhost:8080/ping  # Java
+    ab -n 19000 -c 19000 -s 200 -r localhost:9090/ping  # go
 
 - Results
 
-	Java mean: 36.3 sec
-	Go mean:    2.8 sec
+	Java median: 102.005 sec
+	Java 95%:    135.280 sec
+
+	Go median:   14.954 sec
+	Go 95%:      15.061 sec
 
 - Further details on [[https://github.com/anz-bank/go-slides/tree/master/pingserver#benchmark][GitHub]]
 
+* Benchmark
+- Range of concurrent requests from 1,000 to 19,000
+.image _img/JavaVsGoLoadTest.png 500 _
 
 * Interlude: Towards Continuous Deployment
 

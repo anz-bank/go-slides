@@ -102,9 +102,32 @@ Percentage of the requests served within a certain time (ms)
 
 ### Response time summary
 
-7,000 concurrent requests:
+19,000 concurrent requests:
 
 ```
-Java mean: 36.3 sec
-Go mean:    2.8 sec
+Java median: 102.005 sec
+Java 95%:    135.280 sec
+
+Go median:   14.954 sec
+Go 95%:      15.061 sec
 ```
+
+### Comparing and plotting many concurrent requests
+`compare.py` is a script that will compare the response times for a range of concurrent requests, currently set from 1,000 to 19,000 between Go and Java.
+
+Requires pandas and matplotlib to be installed with
+```
+pip3 install pandas matplotlib
+```
+
+Data was from java and go servers running on Ubuntu server with soft ulimit  open file limit set to 21000:
+```
+ulimit -n 21000
+```
+then the compare script can be run with:
+```
+python3 compare.py
+```
+
+output will be saved as `responsetime.csv` and a graph will be output as `JavaVsGoLoadTest.png` in
+`content/_img` and will be rendered in the java vs go benchmarking section of the slides
