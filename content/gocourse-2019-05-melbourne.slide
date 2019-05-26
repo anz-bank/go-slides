@@ -837,7 +837,6 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
-
 * Errors in Go
 
 - `error` is a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
@@ -905,6 +904,34 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Deferred functions are called [[https://goplay.space/#ZX5S9xyOS57][in reverse order]]
 - Most commonly used for [[https://goplay.space/#mh9MhO9rDXt][resource cleanup]] (close IO resources, release locks etc.)
 
+* Panic and Recover
+
+- `panic` and `recover` are builtin functions
+- `panic` and `recover` behave similar to `throw/catch` in other languages
+- `panic`:
+	func panic(interface{})
+- `panic` unwinds the stack, calling deferred functions up to the top-level function of the executing goroutine
+- `recover` (see next slide) can intercept this unwinding
+- Without `recover`, the program is terminated and the error condition is reported
+
+* Panic and Recover
+
+- `recover`:
+	func recover() interface{}
+- `recover` allows a program to handle panic called in another function
+- Must be called from within a deferred function in the same goroutine
+- Returns the value passed by call to panic
+
+* Don't Panic
+
+- Panic could terminate the goroutine or the program
+- Use `panic` rarely and judiciously in your own code
+- Use it in deeply nested internal methods/functions and return an error/status to the caller
+- Don't `panic` across package boundaries
+- Don't make a panic part of a package's API, instead always recover at the interface level of the package and return an error
+- [[https://goplay.space/#fFiO42mIOHo][Basic illustration of panic]]
+- [[https://goplay.space/#c8XO7QBMfA5][Basic illustration of panic and recover]]
+- [[https://goplay.space/#V5ckmhsPUHv][Recover and return value]]
 
 * Lab 7 - Errors
 
