@@ -139,7 +139,7 @@ Go favours simplicity and directness resulting in some purposeful omissions:
 
 - simple: easy to learn and read
 - a single obvious right way to do most things
-- tools - `gofmt`, `goimports`, `go` `mod`, `go` `test`, `golangci-lint`, coverage
+- tools - `gofmt`, `goimports`, `godoc`, `go` `mod`, `go` `test`, `golangci-lint`, coverage
 - standard library
 - productive and fun
 - lightweight concurrency
