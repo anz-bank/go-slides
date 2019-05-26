@@ -24,11 +24,17 @@ func init() {
 
 // dirHandler serves a directory listing for the requested path, rooted at *contentPath.
 func dirHandler(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/favicon.ico" {
+	urlPath := strings.Trim(r.URL.Path, "/")
+	if urlPath == "favicon.ico" {
 		http.NotFound(w, r)
 		return
+	} else if urlPath == "" {
+		http.Redirect(w, r, "/gocourse-2019-05-melbourne.slide", 301)
+		return
+	} else if urlPath == "list" {
+		urlPath = "/"
 	}
-	name := filepath.Join(*contentPath, r.URL.Path)
+	name := filepath.Join(*contentPath, urlPath)
 	if isDoc(name) {
 		err := renderDoc(w, name)
 		if err != nil {

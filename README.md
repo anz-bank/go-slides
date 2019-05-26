@@ -10,9 +10,11 @@ This projects is continuously deployed to Appengine at [`https://gotraining.apps
 
 Run the present tool locally with
 
-    go build .
-    ./go-slides -base . -content content
+    go run . -base . -content content
 
+For an Appengine like environment run
+
+    GAE_ENV=standard go run .
 
 ## Appengine deployment
 
@@ -40,7 +42,7 @@ otherwise), you can disable SSL validation as a last resort:
 You will need to authenticate the new configuration:
 
     gcloud auth login
-    
+
 ### Deployment for PR review
 
 When you have a PR open for review, you can deploy the changes under
@@ -59,7 +61,7 @@ easily be cleaned up when your PR is closed.
 1. Review the changes as your reviewer will see them
 
 1. When done, delete the app engine service:
-     `gcloud --configuration=gotraining-testing app services delete prNN`
+   `gcloud --configuration=gotraining-testing app services delete prNN`
 
 1. Undo changes to `app.yaml`: `git checkout -- app.yaml`
 
@@ -67,8 +69,7 @@ Please make sure you do not commit a version of `app.yaml` with your
 `service:` line in it. This should only ever be local to your workspace.
 
 You should also make sure your workspace is clean of changes so what you
-deploy is what is on the PR branch in github. run `git describe --all
---dirty` and if that outputs a string with `-dirty` on the end, you have
+deploy is what is on the PR branch in github. run `git describe --all --dirty` and if that outputs a string with `-dirty` on the end, you have
 uncommitted changes. Stash them before you deploy (`git stash -u`) and
 unstash after (`git stash pop`). Note that you should check this before
 modifying the `app.yaml` file as that will make your workspace dirty.
@@ -77,7 +78,7 @@ only dirtyness is the `service: prNN` line in `app.yaml`.
 
 ### Manual production Appengine deployment
 
-Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors). 
+Request access to GCP `gotraining` project from a [contributor](https://github.com/anz-bank/go-slides/graphs/contributors).
 
 Add a new gcloud configuration as described in the [Appengine deployment](#appengine-deployment) section, using `gotraining` instead of `gotraining-testing`.
 
