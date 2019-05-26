@@ -10,9 +10,11 @@ This projects is continuously deployed to Appengine at [`https://gotraining.apps
 
 Run the present tool locally with
 
-    go build .
-    ./go-slides -base . -content content
+    go run . -base . -content content
 
+For an Appengine like environment run
+
+    GAE_ENV=standard go run .
 
 ## Appengine deployment
 
