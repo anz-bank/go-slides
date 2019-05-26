@@ -910,36 +910,51 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Add locking for proper use of sync.Map
 - Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
 
+* Channels
 
-* Concurrency (1/2)
+- Communication mechanism (conduit) that lets goroutines exchange data
+- Each channel allows goroutines to send/receive a particular data type (called element type)
+- Declare channel using `chan` keyword
+- Create unbuffered channel
+	ch := make(chan int) // ch is an unbuffered channel of `int` element type
+- Create buffered channel
+	ch := make(chan int, 10) // ch is a buffered channel of size 10 and type `int`
+- Close channel using `close()` function
 
-"Don't communicate by sharing memory, share memory by communicating."
-"Concurrency is not parallelism."
-"Concurrency is about structure, parallelism is about execution."
- - [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
+* Channel Operations
 
-*Overview:* *built-in* *language* *features*
-Goroutines (`go`)
-Channels (`chan`, `<-`)
-Select (`select`)
+- Send and Receive values with the channel operator <-
 
+	ch <- v // send v to the channel ch
+	v := <-ch // receive from ch and assign it to v
 
-* Concurrency (2/2)
+- Send to buffered channel blocks only when the channel is full
+- Receive from a channel blocks when the channel is empty
+- Sender can close the channel to indicate no more values will be sent
+- Receiver can test whether a channel has been closed
 
-Concurrency isn't easy - we are only scratching the surface.
+	v, ok := <-ch // ok is false if channel is closed and no more data is available
 
-- [[https://goplay.space/#YtuJgIuIswH][Goroutines]] ([[https://play.golang.org/p/YtuJgIuIswH][Playground]]`*`)
-- [[https://goplay.space/#5M0f3-YY44W][Channels]] ([[https://play.golang.org/p/5M0f3-YY44W][Playground]]`*`)
-- [[https://goplay.space/#FEWHmUA0QtN][Buffered Channels]]
-- [[https://goplay.space/#ANO8rpfNynY][Range and close]] ([[https://play.golang.org/p/ANO8rpfNynY][Playground]]`*`)
-- [[https://goplay.space/#R1qgjOsPSGk][Select]] ([[https://play.golang.org/p/R1qgjOsPSGk][Playground]]`*`)
-- [[https://goplay.space/#4TGM29YbvX4][Deadlocks]] ([[https://play.golang.org/p/4TGM29YbvX4][Playground]]`*`)
+- Sending message on a closed/nil channel causes the program to panic
+- Receive on a closed channel never blocks
 
-`*` The [[https://play.golang.org/][official Go Playground]] prints in real-time with delays but lacks syntax colouring.
+* Channel Operations (continued)
 
+- Range on a channel
+
+	for v := range ch {
+		fmt.Println(v)
+	}
+
+- Range over a channel that never closes never finishes
+
+* Channel Examples
+
+- [[https://play.golang.org/p/dIQTgdZ2kvQ][Send and receive on an unbuffered channel]]
+- [[https://play.golang.org/p/DVkhMmqfs_x][Send and receive on a buffered channel]]
+- [[https://play.golang.org/p/840nqny9Y4D][Receive from a channel using 'range']]
 
 * Tools and Conventions
-
 
 * Project layout
 
