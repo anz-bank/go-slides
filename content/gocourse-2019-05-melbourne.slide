@@ -937,7 +937,8 @@ Definition
 
 * Concurrency in Go
 
-- Go provides:
+Go provides:
+
 - Concurrent execution (goroutines)
 - Synchronisation and message passing (channels)
 - Multi-way concurrent control (select)
