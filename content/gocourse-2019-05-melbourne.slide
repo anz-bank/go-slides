@@ -454,7 +454,7 @@ Before adding any commits to `feature` locally run:
 
 * Pull Request (PR) recommendations (2/2)
 
-- "Think of the reviewer: your code needs to be reviewable and that should be a prime concern when writing your code, commits and PRs." (@camh-anz)
+- Think of the reviewer: your code needs to be reviewable and that should be a prime concern when writing your code, commits and PRs
 - Tag your PR Title with `[WIP]` if adjustments are needed
 - Rework fixup commits with `git` `rebase` `-i`  `COMMIT_HASH` and force push
 - Add reviewers and remove `[WIP]` tag when all of the above are met
