@@ -929,18 +929,24 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 	v := <-ch // receive from ch and assign it to v
 
 - Send to buffered channel blocks only when the channel is full
+- Receive from a channel blocks when the channel is empty
 - Sender can close the channel to indicate no more values will be sent
 - Receiver can test whether a channel has been closed
 
 	v, ok := <-ch // ok is false if channel is closed and no more data is available
 
 - Sending message on a closed/nil channel causes the program to panic
+- Receive on a closed channel never blocks
+
+* Channel Operations (continued)
+
 - Range on a channel
 
-	// range ch receives on a channel until it is closed
 	for v := range ch {
 		fmt.Println(v)
 	}
+
+- Range over a channel that never closes never finishes
 
 * Channel Examples
 
