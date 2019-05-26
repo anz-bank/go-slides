@@ -951,7 +951,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 * Channel Examples
 
 - [[https://play.golang.org/p/dIQTgdZ2kvQ][Send and receive on an unbuffered channel]]
-- [[https://play.golang.org/p/8-3x0YnPCIo][Send and receive on a buffered channel]]
+- [[https://play.golang.org/p/DVkhMmqfs_x][Send and receive on a buffered channel]]
 - [[https://play.golang.org/p/840nqny9Y4D][Receive from a channel using 'range']]
 
 * Tools and Conventions

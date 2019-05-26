@@ -13,6 +13,7 @@ func channelWrite(ch chan<- int, value int) {
 }
 
 func main() {
+	// What happens if the channel buffer size is 2?
 	ch := make(chan int, 5)
 	for i := 0; i < 5; i++ {
 		go channelWrite(ch, i)
@@ -23,4 +24,3 @@ func main() {
 	}
 	fmt.Println("main: exiting")
 }
-
