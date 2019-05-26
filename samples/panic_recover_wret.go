@@ -25,5 +25,4 @@ func oddPanic(n int) {
 	if n%2 != 0 {
 		panic(fmt.Sprintf("invalid input: %d", n))
 	}
-	return
 }
