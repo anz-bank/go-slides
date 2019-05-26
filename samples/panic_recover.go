@@ -6,18 +6,18 @@ import (
 )
 
 func main() {
-	n := panicTest()
-	fmt.Printf("panicTest: %d\n", n)
+	panicTest()
+	fmt.Println("Still alive!")
 }
 
 func panicTest() int {
-	var n int = 10
+	var n = 10
 
 	defer func() {
 		if r := recover(); r != nil {
-			fmt.Println(r)
+			fmt.Println("recovered from:", r)
 		}
 	}()
-	panic("failed")
+	panic("panicking")
 	return n
 }

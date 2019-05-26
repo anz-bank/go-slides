@@ -7,25 +7,21 @@ import (
 )
 
 func main() {
-	oddPanicTest(2)
-	oddPanicTest(3)
+	fmt.Println("validateOdd(2); err = ", validateOdd(2))
+	fmt.Println("validateOdd(3); err = ", validateOdd(3))
 }
 
-func oddPanicTest(n int) {
-	fmt.Printf("odd_panic_test: input: %d, outcome: ", n)
-	if err := oddPanic(n); err != nil {
-		fmt.Println(err)
-	} else {
-		fmt.Println("ok")
-	}
-}
-
-func oddPanic(n int) (err error) {
+func validateOdd(n int) (err error) {
 	defer func() {
 		if r := recover(); r != nil {
 			err = errors.New(r.(string))
 		}
 	}()
+	oddPanic(n)
+	return
+}
+
+func oddPanic(n int) {
 	if n%2 != 0 {
 		panic(fmt.Sprintf("invalid input: %d", n))
 	}
