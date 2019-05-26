@@ -914,6 +914,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 
 * Topics
 
+- Concurrency in Go
 - Processes, threads and goroutines
 - Go Scheduler
 - Goroutines
@@ -921,6 +922,13 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Channels
 - Mutex
 - Select
+
+* Concurrency in Go
+
+- "Don't communicate by sharing memory, share memory by communicating."
+- "Concurrency is not parallelism."
+- "Concurrency is about structure, parallelism is about execution."
+- [[https://go-proverbs.github.io/][Rob Pike]] ([[https://www.youtube.com/watch?v=cN_DpYBzKso][Talk]], [[https://talks.golang.org/2012/waza.slide][Slides]])
 
 * Channels
 
