@@ -21,16 +21,17 @@ func report() {
 		n := runtime.NumGoroutine()
 		if n > 1 && nGoroutines != n {
 			nGoroutines = n
-			fmt.Println("report: Number of goroutines:", n)
+			fmt.Printf("\r                                    ")
+			fmt.Printf("\r# Goroutines: %d/100,000", n)
+			time.Sleep(1 * time.Millisecond)
 		} else if n == 1 {
-			fmt.Println("No more goroutines")
+			fmt.Printf("\n# Goroutines: %d/100,000 (Exiting)\n", n)
 			break
 		}
 	}
 }
 
 func main() {
-
 	for i := 0; i < 100000; i++ {
 		if i%10000 == 0 {
 			fmt.Printf("Started %d goroutines\n", i)
