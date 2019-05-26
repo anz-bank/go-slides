@@ -910,6 +910,18 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Add locking for proper use of sync.Map
 - Bonus points: Add a third `Storer` implementation using [[https://github.com/syndtr/goleveldb][LevelDB]]
 
+* Go Concurrency
+
+* Topics
+
+- Processes, threads and goroutines
+- Go Scheduler
+- Goroutines
+- Wait Group
+- Channels
+- Mutex
+- Select
+
 * Channels
 
 - Communication mechanism (conduit) that lets goroutines exchange data
