@@ -1,4 +1,3 @@
-// Panic
 package main
 
 import "os"
