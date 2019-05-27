@@ -29,6 +29,10 @@ func main() {
 	bytes, _ = json.Marshal(person)
 	fmt.Println(string(bytes))
 
+	person = Person{FirstName: "Madonna", Age: 67}
+	bytes, _ = json.Marshal(person)
+	fmt.Println(string(bytes))
+
 	bytes = []byte(`{"firstName": "Julius", "lastName": "Caesar", "age": 55}`)
 	if err := json.Unmarshal(bytes, &person); err != nil {
 		log.Fatal(err)

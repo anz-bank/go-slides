@@ -1005,18 +1005,19 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 * JSON - (De-)Serialisation
 
-- `Encode` converts Go struct, pointer or primitive data type into JSON encoded stream
-- `Marshal` converts Go struct, pointer or primitive data type into JSON byte array
-- `Decode` and `Unmarshall` are the inverse functions to `Encode` and `Marshal`
+- `Marshal` converts a value into a JSON byte array
+- `Unmarshal` converts a JSON-encoded byte array into a value
+- An `Encoder` marshals values as JSON to a stream (`io.Writer`) 
+- A `Decoder` unmarshals JSON-encoded values from a stream (`io.Reader`)
 
-	func Marshal(v interface{}) ([]byte, error) 
+	func Marshal(v interface{}) ([]byte, error) { /* ... */ }
 
-	func Unmarshal(data []byte, v interface{}) error 
+	func Unmarshal(data []byte, v interface{}) error { /* ... */ }
 
 
-* JSON - Tags
+* JSON - Field Tags
 
-- Attach `json` tag to specify JSON property name
+- Attach a 'json' field tag to customise (un)marshalling
 - Common error is making Go fields private (lower case) which results in the fields not being (un)marshalled
 
 
@@ -1036,7 +1037,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 * Examples
 
-- [[https://goplay.space/#_LVQLCOKYNT][JSON Marshal / Unmarshal]]
+- [[https://goplay.space/#lYdq4Jg19EP][JSON Marshal / Unmarshal]]
 - [[https://goplay.space/#KkPDLf_PvQP][JSON Zero Values]]
 
 
