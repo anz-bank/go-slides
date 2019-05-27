@@ -492,7 +492,7 @@ Before adding any commits to `feature` locally run:
 - [[https://goplay.space/#FJKCetXBe2c][Functions]]
 
 _Notes:_
-Keep your exported Names to as few as possible
+Keep your exported identifiers to as few as possible
 Document them
 
 
@@ -521,6 +521,7 @@ Document them
 	0      for numeric types
 	false  for the boolean type
 	""     for strings
+	nil    for pointers
 
 
 * Values and control flow
