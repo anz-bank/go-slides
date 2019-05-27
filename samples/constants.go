@@ -14,7 +14,7 @@ const (
 )
 
 func main() {
-	const World = "ವಿಶ್ವ"
+	const World = "Melbourne"
 	fmt.Println("Hello", World)
 	fmt.Println("Beauty in number:", Phi)
 
