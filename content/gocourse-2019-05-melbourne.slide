@@ -479,10 +479,11 @@ Before adding any commits to `feature` locally run:
 
 - [[https://tour.golang.org/][Tour of Go]]
 - [[https://gobyexample.com/][Go by example]]
-- [[https://play.golang.org/][Go playground]]
 - [[https://golangbot.com/learn-golang-series/][Golangbot]]
-- [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
+- [[https://play.golang.org/][Go playground]]
+- [[https://goplay.space][Go play space]]
 - [[https://golang.org/ref/spec][The Go Programming Language Specification]]
+- [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
 
 
 * Getting started
