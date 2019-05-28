@@ -479,19 +479,20 @@ Before adding any commits to `feature` locally run:
 
 - [[https://tour.golang.org/][Tour of Go]]
 - [[https://gobyexample.com/][Go by example]]
-- [[https://play.golang.org/][Go playground]]
 - [[https://golangbot.com/learn-golang-series/][Golangbot]]
-- [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
+- [[https://play.golang.org/][Go playground]]
+- [[https://goplay.space][Go play space]]
 - [[https://golang.org/ref/spec][The Go Programming Language Specification]]
+- [[https://stackoverflow.com/questions/tagged/go?sort=votes&pageSize=100][Stackoverflow]]
 
 
 * Getting started
 
-- [[https://goplay.space/#ZgnRgImb2mv][Packages]], imports and exported names
-- [[https://goplay.space/#0sIugrcfh_z][Functions]]
+- [[https://goplay.space/#cz9VBPWuHS3][Packages]], imports and exported names
+- [[https://goplay.space/#FJKCetXBe2c][Functions]]
 
 _Notes:_
-Keep your exported Names to as few as possible
+Keep your exported identifiers to as few as possible
 Document them
 
 
@@ -520,15 +521,16 @@ Document them
 	0      for numeric types
 	false  for the boolean type
 	""     for strings
+	nil    for pointers
 
 
 * Values and control flow
 
 - [[https://goplay.space/#TOqGA-5RjUi][Values]]
-- [[https://goplay.space/#gs20cFjl-gs][Variables]]
-- [[https://goplay.space/#2X57Ha4ldNV][Constants]]
-- [[https://goplay.space/#Rbz8FhL3PxU][Type conversion]]
-- [[https://goplay.space/#ugMD-VYlwjI][For]]
+- [[https://goplay.space/#ouELtOl07G0][Variables]]
+- [[https://goplay.space/#Nc_taqy8IH2][Constants]]
+- [[https://goplay.space/#LISrbZdkUsy][Type conversion]]
+- [[https://goplay.space/#4IXB0oGgGsY][For]]
 - [[https://goplay.space/#AbYAd6LB2c3][If/Else]]
 - [[https://goplay.space/#GpoaMY8dboJ][Switch]]
 

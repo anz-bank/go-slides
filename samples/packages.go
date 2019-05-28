@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(strings.Title("hello, ಬೆಂಗಳೂರು"))
+	fmt.Println(strings.Title("hello, melbourne"))
 }

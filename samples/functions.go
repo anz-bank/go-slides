@@ -8,6 +8,6 @@ func myWorld() string {
 }
 
 func main() {
-	fmt.Println("Hello, ಬೆಂಗಳೂರು")
+	fmt.Println("Hello, Melbourne")
 	fmt.Println("Hello", myWorld())
 }

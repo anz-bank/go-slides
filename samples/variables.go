@@ -3,16 +3,19 @@ package main
 
 import "fmt"
 
-var (
-	idx   int     // global variable
-	two   int = 2 // with initialiser
-	three     = 3 // with inferred type
+var j int // single variable declaration
+
+var ( // declaring multiple variables
+	rat int     // global variable
+	dog int = 2 // with initialiser
+	foo     = 3 // with inferred type
 )
 
 func main() {
-	fmt.Printf("idx  - Val: %v, Type: %T\n", idx, idx)
-	fmt.Printf("two  - Val: %v, Type: %T\n", two, two)
-	fmt.Printf("three- Val: %v, Type: %T\n\n", three, three)
+	fmt.Printf("j    - Val: %v, Type: %T\n\n", j, j)
+	fmt.Printf("rat  - Val: %v, Type: %T\n", rat, rat)
+	fmt.Printf("dog  - Val: %v, Type: %T\n", dog, dog)
+	fmt.Printf("foo  - Val: %v, Type: %T\n\n", foo, foo)
 
 	var i int
 	var yes bool = true
@@ -21,7 +24,13 @@ func main() {
 	fmt.Printf("yes  - Val: %v, Type: %T\n", yes, yes)
 	fmt.Printf("nope - Val: %v, Type: %T\n\n", nope, nope)
 
-	// Short variable declarations, only inside functions
+	// short variable declarations, only inside functions
 	s := "shanti"
-	fmt.Printf("s    - Val: %v, Type: %T\n", s, s)
+	fmt.Printf("s    - Val: %v, Type: %T\n\n", s, s)
+
+	// single line declaration
+	a, b, c := 1, 2, 3
+	fmt.Printf("a    - Val: %v, Type: %T\n", a, a)
+	fmt.Printf("b    - Val: %v, Type: %T\n", b, b)
+	fmt.Printf("c    - Val: %v, Type: %T\n", c, c)
 }

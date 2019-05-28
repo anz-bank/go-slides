@@ -11,6 +11,6 @@ func main() {
 	f := math.Sqrt(float64(x))
 	z := uint(f)
 	fmt.Printf("x: %v %T\n", x, x)
-	fmt.Printf("x: %v %T\n", f, f)
-	fmt.Printf("x: %v %T\n", z, z)
+	fmt.Printf("f: %v %T\n", f, f)
+	fmt.Printf("z: %v %T\n", z, z)
 }

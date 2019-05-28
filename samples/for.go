@@ -32,4 +32,10 @@ func main() {
 		}
 		fmt.Println(n)
 	}
+
+	var sequence = []string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday"}
+	// range function can return index and item in a for loop
+	for i, a := range sequence {
+		fmt.Println(i, a)
+	}
 }
