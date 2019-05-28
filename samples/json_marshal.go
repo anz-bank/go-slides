@@ -1,4 +1,4 @@
-// json
+// json - marshal / unmarshal
 package main
 
 import (
@@ -26,6 +26,10 @@ func main() {
 	fmt.Println(string(bytes))
 
 	person := Person{LastName: "Sting", Age: 67}
+	bytes, _ = json.Marshal(person)
+	fmt.Println(string(bytes))
+
+	person = Person{FirstName: "Madonna", Age: 67}
 	bytes, _ = json.Marshal(person)
 	fmt.Println(string(bytes))
 
