@@ -1,9 +1,9 @@
+// goroutines_helloworld
 package main
 
 import (
 	"fmt"
 	"time"
-	"runtime"
 )
 
 func say(s string) {
@@ -14,7 +14,6 @@ func say(s string) {
 }
 
 func main() {
-	fmt.Println("Number of logical processors:", runtime.NumCPU())
 	go say("world")
 	say("hello")
 }

@@ -33,7 +33,7 @@ func main() {
 
 	for i := 0; i < 100000; i++ {
 		if i%10000 == 0 {
-			fmt.Printf("Started %d threads\n", i)
+			fmt.Printf("Started %d goroutines\n", i)
 		}
 		go memFunc()
 	}

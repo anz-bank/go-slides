@@ -1004,38 +1004,19 @@ Definition
 
 * Concurrency in Go
 
-* Background: Process, Threads and OS Scheduling
-
-.image _img/process.png
-.caption [[https://randu.org/tutorials/threads/]]
-
-- Large (default 2 Mb on Linux) stack size
-- 1x1 mapping between user and kernel threads
-
-* Go Runtime
-
-- Scheduling, Memory Management, Garbage Collection
-
-.image _img/go_runtime.png
-.caption [[http://bit.ly/30uMfhm]]
-
-* Goroutines and Scheduler
-
-- Goroutine is an extremely lightweight thread of execution
-- Low initial stack size (2 Kb) that grows
-- Runs concurrently like threads
-- Scheduler tracks goroutines and schedules them to run on a set of OS threads
-- GOMAXPROCS and runtime.GOMAXPROCS() sets the number of OS threads
-- Start a goroutine [[https://play.golang.org/p/2sr6XrkGYKz][using the 'go' statement]]
-	go <function-call>
-
-A good read about details of Go scheduler [[https://www.ardanlabs.com/blog/2018/08/scheduling-in-go-part1.html][here]]
-
 Go provides:
 
 - Concurrent execution (goroutines)
 - Synchronisation and message passing (channels)
 - Multi-way concurrent control (select)
+
+* Goroutines
+
+- Goroutine is an extremely lightweight thread of execution
+- Low initial stack size (2 Kb) that grows
+- Runs concurrently like threads
+- Start a goroutine [[https://play.golang.org/p/VkaBamAtRAg][using the 'go' statement]]
+	go <function-call>
 
 * Channels
 
@@ -1074,6 +1055,23 @@ Go provides:
 	}
 
 - Range over a channel that never closes never finishes
+
+* Under the hood: Process, Threads and OS Scheduling
+
+.image _img/process.png
+.caption [[https://randu.org/tutorials/threads/]]
+
+- Large (default 2 Mb on Linux) stack size
+- 1x1 mapping between user and kernel threads
+
+* Under the hood: Go Runtime
+
+- Scheduling, Memory Management, Garbage Collection
+- Scheduler tracks goroutines and schedules them to run on a set of OS threads
+- GOMAXPROCS and runtime.GOMAXPROCS() sets the number of OS threads
+
+.image _img/go_runtime.png
+.caption [[http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf][Analysis of the Go runtime scheduler]]
 
 * Channel Examples
 
