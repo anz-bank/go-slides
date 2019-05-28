@@ -866,6 +866,8 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
+* Error Handling in Go
+
 * Errors in Go
 
 - `error` is a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
@@ -874,7 +876,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 	}
 - Check errors explicitly
 
-* Errors in Go (continued)
+* Errors in Go (1/2)
 
 - Create error values
 - Using [[https://golang.org/src/errors/errors.go?s=293:320#L1][`errors.New()`]]:
@@ -883,7 +885,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
     return fmt.Errorf("archive/tar: missed writing %d bytes", nb)
 - Exported error variables start with 'Err' (like ErrTimeout, ErrNotFound)
 
-* Errors in Go (continued)
+* Errors in Go (2/2)
 
 - Create custom error types ([[https://golang.org/pkg/net/#AddrError][source: AddrError]]):
 	type AddrError struct {
@@ -924,7 +926,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Deferred functions are called [[https://goplay.space/#ZX5S9xyOS57][in reverse order]]
 - Most commonly used for [[https://goplay.space/#mh9MhO9rDXt][resource cleanup]] (close IO resources, release locks etc.)
 
-* Panic and Recover
+* Panic and Recover (1/2)
 
 - `panic` and `recover` are builtin functions
 - `panic` and `recover` behave similar to `throw/catch` in other languages
@@ -934,7 +936,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - `recover` (see next slide) can intercept this unwinding
 - Without `recover`, the program is terminated and the error condition is reported
 
-* Panic and Recover
+* Panic and Recover (2/2)
 
 - `recover`:
 	func recover() interface{}
