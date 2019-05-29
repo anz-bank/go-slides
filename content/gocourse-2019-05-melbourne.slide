@@ -684,7 +684,7 @@ Before adding any commits to `feature` locally run:
 
 	func sortLetters(m map[rune]int) []string
 
-- Call `fmt.Println(strings.Join(sortLetters(letters("aba"))),` `"\n")` in `main` to print:
+- Call `fmt.Println(strings.Join(sortLetters(letters("aba")),` `"\n"))` in `main` to print:
 
 	a:2
 	b:1
