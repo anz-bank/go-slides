@@ -1330,6 +1330,15 @@ Rob Pike's Talk ([[https://blog.golang.org/toward-go2][Towards Go 2]])
 Dave Cheney Blog ([[https://dave.cheney.net/paste/the-past-present-and-future-of-go2.pdf][Past Present and Future of Go]])
 
 
+* Further Reading
+
+- [[https://blog.golang.org/using-go-modules][Package management with go modules]]
+- [[https://appliedgo.net/plugins/][Writing plugins in go]]
+- [[https://blog.golang.org/cover][Code coverage with go test]]
+- [[https://dave.cheney.net/2013/06/30/how-to-write-benchmarks-in-go][Benchmarking your code]]
+- [[https://golang.org/pkg/runtime/pprof/][CPU/Memory Profiling]]
+
+
 * References
 
 - [[https://golang.org/doc/faq]]
