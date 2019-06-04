@@ -1015,7 +1015,7 @@ Go provides:
 - Goroutine is an extremely lightweight thread of execution
 - Low initial stack size (2 Kb) that grows
 - Runs concurrently like threads
-- Start a goroutine [[https://play.golang.org/p/VkaBamAtRAg][using the 'go' statement]]
+- Start a goroutine [[https://play.golang.org/p/Xp-QlM1nTGC][using the 'go' statement]]
 	go <function-call>
 
 * Channels

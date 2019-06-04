@@ -6,14 +6,19 @@ import (
 	"time"
 )
 
+var start = time.Now()
+
 func say(s string) {
-	for i := 0; i < 5; i++ {
-		time.Sleep(100 * time.Millisecond)
-		fmt.Println(s)
-	}
+	time.Sleep(1 * time.Second)
+	elapsed := time.Now().Sub(start).Round(time.Second)
+	fmt.Println(elapsed, s)
 }
 
 func main() {
-	go say("world")
 	say("hello")
+	say("world")
+	println("========")
+	go say("HELLO")
+	say("WORLD")
+	time.Sleep(1 * time.Second)
 }
