@@ -1,3 +1,4 @@
+// errors_are_values
 package main
 
 import (

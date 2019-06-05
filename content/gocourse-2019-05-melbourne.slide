@@ -866,6 +866,8 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 .image _img/crud_puppy.jpg
 .caption J. D. Frazer "Illiad", User Friendly - [[https://en.wikipedia.org/wiki/User_Friendly#Crud_Puppy][Crud Puppy]]
 
+* Error Handling in Go
+
 * Errors in Go
 
 - `error` is a builtin interface ([[https://golang.org/src/builtin/builtin.go?s=11246:11286#L251][source: error]])
@@ -874,25 +876,17 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 	}
 - Check errors explicitly
 
-* Errors in Go (continued)
+* Errors in Go (1/2)
 
-- The [[https://golang.org/pkg/errors/][`errors`]] package has functions for creating new error values
-- Using [[https://golang.org/src/errors/errors.go?s=293:320#L1][`errors.New()`]]:
-
-	func Sqrt(f float64) (float64, error) {
-		if f < 0 {
-			return 0, errors.New("math: square root of negative number")
-		}
-		// implementation
-	}
+- Create error values using [[https://golang.org/src/errors/errors.go?s=293:320#L1][`errors.New()`]]:
+    var ErrPermission = errors.New("permission denied")
 - Alternatively using `fmt.Errorf`:
-	if f < 0 {
-		return 0, fmt.Errorf("math: square root of negative number %g", f)
-	}
+    return fmt.Errorf("archive/tar: missed writing %d bytes", nb)
+- Exported error variables start with 'Err' (like ErrTimeout, ErrNotFound)
 
-* Errors in Go (continued)
+* Errors in Go (2/2)
 
-- Implement custom error types ([[https://golang.org/pkg/net/#AddrError][source: AddrError]]):
+- Create custom error types ([[https://golang.org/pkg/net/#AddrError][source: AddrError]]):
 	type AddrError struct {
 		Err  string
 		Addr string
@@ -908,20 +902,17 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 		return s
 	}
 - Error values can be logged and printed:
-	if _, err := Sqrt(-1); err != nil {
-		log.Println(err)
-	}
+    log.Println(err)
 
 * Error Handling
 
-- Check for the presence of an error by [[https://goplay.space/#40Ho_HWiYrb][comparing with nil]]
-- [[https://goplay.space/#T2RkoxxpuUV][Comparing error values]]
-- Errors are values so they can be [[https://goplay.space/#F_EG5jM_fZ6][programmed]]
-- [[https://goplay.space/#bTOIkCkGssE][Handle errors gracefully]]
-- Check errors using [[https://goplay.space/#ISKTAUFOyjk][type assertions]]
+- [[https://goplay.space/#X0qqmcrO6om][Check for error]]
+- [[https://goplay.space/#HiLw8Y_D_6T][Compare error values]]
+- [[https://goplay.space/#CII8be9-TqW][Compare error types]]
+- [[https://goplay.space/#I6UJNHe6C7v][Program with error]]
 - By convention many standard library functions return `error` as the second return value
 
-"Errors are values."  - [[https://go-proverbs.github.io/][Rob Pike]]
+"Errors are values."  - [[https://blog.golang.org/errors-are-values][Rob Pike]]
 
 * Defer
 
@@ -933,7 +924,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - Deferred functions are called [[https://goplay.space/#ZX5S9xyOS57][in reverse order]]
 - Most commonly used for [[https://goplay.space/#mh9MhO9rDXt][resource cleanup]] (close IO resources, release locks etc.)
 
-* Panic and Recover
+* Panic and Recover (1/2)
 
 - `panic` and `recover` are builtin functions
 - `panic` and `recover` behave similar to `throw/catch` in other languages
@@ -943,7 +934,7 @@ Embedding types introduces the possiblity for naming conflicts. Go follows some 
 - `recover` (see next slide) can intercept this unwinding
 - Without `recover`, the program is terminated and the error condition is reported
 
-* Panic and Recover
+* Panic and Recover (2/2)
 
 - `recover`:
 	func recover() interface{}
