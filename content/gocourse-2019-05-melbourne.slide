@@ -1001,6 +1001,14 @@ Go provides:
 - Synchronisation and message passing (channels)
 - Multi-way concurrent control (select)
 
+* Goroutines
+
+- Goroutine is an extremely lightweight thread of execution
+- Low initial stack size (2 Kb) that grows
+- Runs concurrently like threads
+- Start a goroutine [[https://play.golang.org/p/Xp-QlM1nTGC][using the 'go' statement]]
+	go <function-call>
+
 * Channels
 
 - Communication mechanism (conduit) that lets goroutines exchange data
@@ -1038,6 +1046,23 @@ Go provides:
 	}
 
 - Range over a channel that never closes never finishes
+
+* Under the hood: Process, Threads and OS Scheduling
+
+.image _img/process.png
+.caption [[https://randu.org/tutorials/threads/]]
+
+- Large (default 2 Mb on Linux) stack size
+- 1x1 mapping between user and kernel threads
+
+* Under the hood: Go Runtime
+
+- Scheduling, Memory Management, Garbage Collection
+- Scheduler tracks goroutines and schedules them to run on a set of OS threads
+- GOMAXPROCS and runtime.GOMAXPROCS() sets the number of OS threads
+
+.image _img/go_runtime.png
+.caption [[http://www1.cs.columbia.edu/~aho/cs6998/reports/12-12-11_DeshpandeSponslerWeiss_GO.pdf][Analysis of the Go runtime scheduler]]
 
 * Channel Examples
 
