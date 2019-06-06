@@ -1020,7 +1020,7 @@ Go provides:
 	ch := make(chan int, 10) // ch is a buffered channel of size 10 and type `int`
 - Close channel using `close()` function
 
-* Channel Operations
+* Channel Operations (1/2)
 
 - Send and Receive values with the channel operator <-
 
@@ -1037,7 +1037,7 @@ Go provides:
 - Sending message on a closed/nil channel causes the program to panic
 - Receive on a closed channel never blocks
 
-* Channel Operations (continued)
+* Channel Operations (2/2)
 
 - Range on a channel
 
@@ -1046,6 +1046,25 @@ Go provides:
 	}
 
 - Range over a channel that never closes never finishes
+
+* select Statement
+
+- Allows composing of channels
+- Chooses which set of possible "send" or "receive" operations will proceed
+
+    var ch1, ch2 chan int
+    select {
+        case ch1 <- 1:
+            fmt.Println("1 sent on ch1")
+        case x, ok := <-ch2:
+            if ok {
+                fmt.Printf("%v received on ch2", x)
+            } else {
+                fmt.Println("ch2 is closed")
+            }
+        default:
+            fmt.Println("no communication")
+    }
 
 * Under the hood: Process, Threads and OS Scheduling
 
@@ -1069,6 +1088,7 @@ Go provides:
 - [[https://play.golang.org/p/dIQTgdZ2kvQ][Send and receive on an unbuffered channel]]
 - [[https://play.golang.org/p/DVkhMmqfs_x][Send and receive on a buffered channel]]
 - [[https://play.golang.org/p/840nqny9Y4D][Receive from a channel using 'range']]
+- [[https://play.golang.org/p/BQtEdOoAjoZ][Timeout with 'select']]
 
 * Tools and Conventions
 
