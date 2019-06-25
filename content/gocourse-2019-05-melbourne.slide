@@ -1126,10 +1126,8 @@ Abridged version:
 
 	language:none
 	├── README.md
-	├── go.mod
-	├── go.sum
 	├── pkg
-	│   └── USERNAME-puppy
+	│   └── puppy
 	│       ├── types.go
 	│       ├── types_test.go
 	│       ├── errors.go
@@ -1137,10 +1135,9 @@ Abridged version:
 	│       └── store
 	│           ├── storer.go
 	│           └── .... store files and tests, e.g. mapstore.go
-	├── cmd
-	│   └── USERNAME-puppy-server
-	│       └── main.go
-	└── vendor
+	└── cmd
+	    └── puppy-server
+	        └── main.go
 
 - Add project introduction and how to build, run & test it to `README.md`
 
@@ -1193,7 +1190,7 @@ Use `gofmt` or `goimport` as part of your editor/IDE setup
 
 - `Marshal` converts a value into a JSON byte array
 - `Unmarshal` converts a JSON-encoded byte array into a value
-- An `Encoder` marshals values as JSON to a stream (`io.Writer`) 
+- An `Encoder` marshals values as JSON to a stream (`io.Writer`)
 - A `Decoder` unmarshals JSON-encoded values from a stream (`io.Reader`)
 
 	func Marshal(v interface{}) ([]byte, error) { /* ... */ }
